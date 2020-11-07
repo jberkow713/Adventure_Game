@@ -113,6 +113,10 @@ class Player:
                 print(f"{item} gives you {value}")
                 print("--------------------------")
 
+    
+    
+
+
 
 
 

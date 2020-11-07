@@ -113,6 +113,7 @@ while True:
     print('----------------------------------------')
     print("Your attack, magic_attack, defense, level, and magic level all improve your ability to defeat monsters!")
     print('----------------------------------------')
+    
     if "Broomstick" in player.item:
         users_choice = input("Please choose north, east, west, south, magic, or fly: \n ")
     else:
@@ -147,8 +148,11 @@ while True:
                             print(f"You have {player.lives} lives, let the battle begin!")
                             #attack is improved based on your inventory which improves attributes
                             attack = (random.randint(0, 10)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                            print(f"You prepare to battle the snakes, with {round(attack,1)} power!")
-                            if attack >= 4:
+                            HP = 4
+                                                    
+                            print(f"You prepare to battle the snakes with {HP} hitpoints, you attack for {round(attack,1)} !")
+                            
+                            if attack >= HP:
                                 player.lives +=1
                                 player.level +=.02
                                 print(f"You have defeated the Snakes with {player.lives} lives left, you may continue on!")
@@ -170,8 +174,9 @@ while True:
                             print(f"You have {player.lives} lives, let the battle begin!")
 
                             attack = (random.randint(0, 20)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                            print(f"You prepare to battle the Goblins, with {round(attack,1)} power!")
-                            if attack > 12:
+                            HP = 12
+                            print(f"You prepare to battle the Goblins with {HP} hitpoints, you attack for {round(attack,1)}")
+                            if attack > HP:
                                 player.lives +=1
                                 player.level +=.04
                                 player.magic_level +=.02
@@ -194,8 +199,9 @@ while True:
                             print(f"You have {player.lives} lives, let the battle begin!")
                             
                             attack = (random.randint(0, 25)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                            print(f"You prepare to battle the lurking mummies, with {round(attack,1)} power!")
-                            if attack > 15:
+                            HP = 15
+                            print(f"You prepare to battle the lurking mummies with {HP} hitpoints, you attack for {round(attack,1)}")
+                            if attack > HP:
                                 player.lives +=1
                                 player.level +=.06
                                 print(f"You have defeated the Mummies with {player.lives} lives left!")
@@ -217,8 +223,9 @@ while True:
                             print(f"You have {player.lives} lives, let the battle begin!")
 
                             attack = (random.randint(0, 50)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                            print(f"You prepare to battle the giant beast, with {round(attack,1)} power!")
-                            if attack >= 40:
+                            HP = 40
+                            print(f"You prepare to battle the giant beast with {HP} hitpoints, you attack for {round(attack,1)}")
+                            if attack >= HP:
                                 player.lives +=1
                                 player.level +=.1
                                 player.magic_level +=.08
@@ -239,8 +246,9 @@ while True:
                             
                             print(f"You have {player.lives} lives, let the battle begin!")
                             attack = (random.randint(0,100)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                            print(f"You prepare to battle the evil spider, with {round(attack,1)} power!")
-                            if attack >= 80:
+                            HP = 80
+                            print(f"You prepare to battle the evil spider with {HP} hitpoints, you attack for {round(attack,1)}")
+                            if attack >= HP:
                                 player.lives +=1
                                 player.level +=.15
                                 player.magic_level +=.15
@@ -263,9 +271,10 @@ while True:
                             
                             print(f"You have {player.lives} lives, let the battle begin!")
                             attack = (random.randint(0,150)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                            print(f"You prepare to battle the Wicked Witch, with {round(attack,1)} power!")
+                            HP = 140
+                            print(f"You prepare to battle the Wicked Witch with {HP} hitpoints, you attack for {round(attack,1)}")
                             
-                            if attack >= 140:
+                            if attack >= HP:
                                 player.lives +=1
                                 player.level +=.2
                                 player.magic_level +=.2
@@ -288,9 +297,10 @@ while True:
                             
                             print(f"You have {player.lives} lives, let the battle begin!")
                             attack = (random.randint(0,200)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                            print(f"You prepare to battle the mighty wizard, with {round(attack,1)} power!")
+                            HP = 185
+                            print(f"You prepare to battle the mighty wizard with {HP} hitpoints, you attack for {round(attack,1)}")
                             
-                            if attack >= 185:
+                            if attack >= HP:
                                 player.lives +=1
                                 player.level +=.25
                                 player.magic_level +=.25
