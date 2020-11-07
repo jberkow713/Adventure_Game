@@ -85,7 +85,12 @@ player = Player(name=User_name, level=1, defense=1,  magic_level=1, \
 
 
 print(f"Welcome {player.name}")
-difficulty_choice = input("Please choose easy, medium, hard, or expert: \n")
+
+difficulty_choice = ""
+
+while difficulty_choice != "easy" and difficulty_choice != "medium" and difficulty_choice != "hard" and difficulty_choice != "expert":
+    difficulty_choice = input("Please choose easy, medium, hard, or expert: \n")
+        
 player.set_lives(difficulty_choice)
 player.set_initial_fortune_and_defense()
 
@@ -153,7 +158,7 @@ while True:
                             attack = (random.randint(0, 10)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
                             HP = 4
                                                     
-                            print(f"You prepare to battle the snakes with {HP} hitpoints, you attack for {round(attack,1)} !")
+                            print(f"You prepare to battle the snakes with {HP} hitpoints, you attack for {round(attack,1)} damage !")
                             
                             if attack >= HP:
                                 player.lives +=1
@@ -178,7 +183,7 @@ while True:
 
                             attack = (random.randint(0, 20)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
                             HP = 12
-                            print(f"You prepare to battle the Goblins with {HP} hitpoints, you attack for {round(attack,1)}")
+                            print(f"You prepare to battle the Goblins with {HP} hitpoints, you attack for {round(attack,1)} damage")
                             if attack > HP:
                                 player.lives +=1
                                 player.level +=.04
@@ -203,7 +208,7 @@ while True:
                             
                             attack = (random.randint(0, 25)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
                             HP = 15
-                            print(f"You prepare to battle the lurking mummies with {HP} hitpoints, you attack for {round(attack,1)}")
+                            print(f"You prepare to battle the lurking mummies with {HP} hitpoints, you attack for {round(attack,1)} damage")
                             if attack > HP:
                                 player.lives +=1
                                 player.level +=.06
@@ -227,7 +232,7 @@ while True:
 
                             attack = (random.randint(0, 50)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
                             HP = 40
-                            print(f"You prepare to battle the giant beast with {HP} hitpoints, you attack for {round(attack,1)}")
+                            print(f"You prepare to battle the giant beast with {HP} hitpoints, you attack for {round(attack,1)} damage")
                             if attack >= HP:
                                 player.lives +=1
                                 player.level +=.1
@@ -250,7 +255,7 @@ while True:
                             print(f"You have {player.lives} lives, let the battle begin!")
                             attack = (random.randint(0,100)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
                             HP = 80
-                            print(f"You prepare to battle the evil spider with {HP} hitpoints, you attack for {round(attack,1)}")
+                            print(f"You prepare to battle the evil spider with {HP} hitpoints, you attack for {round(attack,1)} damage")
                             if attack >= HP:
                                 player.lives +=1
                                 player.level +=.15
@@ -275,7 +280,7 @@ while True:
                             print(f"You have {player.lives} lives, let the battle begin!")
                             attack = (random.randint(0,150)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
                             HP = 140
-                            print(f"You prepare to battle the Wicked Witch with {HP} hitpoints, you attack for {round(attack,1)}")
+                            print(f"You prepare to battle the Wicked Witch with {HP} hitpoints, you attack for {round(attack,1)} damage")
                             
                             if attack >= HP:
                                 player.lives +=1
@@ -301,7 +306,7 @@ while True:
                             print(f"You have {player.lives} lives, let the battle begin!")
                             attack = (random.randint(0,200)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
                             HP = 185
-                            print(f"You prepare to battle the mighty wizard with {HP} hitpoints, you attack for {round(attack,1)}")
+                            print(f"You prepare to battle the mighty wizard with {HP} hitpoints, you attack for {round(attack,1)} damage")
                             
                             if attack >= HP:
                                 player.lives +=1
@@ -355,13 +360,21 @@ while True:
                                 print("You currently have too many items in your bag")
                                 print(f"You currently possess {player.item}")
 
-                                swap_choice = input("Please choose an item to swap from your bag: ")
-                                if swap_choice in player.item:
-                                                                                    
-                                    player.item.remove(swap_choice)
-                                    player.item.append(item_choice)
+                                swap_choice = input("Please choose an item to swap from your bag, or pass to continue with your current bag: ")
+                                choice2 = False
+                                while choice2 == False:
+                                    if swap_choice in player.item:
+                                        player.item.remove(swap_choice)
+                                        player.item.append(item_choice)
+                                        choice2 = True 
+                                    elif swap_choice == 'pass':
+                                        choice2 = True 
+                                    else:
+                                        swap_choice = input("Please choose an item to swap from your bag, or pass to continue with your current bag: ")
+                                        
+
                             choice = True                 
-                    
+                    print("----------------------------------")
                     print(f"You currently possess {player.item}")
 
             else:
