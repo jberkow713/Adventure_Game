@@ -90,9 +90,30 @@ class Player:
         if "Enchanted Staff" in self.item:
             Player.magic_attack = Player.magic_attack * 1.2
         if "Boomerang" in self.item:
-            Player.attack = Player.attack * 1.11
+            Player.attack = Player.attack * 1.1
         if "Broomstick" in self.item:
             
             print("You can fly!!!")         
 
-    
+    def describe_power(self, item):
+        item_list = ["Body Armor", "sword", "helmet", "bomb", "bow", "arrows", "diamond", "Arkenstone", "Spear", "Ocarina",\
+            "Bag of marbles", "Magic Cloak", "Crystal Sword", "Wand of Death", "Glowing Candle", "Enchanted Staff", \
+                "Boomerang", "Broomstick"]
+        item_benefit = ["Lives * 1.1", "Attack * 1.1", "Defense * 1.1", "Attack * 1.1",\
+            "Attack * 1.1", "Attack *1.1 ", "Fortune * 1.1", "Magic_attack * 1.15", \
+                "Attack * 1.1", "Magic_level * 1.15","Fortune * 1.1", "Magic_attack *1.1", "Attack * 1.2", \
+                    "Magic_attack * 1.2", "Magic_level * 1.1", "Magic_attack * 1.2", "Attack * 1.1",\
+                        "the ability to fly!"          ]
+        
+        
+        power_dict = dict(zip(item_list, item_benefit))
+
+        for key, value in power_dict.items():
+            if item == key:
+                print(f"{item} gives you {value}")
+                print("--------------------------")
+
+
+
+
+                

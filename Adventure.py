@@ -98,7 +98,8 @@ while True:
         print("Your journey has ended, but we all must fade someday...try again soon!")
         break 
     print('----------------------------------------')
-            
+    print(f"You are currently in the {player.room.name}")
+    print('----------------------------------------')        
     player.set_player_attributes(difficulty_choice)
 
     #lives, level, and magic level are based on experience and defeating monsters, they can not reset
@@ -107,7 +108,10 @@ while True:
     print('----------------------------------------')
     print(f"You currently have {player.lives} lives left.")
     print('----------------------------------------')
-    print(f"Your current attack is {round(player.attack,1)}, your current magic attack is {round(player.magic_attack,1)}")
+    print(f"Your current attack is {round(player.attack,1)}, Your current magic attack is {round(player.magic_attack,1)},\n\
+    Your current defense is {round(player.defense, 1)}")
+    print('----------------------------------------')
+    print("Your attack, magic_attack, defense, level, and magic level all improve your ability to defeat monsters!")
     print('----------------------------------------')
     if "Broomstick" in player.item:
         users_choice = input("Please choose north, east, west, south, magic, or fly: \n ")
@@ -142,7 +146,7 @@ while True:
                         while player.lives > 0:
                             print(f"You have {player.lives} lives, let the battle begin!")
                             #attack is improved based on your inventory which improves attributes
-                            attack = (random.randint(0, 10)) * player.attack * player.magic_attack * player.defense
+                            attack = (random.randint(0, 10)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
                             print(f"You prepare to battle the snakes, with {round(attack,1)} power!")
                             if attack >= 4:
                                 player.lives +=1
@@ -165,7 +169,7 @@ while True:
                         while player.lives >0:
                             print(f"You have {player.lives} lives, let the battle begin!")
 
-                            attack = (random.randint(0, 20)) * player.attack * player.magic_attack * player.defense
+                            attack = (random.randint(0, 20)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
                             print(f"You prepare to battle the Goblins, with {round(attack,1)} power!")
                             if attack > 12:
                                 player.lives +=1
@@ -189,7 +193,7 @@ while True:
                         while player.lives > 0:
                             print(f"You have {player.lives} lives, let the battle begin!")
                             
-                            attack = (random.randint(0, 25)) * player.attack * player.magic_attack * player.defense 
+                            attack = (random.randint(0, 25)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
                             print(f"You prepare to battle the lurking mummies, with {round(attack,1)} power!")
                             if attack > 15:
                                 player.lives +=1
@@ -212,7 +216,7 @@ while True:
                         while player.lives >0:
                             print(f"You have {player.lives} lives, let the battle begin!")
 
-                            attack = (random.randint(0, 50)) * player.attack * player.magic_attack * player.defense 
+                            attack = (random.randint(0, 50)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
                             print(f"You prepare to battle the giant beast, with {round(attack,1)} power!")
                             if attack >= 40:
                                 player.lives +=1
@@ -234,7 +238,7 @@ while True:
                         while player.lives >0:
                             
                             print(f"You have {player.lives} lives, let the battle begin!")
-                            attack = (random.randint(0,100)) * player.attack * player.magic_attack * player.defense 
+                            attack = (random.randint(0,100)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
                             print(f"You prepare to battle the evil spider, with {round(attack,1)} power!")
                             if attack >= 80:
                                 player.lives +=1
@@ -258,7 +262,7 @@ while True:
                         while player.lives >0:
                             
                             print(f"You have {player.lives} lives, let the battle begin!")
-                            attack = (random.randint(0,150)) * player.attack * player.magic_attack * player.defense 
+                            attack = (random.randint(0,150)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
                             print(f"You prepare to battle the Wicked Witch, with {round(attack,1)} power!")
                             
                             if attack >= 140:
@@ -283,7 +287,7 @@ while True:
                         while player.lives >0:
                             
                             print(f"You have {player.lives} lives, let the battle begin!")
-                            attack = (random.randint(0,200)) * player.attack * player.magic_attack * player.defense 
+                            attack = (random.randint(0,200)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
                             print(f"You prepare to battle the mighty wizard, with {round(attack,1)} power!")
                             
                             if attack >= 185:
@@ -310,6 +314,11 @@ while True:
                     continue
                 else:
                     print(f"You find {player.room.item}")
+                    print("-------------------------")
+                    for treasure in player.room.item:
+                        player.describe_power(treasure)
+                    
+
                     item_choice = input("Which item will you pickup?: \n")
                 
                 #can not pick up duplicate items
