@@ -98,12 +98,12 @@ class Player:
     def describe_power(self, item):
         item_list = ["Body Armor", "sword", "helmet", "bomb", "bow", "arrows", "diamond", "Arkenstone", "Spear", "Ocarina",\
             "Bag of marbles", "Magic Cloak", "Crystal Sword", "Wand of Death", "Glowing Candle", "Enchanted Staff", \
-                "Boomerang", "Broomstick"]
+                "Boomerang", "Broomstick", "Glowing Orb"]
         item_benefit = ["Lives * 1.1", "Attack * 1.1", "Defense * 1.1", "Attack * 1.1",\
             "Attack * 1.1", "Attack *1.1 ", "Fortune * 1.1", "Magic_attack * 1.15", \
                 "Attack * 1.1", "Magic_level * 1.15","Fortune * 1.1", "Magic_attack *1.1", "Attack * 1.2", \
                     "Magic_attack * 1.2", "Magic_level * 1.1", "Magic_attack * 1.2", "Attack * 1.1",\
-                        "the ability to fly!"          ]
+                        "the ability to fly!", "Who knows what this does..."          ]
         
         
         power_dict = dict(zip(item_list, item_benefit))
@@ -113,7 +113,14 @@ class Player:
                 print(f"{item} gives you {value}")
                 print("--------------------------")
 
-    
+    def choose_item(self, item_list):
+
+        item_choice = ""
+        while item_choice != item in item_list :
+            item_choice = input("Which item will you pickup?: \n")
+
+        Player.item.append(item_choice)
+
     
 
 

@@ -37,7 +37,9 @@ await you now! Beware the beasts that dwell within!""", ['Magic Cloak', 'Crystal
 'Wizard training room':Room("Wizard Training Room", """Wizards are battling it out in the corner...they spot you...""", 
 ['Enchanted Staff', 'Boomerang'], ['The head Wizard aims his wand at you']),
 
-'Cloud Fortress': Room("Cloud Fortress", """You jump off of the broomstick and land at the gates of a mighty fortress, high up on a magical floating cloud city""", )  
+'Cloud Fortress': Room("Cloud Fortress", """You jump off of the broomstick and land at the gates of a mighty fortress, high up on a magical floating cloud city""" ),
+'Mysterious Shack': Room("Mysterious Shack", """You arrive at an old run down shack in the middle of the clouds\
+    what on earth is this thing doing here???""", ['Glowing Orb']),       
 }
 
 
@@ -61,7 +63,7 @@ room['Cauldron Room'].s_to = room['Magical Entrance']
 room['Magical Entrance'].e_to =room['Wizard training room']
 room['Wizard training room'].w_to = room['Magical Entrance']
 room['Cauldron Room'].fly_to = room['Cloud Fortress']
-# room['Cloud Fortress'].e_to = room['Mysterious Shack']
+room['Cloud Fortress'].e_to = room['Mysterious Shack']
 # room['Cloud Fortress'].fly_to = room['Cauldron Room']
 # room['Mysterious Shack'].magic_to = room['Rabbit Hole']
 # room['Rabbit Hole'].magic_to = room['WonderWorld']
@@ -75,7 +77,6 @@ room['Cauldron Room'].fly_to = room['Cloud Fortress']
 # room["Ogre King's Lair"].s_to = room['Ogre Fortress']
 # room['Ogre Fortress East'].e_to = room['Ogre Fortress']
 # room['Ogre Fortress West'].w_to = room['Ogre Fortress']
-
 
 User_name = input("Please enter your name: \n")
 
@@ -97,6 +98,8 @@ while True:
     if player.lives <=0:
         print("Your journey has ended, but we all must fade someday...try again soon!")
         break 
+    print('----------------------------------------')
+    print('----------------------------------------')
     print('----------------------------------------')
     print(f"You are currently in the {player.room.name}")
     print('----------------------------------------')        
@@ -323,46 +326,48 @@ while True:
                 if len(player.room.item) < 1:
                     continue
                 else:
+                
                     print(f"You find {player.room.item}")
+                    if len(player.item) >0:
+                        print(f"You currently possess{player.item}")
                     print("-------------------------")
+                    
                     for treasure in player.room.item:
                         player.describe_power(treasure)
+                
+                    item_choice = input("Which item will you pickup? Or say pass to move on: \n")
                     
+                    choice = False
+                    while choice == False:
+                        
+                        if item_choice == 'pass':
+                            choice = True 
 
-                    item_choice = input("Which item will you pickup?: \n")
-                
-                #can not pick up duplicate items
-                if item_choice in player.room.item and item_choice not in player.item:
-                        #so far inventory cap is 5, may change it as game goes along and more rooms are added 
-                        if len(player.item) >= 5:
-                            print("You currently have too many items in your bag")
-                            print(f"You currently possess {player.item}")
-                            swap_choice = input("Please choose an item to swap from your bag: ")
-                            if swap_choice in player.item:
-                                #replaces 5th item with new chosen item
-                                player.item.remove(swap_choice)
-                                player.item.append(item_choice)
-                                
+                        elif item_choice not in player.room.item or item_choice in player.item:
+                            item_choice = input("Which item will you pickup? Or say 'pass' to move on: \n")
+                            continue 
+                                                
+                        elif item_choice in player.room.item and item_choice not in player.item:
+                            if len(player.item) <5:
+                                player.item.append(item_choice)    
+                            
+                            elif len(player.item) >= 5:
+                                print("You currently have too many items in your bag")
                                 print(f"You currently possess {player.item}")
-                            else:
-                                print("You did not properly select an item to swap...better luck next time!")    
-                        #if less than 5 items are in inventory, adds item
-                        elif len(player.item) <5:
-                            print(f"You have added {item_choice}\n")
-                            player.item.append(item_choice)
-                            print(f"You currently possess {player.item}")
-                elif item_choice in player.room.item and item_choice in player.item:
-                    print("You may only carry one of that item")
-                    continue
-                #if improperly typed, no item is added, may tweak in future
-                else:
-                    print("You did not choose a proper item, better luck next time!")
-                    print(f"You currently possess {player.item}")
-                    continue   
+
+                                swap_choice = input("Please choose an item to swap from your bag: ")
+                                if swap_choice in player.item:
+                                                                                    
+                                    player.item.remove(swap_choice)
+                                    player.item.append(item_choice)
+                            choice = True                 
                     
-                
-                
-                
+                    print(f"You currently possess {player.item}")
+
             else:
+                print("----------------------------------")
                 print('You can not go in that direction!')
                 continue
+
+                
+            
