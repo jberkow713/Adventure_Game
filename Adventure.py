@@ -22,7 +22,7 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. """, "red dragon", 40 , ["diamond", "Arkenstone"], ["A giant Red Dragon approaches"]),
 
 'Cave Exit': Room("Cave Exit", """You have free solod your way out of the treasure room to the opening above, 
-the sun greets you as you claw your way through the rocks to a giant open field""", "none", 0 ),
+the sun greets you as you claw your way through the rocks to a giant open field""", [], 0 ),
 
 'Enchanted Forest': Room("Enchanted Forest", """As you enter the woods you feel a bit funny...You turn around to 
 retreat, only to find that you are completely lost""", "giant spider", 80, ['Ocarina', 'Bag of marbles'], ['From the treetops, a giant spider \
@@ -37,14 +37,19 @@ await you now! Beware the beasts that dwell within!""",[], 0, ['Magic Cloak', 'C
 'Wizard training room':Room("Wizard Training Room", """Wizards are battling it out in the corner...they spot you...""", "wizard", 140, 
 ['Enchanted Staff', 'Boomerang'], ['The head Wizard aims his wand at you']),
 
-'Cloud Fortress': Room("Cloud Fortress", """You jump off of the broomstick and land at the gates of a mighty fortress, high up on a magical floating cloud city""", "none", 0 ),
+'Cloud Fortress': Room("Cloud Fortress", """You jump off of the broomstick and land at the gates of a mighty fortress, high up on a magical floating cloud city""", [], 0 ),
 'Mysterious Shack': Room("Mysterious Shack", """You arrive at an old run down shack in the middle of the clouds\
-    what on earth is this thing doing here???""", 'none', 0, ['Glowing Orb']),       
+    what on earth is this thing doing here???""", [], 0, ['Glowing Orb']),  
+'Rabbit Hole': Room("Rabbit Hole", """You fall down a giant hole within the hut, in front of you is a tiny door""", [], 0, ['Mysterious looking Brownie'] )         
 }
 
-monster_list = {"snakes": Monster('snakes', 4) , "goblins": Monster('goblins', 12), 
-}
 
+
+
+
+Wonderland = {'WonderWorld': Room('WonderWorld', """As you fit through the miniature door, a vast forest lies before you""", [], 0)
+
+}
 
 # Link rooms together
 #World 1
@@ -67,9 +72,10 @@ room['Magical Entrance'].e_to =room['Wizard training room']
 room['Wizard training room'].w_to = room['Magical Entrance']
 room['Cauldron Room'].fly_to = room['Cloud Fortress']
 room['Cloud Fortress'].e_to = room['Mysterious Shack']
-# room['Cloud Fortress'].fly_to = room['Cauldron Room']
-# room['Mysterious Shack'].magic_to = room['Rabbit Hole']
-# room['Rabbit Hole'].magic_to = room['WonderWorld']
+room['Cloud Fortress'].fly_to = room['Cauldron Room']
+room['Mysterious Shack'].magic_to = room['Rabbit Hole']
+room['Rabbit Hole'].magic_to = Wonderland['WonderWorld']
+room['Mysterious Shack'].w_to = room['Cloud Fortress']
 # room['Mysterious Shack'].n_to = room['Castle Gates']
 # room['Castle Gates'].s_to = room['Mysterious Shack']
 # room['Castle Gates'].n_to = room['Ogre Fortress']
@@ -110,6 +116,7 @@ while True:
     print('----------------------------------------')
     print(f"You are currently in the {player.room.name}")
     print('----------------------------------------')        
+    
     player.set_player_attributes(difficulty_choice)
 
     #lives, level, and magic level are based on experience and defeating monsters, they can not reset
@@ -123,12 +130,29 @@ while True:
     print('----------------------------------------')
     print("Your attack, magic_attack, defense, level, and magic level all improve your ability to defeat monsters!")
     print('----------------------------------------')
+           
+    if player.room.name == "Rabbit Hole":
+        if 'Mysterious looking Brownie' in player.item:
+            print("A tiny door stands before you. Dirt begins to fall from the ceiling, you'd better find a way out quickly!")
+            escape = input("Do you walk through the tiny door?")
+            if escape == "yes":
+                player.room = Wonderland['WonderWorld']
+                continue
+            else:
+                print("You have been buried alive")
+                break     
+        elif 'Mysterious looking Brownie' not in player.item:
+            print('Dirt begins to fall from the ceiling...there is no escape...perhaps you should have eaten the brownie')
+            break 
     
     if "Broomstick" in player.item:
         users_choice = input("Please choose north, east, west, south, magic, or fly: \n ")
+        print('-----------------------------------------------')
     else:
-        users_choice = input("Please choose north, east, west, south, magic: \n ")  
-        
+        users_choice = input("Please choose north, east, west, south, magic: \n ")
+        print('--------------------------------------------------')      
+
+
     print('----------------------------------------')
     
     choices = ["north", "east", "west", "south", "magic", "fly"]
@@ -149,7 +173,7 @@ while True:
                 print(player.room.description)
                 print('----------------------------------------')
                 if len(player.room.enemies) >=1:
-                    print(f" {player.room.enemies}")
+                    print(f" {player.room.enemy_description}")
                     print('----------------------------------------')
                     #check if enemy exists
                     #check which room in to adapt the battle

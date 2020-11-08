@@ -4,7 +4,7 @@ from Room import Room, Monster
 import random
 
 class Player:
-    def __init__(self, name, level,  defense, magic_level,  room,  item=[]):
+    def __init__(self, name, level,  defense, magic_level,  room, item=[]):
         self.room = room 
         self.name = name
         self.item = item
@@ -15,6 +15,7 @@ class Player:
         # self.lives = 0
         self.defense = defense
         self.monster = Monster
+        # self.size = size 
         # self.fortune = fortune
          
     def __str__(self):
@@ -92,19 +93,23 @@ class Player:
             Player.magic_attack = Player.magic_attack * 1.2
         if "Boomerang" in self.item:
             Player.attack = Player.attack * 1.1
-        if "Broomstick" in self.item:
-            
-            print("You can fly!!!")         
+        # if "Broomstick" in self.item:
+                        
+        #     print('---------------------------')
+        if 'Mysterious looking Brownie' in self.item:
+            print("You shrink down to the size of a penny!")
+            print('----------------------------')
+                        
 
     def describe_power(self, item):
         item_list = ["Body Armor", "sword", "helmet", "bomb", "bow", "arrows", "diamond", "Arkenstone", "Spear", "Ocarina",\
             "Bag of marbles", "Magic Cloak", "Crystal Sword", "Wand of Death", "Glowing Candle", "Enchanted Staff", \
-                "Boomerang", "Broomstick", "Glowing Orb"]
+                "Boomerang", "Broomstick", "Glowing Orb", 'Mysterious looking Brownie']
         item_benefit = ["Lives * 1.1", "Attack * 1.1", "Defense * 1.1", "Attack * 1.1",\
             "Attack * 1.1", "Attack *1.1 ", "Fortune * 1.1", "Magic_attack * 1.15", \
                 "Attack * 1.1", "Magic_level * 1.15","Fortune * 1.1", "Magic_attack *1.1", "Attack * 1.2", \
                     "Magic_attack * 1.2", "Magic_level * 1.1", "Magic_attack * 1.2", "Attack * 1.1",\
-                        "the ability to fly!", "Who knows what this does..."          ]
+                        "the ability to fly!", "Who knows what this does...", "miniature size"   ]
         
         
         power_dict = dict(zip(item_list, item_benefit))
