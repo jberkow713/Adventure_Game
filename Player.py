@@ -1,10 +1,10 @@
 # Write a class to hold player information, e.g. what room they are in
 # currently.
-from Room import Room 
+from Room import Room, Monster
 import random
 
 class Player:
-    def __init__(self, name, level,  defense, magic_level,  room, item=[]):
+    def __init__(self, name, level,  defense, magic_level,  room,  item=[]):
         self.room = room 
         self.name = name
         self.item = item
@@ -14,6 +14,7 @@ class Player:
         self.magic_level = magic_level
         # self.lives = 0
         self.defense = defense
+        self.monster = Monster
         # self.fortune = fortune
          
     def __str__(self):
@@ -112,19 +113,3 @@ class Player:
             if item == key:
                 print(f"{item} gives you {value}")
                 print("--------------------------")
-
-    def choose_item(self, item_list):
-
-        item_choice = ""
-        while item_choice != item in item_list :
-            item_choice = input("Which item will you pickup?: \n")
-
-        Player.item.append(item_choice)
-
-    
-
-
-
-
-
-                

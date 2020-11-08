@@ -1,4 +1,4 @@
-from Room import Room
+from Room import Room, Monster
 from Player import Player 
 # Declare all the rooms
 import random
@@ -8,38 +8,41 @@ room = {
                      "North of you, the cave mount beckons", ["Body Armor" ], ["There are no enemies here..."]),
 
 'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east.""", ["sword", "helmet"], ["Snakes...why did it have to be snakes?"]),
+passages run north and east.""", "snakes", 4, ["sword", "helmet"], ["Snakes...why did it have to be snakes?"]),
 
 'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm.""", ["key", "bomb"], ["Out of nowhere come three scary goblins"]),
+the distance, but there is no way across the chasm.""", "goblins", 12, ["key", "bomb"], ["Out of nowhere come three scary goblins"]),
 
 'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air.""", ["bow", "arrows"], ["A group of Mummies lumber towards you"]),
+to north. The smell of gold permeates the air.""", "mummies", 15, ["bow", "arrows"], ["A group of Mummies lumber towards you"]),
 
 'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. """, ["diamond", "Arkenstone"], ["A giant Red Dragon approaches"]),
+earlier adventurers. """, "red dragon", 40 , ["diamond", "Arkenstone"], ["A giant Red Dragon approaches"]),
 
 'Cave Exit': Room("Cave Exit", """You have free solod your way out of the treasure room to the opening above, 
-the sun greets you as you claw your way through the rocks to a giant open field""" ),
+the sun greets you as you claw your way through the rocks to a giant open field""", "none", 0 ),
 
 'Enchanted Forest': Room("Enchanted Forest", """As you enter the woods you feel a bit funny...You turn around to 
-retreat, only to find that you are completely lost""", ['Ocarina', 'Bag of marbles'], ['From the treetops, a giant spider \
+retreat, only to find that you are completely lost""", "giant spider", 80, ['Ocarina', 'Bag of marbles'], ['From the treetops, a giant spider \
 descends upon you!']),
 
 'Magical Entrance': Room("Magical Entrance", """The forest has captured you and brought you here...A world of wonder and magic
-await you now! Beware the beasts that dwell within!""", ['Magic Cloak', 'Crystal Sword', 'Wand of Death']),
+await you now! Beware the beasts that dwell within!""",[], 0, ['Magic Cloak', 'Crystal Sword', 'Wand of Death']),
 
-'Cauldron Room': Room("Cauldron Room", """In the center of the room lies a large cauldron...it is bubbling.""",
+'Cauldron Room': Room("Cauldron Room", """In the center of the room lies a large cauldron...it is bubbling.""", "witch", 185,
 ['Broomstick', 'Glowing Candle'], ['As you enter the room, a witch flies down from the ceiling to attack you!']),
 
-'Wizard training room':Room("Wizard Training Room", """Wizards are battling it out in the corner...they spot you...""", 
+'Wizard training room':Room("Wizard Training Room", """Wizards are battling it out in the corner...they spot you...""", "wizard", 140, 
 ['Enchanted Staff', 'Boomerang'], ['The head Wizard aims his wand at you']),
 
-'Cloud Fortress': Room("Cloud Fortress", """You jump off of the broomstick and land at the gates of a mighty fortress, high up on a magical floating cloud city""" ),
+'Cloud Fortress': Room("Cloud Fortress", """You jump off of the broomstick and land at the gates of a mighty fortress, high up on a magical floating cloud city""", "none", 0 ),
 'Mysterious Shack': Room("Mysterious Shack", """You arrive at an old run down shack in the middle of the clouds\
-    what on earth is this thing doing here???""", ['Glowing Orb']),       
+    what on earth is this thing doing here???""", 'none', 0, ['Glowing Orb']),       
+}
+
+monster_list = {"snakes": Monster('snakes', 4) , "goblins": Monster('goblins', 12), 
 }
 
 
@@ -81,8 +84,7 @@ room['Cloud Fortress'].e_to = room['Mysterious Shack']
 User_name = input("Please enter your name: \n")
 
 player = Player(name=User_name, level=1, defense=1,  magic_level=1, \
-    room=room["outside"], item=[] ) 
-
+    room=room["outside"],  item=[] ) 
 
 print(f"Welcome {player.name}")
 
@@ -155,12 +157,12 @@ while True:
                         while player.lives > 0:
                             print(f"You have {player.lives} lives, let the battle begin!")
                             #attack is improved based on your inventory which improves attributes
-                            attack = (random.randint(0, 10)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                            HP = 4
-                                                    
-                            print(f"You prepare to battle the snakes with {HP} hitpoints, you attack for {round(attack,1)} damage !")
+                            attack = ((random.randint(0, 10)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level)
                             
-                            if attack >= HP:
+                                                    
+                            print(f"You prepare to battle the snakes with {player.room.enemyHP} hitpoints, you attack for {round(attack,1)} damage !")
+                            
+                            if attack >= player.room.enemyHP:
                                 player.lives +=1
                                 player.level +=.02
                                 print(f"You have defeated the Snakes with {player.lives} lives left, you may continue on!")
@@ -182,9 +184,9 @@ while True:
                             print(f"You have {player.lives} lives, let the battle begin!")
 
                             attack = (random.randint(0, 20)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                            HP = 12
-                            print(f"You prepare to battle the Goblins with {HP} hitpoints, you attack for {round(attack,1)} damage")
-                            if attack > HP:
+                            
+                            print(f"You prepare to battle the Goblins with {player.room.enemyHP} hitpoints, you attack for {round(attack,1)} damage")
+                            if attack >= player.room.enemyHP:
                                 player.lives +=1
                                 player.level +=.04
                                 player.magic_level +=.02
@@ -207,9 +209,9 @@ while True:
                             print(f"You have {player.lives} lives, let the battle begin!")
                             
                             attack = (random.randint(0, 25)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                            HP = 15
-                            print(f"You prepare to battle the lurking mummies with {HP} hitpoints, you attack for {round(attack,1)} damage")
-                            if attack > HP:
+                           
+                            print(f"You prepare to battle the lurking mummies with {player.room.enemyHP} hitpoints, you attack for {round(attack,1)} damage")
+                            if attack >= player.room.enemyHP:
                                 player.lives +=1
                                 player.level +=.06
                                 print(f"You have defeated the Mummies with {player.lives} lives left!")
@@ -231,9 +233,9 @@ while True:
                             print(f"You have {player.lives} lives, let the battle begin!")
 
                             attack = (random.randint(0, 50)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                            HP = 40
-                            print(f"You prepare to battle the giant beast with {HP} hitpoints, you attack for {round(attack,1)} damage")
-                            if attack >= HP:
+                            
+                            print(f"You prepare to battle the giant beast with {player.room.enemyHP} hitpoints, you attack for {round(attack,1)} damage")
+                            if attack >= player.room.enemyHP:
                                 player.lives +=1
                                 player.level +=.1
                                 player.magic_level +=.08
@@ -254,9 +256,9 @@ while True:
                             
                             print(f"You have {player.lives} lives, let the battle begin!")
                             attack = (random.randint(0,100)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                            HP = 80
-                            print(f"You prepare to battle the evil spider with {HP} hitpoints, you attack for {round(attack,1)} damage")
-                            if attack >= HP:
+                            
+                            print(f"You prepare to battle the evil spider with {player.room.enemyHP} hitpoints, you attack for {round(attack,1)} damage")
+                            if attack >= player.room.enemyHP:
                                 player.lives +=1
                                 player.level +=.15
                                 player.magic_level +=.15
@@ -279,10 +281,10 @@ while True:
                             
                             print(f"You have {player.lives} lives, let the battle begin!")
                             attack = (random.randint(0,150)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                            HP = 140
-                            print(f"You prepare to battle the Wicked Witch with {HP} hitpoints, you attack for {round(attack,1)} damage")
                             
-                            if attack >= HP:
+                            print(f"You prepare to battle the Wicked Witch with {player.room.enemyHP} hitpoints, you attack for {round(attack,1)} damage")
+                            
+                            if attack >= player.room.enemyHP:
                                 player.lives +=1
                                 player.level +=.2
                                 player.magic_level +=.2
@@ -305,10 +307,10 @@ while True:
                             
                             print(f"You have {player.lives} lives, let the battle begin!")
                             attack = (random.randint(0,200)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                            HP = 185
-                            print(f"You prepare to battle the mighty wizard with {HP} hitpoints, you attack for {round(attack,1)} damage")
+                           
+                            print(f"You prepare to battle the mighty wizard with {player.room.enemyHP} hitpoints, you attack for {round(attack,1)} damage")
                             
-                            if attack >= HP:
+                            if attack >= player.room.enemyHP:
                                 player.lives +=1
                                 player.level +=.25
                                 player.magic_level +=.25
