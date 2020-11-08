@@ -137,6 +137,7 @@ while True:
             escape = input("Do you walk through the tiny door?")
             if escape == "yes":
                 player.room = Wonderland['WonderWorld']
+                player.item.remove("Mysterious looking Brownie")
                 continue
             else:
                 print("You have been buried alive")
