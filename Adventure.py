@@ -149,17 +149,21 @@ while True:
     if "Broomstick" in player.item:
         users_choice = input("Please choose north, east, west, south, magic, or fly: \n ")
         print('-----------------------------------------------')
+        choices = ["north", "east", "west", "south", "magic", "fly"]
+        directions = [player.room.n_to, player.room.e_to, player.room.w_to, player.room.s_to, player.room.magic_to, player.room.fly_to]
+        path_dict = dict(zip(choices, directions))
+    
     else:
         users_choice = input("Please choose north, east, west, south, magic: \n ")
         print('--------------------------------------------------')      
 
 
-    print('----------------------------------------')
     
-    choices = ["north", "east", "west", "south", "magic", "fly"]
+    
+        choices = ["north", "east", "west", "south", "magic"]
        
-    directions = [player.room.n_to, player.room.e_to, player.room.w_to, player.room.s_to, player.room.magic_to, player.room.fly_to]
-    path_dict = dict(zip(choices, directions))
+        directions = [player.room.n_to, player.room.e_to, player.room.w_to, player.room.s_to, player.room.magic_to]
+        path_dict = dict(zip(choices, directions))
 
 
     if users_choice == "q":
@@ -222,7 +226,8 @@ while True:
                     continue
                 
                 else:
-                
+                    
+                    counter = 0
                     print(f"You find {player.room.item}")
                     if len(player.item) >0:
                         print(f"You currently possess{player.item}")
