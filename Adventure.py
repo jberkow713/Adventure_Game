@@ -179,7 +179,7 @@ while True:
                     
                     #trying new format for battles
                     Enemy_hp = player.room.enemyHP 
-                    while Enemy_hp >0:
+                    while Enemy_hp >0 and player.lives > 0:
                         
 
                         print(f"You have {round(player.lives,1)} lives, let the battle begin!")
