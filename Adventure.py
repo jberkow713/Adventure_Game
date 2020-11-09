@@ -104,10 +104,14 @@ player.set_initial_fortune_and_defense()
 
 print(f"Your starting fortune is {player.fortune}") 
 print(f"Your starting defense is {player.defense}") 
-
+Item_quit = False 
 
 while True:
     #Set attributes at start of every battle
+    if Item_quit == True:
+        print("Your journey has ended!")
+        break 
+    
     if player.lives <=0:
         print("Your journey has ended, but we all must fade someday...try again soon!")
         break 
@@ -253,8 +257,9 @@ while True:
 
                     choice = False
                     while choice == False:
-                        
-                        if item_choice == 'pass':
+                        if item_choice == 'q':
+                            break 
+                        elif item_choice == 'pass':
                             choice = True 
 
                         elif item_choice not in player.room.item or item_choice in player.item:
@@ -281,6 +286,11 @@ while True:
                                         choice2 = True 
                                    
                             choice = True                 
+                    
+                    if item_choice == 'q':
+                        Item_quit = True                         
+                        break 
+                    
                     print("----------------------------------")
                     print(f"You currently possess {player.item}")
 
