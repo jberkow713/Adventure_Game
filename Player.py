@@ -93,8 +93,7 @@ class Player:
             Player.magic_attack = Player.magic_attack * 1.2
         if "Boomerang" in self.item:
             Player.attack = Player.attack * 1.1
-        if 'Ring of invisibility' in self.item:
-            Player.invisibility = True     
+           
         # if "Broomstick" in self.item:
                         
         #     print('---------------------------')
@@ -119,7 +118,7 @@ class Player:
                 "Attack * 1.1", "Magic_level * 1.15","Fortune * 1.1", "Magic_attack *1.1", "Attack * 1.2", \
                     "Magic_attack * 1.2", "Magic_level * 1.1", "Magic_attack * 1.2", "Attack * 1.1",\
                         "the ability to fly!", "Who knows what this does...", "miniature size", "Attack * 1.15",\
-                            "The second piece towards creating a powerful weapon!", 'You become invisible!'       ]
+                            "The second piece towards creating a powerful weapon!", 'You can become invisible!'       ]
         
         
         power_dict = dict(zip(item_list, item_benefit))
