@@ -212,6 +212,8 @@ while True:
                                 print('----------------------------------------') 
                                 break 
                             else:
+                                player.item.remove("Diamond Sword")
+                                player.item.remove("Glowing Orb")
                                 print("You wield the special weapon...strike now!")
                                 print('----------------------------------------')
                                 Special_Weapon = True 
