@@ -104,11 +104,11 @@ player.set_initial_fortune_and_defense()
 
 print(f"Your starting fortune is {player.fortune}") 
 print(f"Your starting defense is {player.defense}") 
-Item_quit = False 
+Quit_Choice = False 
 
 while True:
     #Set attributes at start of every battle
-    if Item_quit == True:
+    if Quit_Choice == True:
         print("Your journey has ended!")
         break 
     
@@ -156,6 +156,7 @@ while True:
         while Choices == False:
             users_choice = input("Please choose north, east, west, south, magic, or fly: \n ")
             if users_choice == 'q':
+                Quit_Choice = True 
                 break
             elif users_choice not in choices:
                 print("That is not a valid direction")
@@ -171,6 +172,7 @@ while True:
         while Choices == False:
             users_choice = input("Please choose north, east, west, south, magic: \n ")
             if users_choice == 'q':
+                Quit_Choice = True 
                 break  
             elif users_choice not in choices:
                 print("That is not a valid direction")
@@ -180,11 +182,6 @@ while True:
         directions = [player.room.n_to, player.room.e_to, player.room.w_to, player.room.s_to, player.room.magic_to]
         path_dict = dict(zip(choices, directions))
 
-
-    if users_choice == "q":
-        print("Your journey has ended!")
-        break
-      
     #consolidated all directions into one for loop!    
     for key, value in path_dict.items():
         if users_choice == key:
@@ -258,6 +255,7 @@ while True:
                     choice = False
                     while choice == False:
                         if item_choice == 'q':
+                            Quit_Choice = True
                             break 
                         elif item_choice == 'pass':
                             choice = True 
@@ -288,7 +286,6 @@ while True:
                             choice = True                 
                     
                     if item_choice == 'q':
-                        Item_quit = True                         
                         break 
                     
                     print("----------------------------------")
