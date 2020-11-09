@@ -5,49 +5,49 @@ import random
 
 room = {
 'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons", ["Body Armor" ], ["There are no enemies here..."]),
+                     "North of you, the cave mount beckons", [], 0, [], ["Body Armor" ], ["There are no enemies here..."]),
 
 'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east.""", "snakes", 4, ["sword", "helmet"], ["Snakes...why did it have to be snakes?"]),
+passages run north and east.""", "snakes", 4, 4, ["sword", "helmet"], ["Snakes...why did it have to be snakes?"]),
 
 'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm.""", "goblins", 12, ["key", "bomb"], ["Out of nowhere come three scary goblins"]),
+the distance, but there is no way across the chasm.""", "goblins", 12, 3, ["key", "bomb"], ["Out of nowhere come three scary goblins"]),
 
 'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air.""", "mummies", 15, ["bow", "arrows"], ["A group of Mummies lumber towards you"]),
+to north. The smell of gold permeates the air.""", "mummies", 15, 3, ["bow", "arrows"], ["A group of Mummies lumber towards you"]),
 
 'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. """, "red dragon", 40 , ["diamond", "Arkenstone"], ["A giant Red Dragon approaches"]),
+earlier adventurers. """, "red dragon", 40 , 2, ["diamond", "Arkenstone"], ["A giant Red Dragon approaches"]),
 
 'Cave Exit': Room("Cave Exit", """You have free solod your way out of the treasure room to the opening above, 
-the sun greets you as you claw your way through the rocks to a giant open field""", [], 0 ),
+the sun greets you as you claw your way through the rocks to a giant open field""", [], 0, [] ),
 
 'Enchanted Forest': Room("Enchanted Forest", """As you enter the woods you feel a bit funny...You turn around to 
-retreat, only to find that you are completely lost""", "giant spider", 80, ['Ocarina', 'Bag of marbles'], ['From the treetops, a giant spider \
+retreat, only to find that you are completely lost""", "giant spider", 80, 1, ['Ocarina', 'Bag of marbles'], ['From the treetops, a giant spider \
 descends upon you!']),
 
 'Magical Entrance': Room("Magical Entrance", """The forest has captured you and brought you here...A world of wonder and magic
-await you now! Beware the beasts that dwell within!""",[], 0, ['Magic Cloak', 'Crystal Sword', 'Wand of Death']),
+await you now! Beware the beasts that dwell within!""",[], 0, [],  ['Magic Cloak', 'Crystal Sword', 'Wand of Death']),
 
-'Cauldron Room': Room("Cauldron Room", """In the center of the room lies a large cauldron...it is bubbling.""", "witch", 185,
+'Cauldron Room': Room("Cauldron Room", """In the center of the room lies a large cauldron...it is bubbling.""", "witch", 185, 1, 
 ['Broomstick', 'Glowing Candle'], ['As you enter the room, a witch flies down from the ceiling to attack you!']),
 
-'Wizard training room':Room("Wizard Training Room", """Wizards are battling it out in the corner...they spot you...""", "wizard", 140, 
+'Wizard training room':Room("Wizard Training Room", """Wizards are battling it out in the corner...they spot you...""", "wizard", 140, 1, 
 ['Enchanted Staff', 'Boomerang'], ['The head Wizard aims his wand at you']),
 
-'Cloud Fortress': Room("Cloud Fortress", """You jump off of the broomstick and land at the gates of a mighty fortress, high up on a magical floating cloud city""", [], 0 ),
+'Cloud Fortress': Room("Cloud Fortress", """You jump off of the broomstick and land at the gates of a mighty fortress, high up on a magical floating cloud city""", [], 0, [] ),
 'Mysterious Shack': Room("Mysterious Shack", """You arrive at an old run down shack in the middle of the clouds\
-    what on earth is this thing doing here???""", [], 0, ['Glowing Orb']),  
-'Rabbit Hole': Room("Rabbit Hole", """You fall down a giant hole within the hut, in front of you is a tiny door""", [], 0, ['Mysterious looking Brownie'] )         
+    what on earth is this thing doing here???""", [], 0, [], ['Glowing Orb']),  
+'Rabbit Hole': Room("Rabbit Hole", """You fall down a giant hole within the hut, in front of you is a tiny door""", [], 0, [], ['Mysterious looking Brownie'] )         
 }
 
 
 
 
 
-Wonderland = {'WonderWorld': Room('WonderWorld', """As you fit through the miniature door, a vast forest lies before you""", [], 0)
+Wonderland = {'WonderWorld': Room('WonderWorld', """As you fit through the miniature door, a vast forest lies before you""", [], 0, [])
 
 }
 
@@ -123,7 +123,7 @@ while True:
     # player.lives = round((player.lives * player.level * player.magic_level),1)
     print(f"Your current level is {round(player.level, 1)}, your current magic level is {round(player.magic_level,1)}")
     print('----------------------------------------')
-    print(f"You currently have {player.lives} lives left.")
+    print(f"You currently have {round(player.lives,1)} lives left.")
     print('----------------------------------------')
     print(f"Your current attack is {round(player.attack,1)}, Your current magic attack is {round(player.magic_attack,1)},\n\
     Your current defense is {round(player.defense, 1)}")
@@ -176,183 +176,33 @@ while True:
                 if len(player.room.enemies) >=1:
                     print(f" {player.room.enemy_description}")
                     print('----------------------------------------')
-                    #check if enemy exists
-                    #check which room in to adapt the battle
-                    if player.room.name  == "Foyer":
-                        while player.lives > 0:
-                            print(f"You have {player.lives} lives, let the battle begin!")
-                            #attack is improved based on your inventory which improves attributes
-                            attack = ((random.randint(0, 10)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level)
-                            
-                                                    
-                            print(f"You prepare to battle the snakes with {player.room.enemyHP} hitpoints, you attack for {round(attack,1)} damage !")
-                            
-                            if attack >= player.room.enemyHP:
-                                player.lives +=1
-                                player.level +=.02
-                                print(f"You have defeated the Snakes with {player.lives} lives left, you may continue on!")
-                                print('----------------------------------------')
-                                break
-                            else:
-                                player.lives -=1
-                                print("The snakes have bitten you!")
-                                print('----------------------------------------')
-                                                
-                        #check to see if player died during battle
-                        if player.lives  <= 0:
-                            print("You have died to a few wimpy snakes!")
+                    
+                    #trying new format for battles
+                    while player.lives >0:
 
+                        print(f"You have {round(player.lives,1)} lives, let the battle begin!")
+                        attack = round(random.uniform(0, (player.room.enemyHP * player.room.enemy_diff)), 1) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
+                        print(f"You prepare to battle the {player.room.enemies} with {player.room.enemyHP} hitpoints, you attack for {round(attack,1)} damage !")
+
+                        if attack >= player.room.enemyHP:
+                            player.lives += (1/ player.room.enemy_diff)
+                            player.level += (.1 / player.room.enemy_diff)
+                            print(f"You have defeated the {player.room.enemies} with {round(player.lives,1)} lives left!")
+                            print('----------------------------------------')
                             break 
-
-                    elif player.room.name == "Grand Overlook":
-                        while player.lives >0:
-                            print(f"You have {player.lives} lives, let the battle begin!")
-
-                            attack = (random.randint(0, 20)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                            
-                            print(f"You prepare to battle the Goblins with {player.room.enemyHP} hitpoints, you attack for {round(attack,1)} damage")
-                            if attack >= player.room.enemyHP:
-                                player.lives +=1
-                                player.level +=.04
-                                player.magic_level +=.02
-                                print(f"You have defeated the Goblins with {player.lives} lives left!")
-                                print('----------------------------------------')
-                                break                                  
+                        else:
+                            player.lives -=1
+                            if player.room.enemies.endswith('s'):
+                                print(f"The {player.room.enemies} have injured you!")
+                                print('----------------------------------------') 
                             else:
-                                player.lives -=1
-                                print("The Goblins have injured you with their knives!")
-                                print('----------------------------------------')
-                        
-                                                
-                        if player.lives  <= 0:
-                            print("The Goblins have smashed you to pieces!")                       
-                            break 
+                                print(f"The {player.room.enemies} has injured you!")
+                                print('----------------------------------------') 
+                    
+                    if player.lives  <= 0:
 
-
-                    elif player.room.name == "Narrow Passage":
-                        while player.lives > 0:
-                            print(f"You have {player.lives} lives, let the battle begin!")
-                            
-                            attack = (random.randint(0, 25)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                           
-                            print(f"You prepare to battle the lurking mummies with {player.room.enemyHP} hitpoints, you attack for {round(attack,1)} damage")
-                            if attack >= player.room.enemyHP:
-                                player.lives +=1
-                                player.level +=.06
-                                print(f"You have defeated the Mummies with {player.lives} lives left!")
-                                print('----------------------------------------')
-                                break
-                            else:
-                                player.lives -=1
-                                print("The mummies have begun to mummify you!")
-                                print('----------------------------------------')
-                        
-                                                
-                        if player.lives  <= 0:
-                            print("The mummies have entombed you for eternity!")
-                                            
-                            break 
-
-                    elif player.room.name == "Treasure Chamber":
-                        while player.lives >0:
-                            print(f"You have {player.lives} lives, let the battle begin!")
-
-                            attack = (random.randint(0, 50)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                            
-                            print(f"You prepare to battle the giant beast with {player.room.enemyHP} hitpoints, you attack for {round(attack,1)} damage")
-                            if attack >= player.room.enemyHP:
-                                player.lives +=1
-                                player.level +=.1
-                                player.magic_level +=.08
-                                print(f"You have defeated the Dragon with {player.lives} lives left!")
-                                print('----------------------------------------')
-                                break 
-                            else:
-                                player.lives -=1
-                                print("The monstrous claws of the red beast descend upon your head!")
-                                print('----------------------------------------')
-                                                
-                        if player.lives  <= 0:
-                            print("Fire reigns down upon your head, you have been engulfed in flames!")
-                                            
-                            break    
-                    elif player.room.name == "Enchanted Forest":
-                        while player.lives >0:
-                            
-                            print(f"You have {player.lives} lives, let the battle begin!")
-                            attack = (random.randint(0,100)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                            
-                            print(f"You prepare to battle the evil spider with {player.room.enemyHP} hitpoints, you attack for {round(attack,1)} damage")
-                            if attack >= player.room.enemyHP:
-                                player.lives +=1
-                                player.level +=.15
-                                player.magic_level +=.15
-                                print(f"You have defeated the wretched monstrosity with {player.lives} lives left!")
-                                print('----------------------------------------')
-                                break 
-                            else:
-                                player.lives -=1
-                                print("The spider has you trapped in her web!")
-                                print('----------------------------------------')
-                       
-                        
-                        if player.lives  <= 0:
-                            print("The spider feasts upon your flesh!")
-                            break    
-                   
-                    elif player.room.name == "Cauldron Room":
-                        
-                        while player.lives >0:
-                            
-                            print(f"You have {player.lives} lives, let the battle begin!")
-                            attack = (random.randint(0,150)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                            
-                            print(f"You prepare to battle the Wicked Witch with {player.room.enemyHP} hitpoints, you attack for {round(attack,1)} damage")
-                            
-                            if attack >= player.room.enemyHP:
-                                player.lives +=1
-                                player.level +=.2
-                                player.magic_level +=.2
-                                print(f"You have defeated the wretched monstrosity with {player.lives} lives left!")
-                                print('----------------------------------------')
-                                break 
-                            else:
-                                player.lives -=1
-                                print("The witch has poisoned you with her dark magic!")
-                                print('----------------------------------------')
-                       
-                        
-                        if player.lives  <= 0:
-                            print("The witch has thrown you in her cauldron, and there you will stay!")
-                            break 
-
-                    elif player.room.name == "Wizard Training Room":
-
-                        while player.lives >0:
-                            
-                            print(f"You have {player.lives} lives, let the battle begin!")
-                            attack = (random.randint(0,200)) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                           
-                            print(f"You prepare to battle the mighty wizard with {player.room.enemyHP} hitpoints, you attack for {round(attack,1)} damage")
-                            
-                            if attack >= player.room.enemyHP:
-                                player.lives +=1
-                                player.level +=.25
-                                player.magic_level +=.25
-                                print(f"You have defeated the conjurer of doom with {player.lives} lives left!")
-                                print('----------------------------------------')
-                                break 
-                            else:
-                                player.lives -=1
-                                print("The wizard has hit you with a fireball!")
-                                print('----------------------------------------')
-                       
-                        
-                        if player.lives  <= 0:
-                            print("The wizard has incinerated you with his unending barrage of death!")
-                            break 
-
-
+                        print(f"You have died to the {player.room.enemies}!")
+                        break                 
 
 
                 if len(player.room.item) < 1:

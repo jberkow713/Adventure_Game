@@ -2,13 +2,14 @@
 # description attributes.
 
 class Room:
-    def __init__(self, name, description,  enemies, enemyHP, item=[] ,enemy_description=[]  ):
+    def __init__(self, name, description,  enemies, enemyHP, enemy_diff, item=[] ,enemy_description=[]  ):
         self.name = name
         self.description = description
         self.item = item
         self.enemies = enemies
         self.enemyHP = enemyHP
         self.enemy_description = enemy_description
+        self.enemy_diff = enemy_diff 
         self.n_to = None
         self.w_to = None
         self.e_to = None
