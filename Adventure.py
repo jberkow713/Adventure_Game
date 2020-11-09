@@ -113,7 +113,6 @@ while True:
         break 
     print('----------------------------------------')
     print('----------------------------------------')
-    print('----------------------------------------')
     print(f"You are currently in the {player.room.name}")
     print('----------------------------------------')        
     
@@ -135,7 +134,8 @@ while True:
         if 'Mysterious looking Brownie' in player.item:
             print("A tiny door stands before you. Dirt begins to fall from the ceiling, you'd better find a way out quickly!")
             escape = input("Do you walk through the tiny door?")
-            if escape == "yes":
+            escape = escape.lower()
+            if "yes" in escape:
                 player.room = Wonderland['WonderWorld']
                 player.item.remove("Mysterious looking Brownie")
                 continue
@@ -178,16 +178,19 @@ while True:
                     print('----------------------------------------')
                     
                     #trying new format for battles
-                    while player.lives >0:
+                    Enemy_hp = player.room.enemyHP 
+                    while Enemy_hp >0:
+                        
 
                         print(f"You have {round(player.lives,1)} lives, let the battle begin!")
                         attack = round(random.uniform(0, (player.room.enemyHP * player.room.enemy_diff)), 1) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                        print(f"You prepare to battle the {player.room.enemies} with {player.room.enemyHP} hitpoints, you attack for {round(attack,1)} damage !")
+                        print(f"You prepare to battle the {player.room.enemies} with {Enemy_hp} hitpoints left. You attack for {round(attack,1)} damage !")
 
-                        if attack >= player.room.enemyHP:
+                        if attack >= Enemy_hp:
                             player.lives += (1/ player.room.enemy_diff)
                             player.level += (.1 / player.room.enemy_diff)
                             print(f"You have defeated the {player.room.enemies} with {round(player.lives,1)} lives left!")
+                            print(f"You gain {round(.1 / player.room.enemy_diff ,2)} lives")
                             print('----------------------------------------')
                             break 
                         else:
@@ -198,7 +201,8 @@ while True:
                             else:
                                 print(f"The {player.room.enemies} has injured you!")
                                 print('----------------------------------------') 
-                    
+                            Enemy_hp = round(Enemy_hp-attack,1) 
+
                     if player.lives  <= 0:
 
                         print(f"You have died to the {player.room.enemies}!")
@@ -258,6 +262,3 @@ while True:
                 print("----------------------------------")
                 print('You can not go in that direction!')
                 continue
-
-                
-            
