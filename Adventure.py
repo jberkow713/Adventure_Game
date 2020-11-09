@@ -147,21 +147,32 @@ while True:
             break 
     
     if "Broomstick" in player.item:
-        users_choice = input("Please choose north, east, west, south, magic, or fly: \n ")
-        print('-----------------------------------------------')
         choices = ["north", "east", "west", "south", "magic", "fly"]
+        Choices = False
+        while Choices == False:
+            users_choice = input("Please choose north, east, west, south, magic, or fly: \n ")
+            if users_choice == 'q':
+                break
+            elif users_choice not in choices:
+                print("That is not a valid direction")
+            elif users_choice in choices:
+                Choices = True
+           
         directions = [player.room.n_to, player.room.e_to, player.room.w_to, player.room.s_to, player.room.magic_to, player.room.fly_to]
         path_dict = dict(zip(choices, directions))
     
     else:
-        users_choice = input("Please choose north, east, west, south, magic: \n ")
-        print('--------------------------------------------------')      
-
-
-    
-    
         choices = ["north", "east", "west", "south", "magic"]
-       
+        Choices = False
+        while Choices == False:
+            users_choice = input("Please choose north, east, west, south, magic: \n ")
+            if users_choice == 'q':
+                break  
+            elif users_choice not in choices:
+                print("That is not a valid direction")
+            elif users_choice in choices:
+                Choices = True
+                   
         directions = [player.room.n_to, player.room.e_to, player.room.w_to, player.room.s_to, player.room.magic_to]
         path_dict = dict(zip(choices, directions))
 
@@ -169,6 +180,7 @@ while True:
     if users_choice == "q":
         print("Your journey has ended!")
         break
+      
     #consolidated all directions into one for loop!    
     for key, value in path_dict.items():
         if users_choice == key:
