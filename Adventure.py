@@ -220,9 +220,19 @@ while True:
                     
                     for treasure in player.room.item:
                         player.describe_power(treasure)
-                
+
+                    counter = 0
+                    len_items_in_bag = len(player.room.item)
+                    for item in player.room.item:
+                        if item in player.item:
+                            counter +=1
+                    if counter == len_items_in_bag:
+                        counter = 0
+                        continue
+
                     item_choice = input("Which item will you pickup? Or say pass to move on: \n")
-                    
+                                      
+
                     choice = False
                     while choice == False:
                         
@@ -236,24 +246,22 @@ while True:
                         elif item_choice in player.room.item and item_choice not in player.item:
                             if len(player.item) <5:
                                 player.item.append(item_choice)    
-                            
+                                                                            
                             elif len(player.item) >= 5:
                                 print("You currently have too many items in your bag")
                                 print(f"You currently possess {player.item}")
-
-                                swap_choice = input("Please choose an item to swap from your bag, or pass to continue with your current bag: ")
+                                
                                 choice2 = False
                                 while choice2 == False:
+                                    swap_choice = input("Please choose an item to swap from your bag, or pass to continue with your current bag: ")
+                                    
                                     if swap_choice in player.item:
                                         player.item.remove(swap_choice)
                                         player.item.append(item_choice)
                                         choice2 = True 
                                     elif swap_choice == 'pass':
                                         choice2 = True 
-                                    else:
-                                        swap_choice = input("Please choose an item to swap from your bag, or pass to continue with your current bag: ")
-                                        
-
+                                   
                             choice = True                 
                     print("----------------------------------")
                     print(f"You currently possess {player.item}")
