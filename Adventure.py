@@ -211,6 +211,16 @@ while True:
 
                 if len(player.room.item) < 1:
                     continue
+                
+                counter = 0
+                len_items_in_bag = len(player.room.item)
+                for item in player.room.item:
+                    if item in player.item:
+                        counter +=1
+                if counter == len_items_in_bag:
+                    counter = 0
+                    continue
+                
                 else:
                 
                     print(f"You find {player.room.item}")
@@ -220,15 +230,6 @@ while True:
                     
                     for treasure in player.room.item:
                         player.describe_power(treasure)
-
-                    counter = 0
-                    len_items_in_bag = len(player.room.item)
-                    for item in player.room.item:
-                        if item in player.item:
-                            counter +=1
-                    if counter == len_items_in_bag:
-                        counter = 0
-                        continue
 
                     item_choice = input("Which item will you pickup? Or say pass to move on: \n")
                                       
