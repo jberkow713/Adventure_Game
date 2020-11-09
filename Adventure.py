@@ -40,7 +40,14 @@ await you now! Beware the beasts that dwell within!""",[], 0, [],  ['Magic Cloak
 'Cloud Fortress': Room("Cloud Fortress", """You jump off of the broomstick and land at the gates of a mighty fortress, high up on a magical floating cloud city""", [], 0, [] ),
 'Mysterious Shack': Room("Mysterious Shack", """You arrive at an old run down shack in the middle of the clouds\
     what on earth is this thing doing here???""", [], 0, [], ['Glowing Orb']),  
-'Rabbit Hole': Room("Rabbit Hole", """You fall down a giant hole within the hut, in front of you is a tiny door""", [], 0, [], ['Mysterious looking Brownie'] )         
+'Rabbit Hole': Room("Rabbit Hole", """You fall down a giant hole within the hut, in front of you is a tiny door""", [], 0, [],\
+     ['Mysterious looking Brownie'] ),
+'Castle Gates': Room('Castle Gates', """Before you stands a towering fortress. As you walk closer you see two giant posts with skulls at the top of them""",\
+    "Ogre Guard", 165, 2, ['Golden Axe'], ['A large brute wielding a giant mace comes charging at you']),
+'Ogre Fortress': Room('Ogre Fortress', """The fortress ceiling is at least 100 feet tall...you are but a puny ant in this lair!""",\
+    'Captain of the Ogre Guard', 300, .8, ['Diamond Sword'], ['A massive ogre descends down the stairs!']),
+"Ogre King's Lair": Room("Ogre King's Lair", """You hear a thumping from within the cave...the sound grows louder and louder!""",\
+    'The Ogre King', 1000, .5, ['Ring of invisibility'],['A towering ogre with a golden crown comes lumbering through the cave'] )                      
 }
 
 
@@ -76,16 +83,13 @@ room['Cloud Fortress'].fly_to = room['Cauldron Room']
 room['Mysterious Shack'].magic_to = room['Rabbit Hole']
 room['Rabbit Hole'].magic_to = Wonderland['WonderWorld']
 room['Mysterious Shack'].w_to = room['Cloud Fortress']
-# room['Mysterious Shack'].n_to = room['Castle Gates']
-# room['Castle Gates'].s_to = room['Mysterious Shack']
-# room['Castle Gates'].n_to = room['Ogre Fortress']
-# room['Ogre Fortress'].s_to = room['Castle Gates']
-# room['Ogre Fortress'].n_to = room["Ogre King's Lair"]
-# room['Ogre Fortress'].e_to = room['Ogre Fortress East']
-# room['Ogre Fortress'].w_to = room['Ogre Fortress West']
-# room["Ogre King's Lair"].s_to = room['Ogre Fortress']
-# room['Ogre Fortress East'].e_to = room['Ogre Fortress']
-# room['Ogre Fortress West'].w_to = room['Ogre Fortress']
+room['Mysterious Shack'].n_to = room['Castle Gates']
+room['Castle Gates'].s_to = room['Mysterious Shack']
+room['Castle Gates'].n_to = room['Ogre Fortress']
+room['Ogre Fortress'].s_to = room['Castle Gates']
+room['Ogre Fortress'].n_to = room["Ogre King's Lair"]
+room["Ogre King's Lair"].s_to = room['Ogre Fortress']
+
 
 User_name = input("Please enter your name: \n")
 
@@ -155,6 +159,7 @@ while True:
         Choices = False
         while Choices == False:
             users_choice = input("Please choose north, east, west, south, magic, or fly: \n ")
+            print('----------------------------------------')
             if users_choice == 'q':
                 Quit_Choice = True 
                 break
@@ -171,6 +176,7 @@ while True:
         Choices = False
         while Choices == False:
             users_choice = input("Please choose north, east, west, south, magic: \n ")
+            print('----------------------------------------')
             if users_choice == 'q':
                 Quit_Choice = True 
                 break  
@@ -195,6 +201,21 @@ while True:
                     print('----------------------------------------')
                     
                     #trying new format for battles
+                    if player.room.name == "Ogre King's Lair":
+                        
+                        Special_Weapon = False
+                        while Special_Weapon == False:
+                                                        
+                            if "Diamond Sword" not in player.item or "Glowing Orb" not in player.item:
+                                player.lives = 0
+                                print("The king's skin is impenetrable without the special weapon!")
+                                print('----------------------------------------') 
+                                break 
+                            else:
+                                print("You wield the special weapon...strike now!")
+                                print('----------------------------------------')
+                                Special_Weapon = True 
+
                     Enemy_hp = player.room.enemyHP 
                     while Enemy_hp >0 and player.lives > 0:
                         
@@ -202,7 +223,7 @@ while True:
                         print(f"You have {round(player.lives,1)} lives, let the battle begin!")
                         attack = round(random.uniform(0, (player.room.enemyHP * player.room.enemy_diff)), 1) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
                         print(f"You prepare to battle the {player.room.enemies} with {Enemy_hp} hitpoints left. You attack for {round(attack,1)} damage !")
-
+                                                        
                         if attack >= Enemy_hp:
                             player.lives += (1/ player.room.enemy_diff)
                             player.level += (.1 / player.room.enemy_diff)
