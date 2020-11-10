@@ -253,6 +253,7 @@ while True:
                         break                 
                 
                 #Possibly Select Companions        
+                Quit_Trigger = False 
                 Companion_Count = False
                 while Companion_Count == False:
                     
@@ -318,12 +319,15 @@ while True:
                     
                         if companion_choice == 'q':
                             Companion_Count = True 
+                            Quit_Trigger = True 
                             break 
                     
                         print("----------------------------------")
                         print(f"You currently possess {player.companion}")
                 
                 #Select Items to add to bag
+                if Quit_Trigger == True:
+                    break 
                 if len(player.room.item) < 1:
                     continue
                 
