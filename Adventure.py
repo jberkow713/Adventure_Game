@@ -1,60 +1,62 @@
-from Room import Room, Monster
+from Room import Room, Monster, MagicRoom
 from Player import Player 
 # Declare all the rooms
 import random
 
 room = {
 'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons", [], 0, [], ["Body Armor" ], ["There are no enemies here..."]),
+                     "North of you, the cave mount beckons", [], 0, [], [],["Body Armor" ], ["There are no enemies here..."]),
 
 'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east.""", "snakes", 4, 4, ["sword", "helmet"], ["Snakes...why did it have to be snakes?"]),
+passages run north and east.""", "snakes", 4, 4,[], ["sword", "helmet"], ["Snakes...why did it have to be snakes?"]),
 
 'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm.""", "goblins", 12, 3, ["key", "bomb"], ["Out of nowhere come three scary goblins"]),
+the distance, but there is no way across the chasm.""", "goblins", 12, 3, [], ["key", "bomb"], ["Out of nowhere come three scary goblins"]),
 
 'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air.""", "mummies", 15, 3, ["bow", "arrows"], ["A group of Mummies lumber towards you"]),
+to north. The smell of gold permeates the air.""", "mummies", 15, 3, [], ["bow", "arrows"], ["A group of Mummies lumber towards you"]),
 
 'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. """, "red dragon", 40 , 2, ["diamond", "Arkenstone"], ["A giant Red Dragon approaches"]),
+earlier adventurers. """, "red dragon", 40 , 2, [], ["diamond", "Arkenstone"], ["A giant Red Dragon approaches"]),
 
 'Cave Exit': Room("Cave Exit", """You have free solod your way out of the treasure room to the opening above, 
-the sun greets you as you claw your way through the rocks to a giant open field""", [], 0, [] ),
+the sun greets you as you claw your way through the rocks to a giant open field""", [], 0, [], [] ),
 
 'Enchanted Forest': Room("Enchanted Forest", """As you enter the woods you feel a bit funny...You turn around to 
-retreat, only to find that you are completely lost""", "giant spider", 80, 1, ['Ocarina', 'Bag of marbles'], ['From the treetops, a giant spider \
+retreat, only to find that you are completely lost""", "giant spider", 80, 1,[], ['Ocarina', 'Bag of marbles'], ['From the treetops, a giant spider \
 descends upon you!']),
 
 'Magical Entrance': Room("Magical Entrance", """The forest has captured you and brought you here...A world of wonder and magic
-await you now! Beware the beasts that dwell within!""",[], 0, [],  ['Magic Cloak', 'Crystal Sword', 'Wand of Death']),
+await you now! Beware the beasts that dwell within!""",[], 0, [], [],  ['Magic Cloak', 'Crystal Sword', 'Wand of Death']),
 
-'Cauldron Room': Room("Cauldron Room", """In the center of the room lies a large cauldron...it is bubbling.""", "witch", 185, 1, 
+'Cauldron Room': Room("Cauldron Room", """In the center of the room lies a large cauldron...it is bubbling.""", "witch", 185, 1,[], 
 ['Broomstick', 'Glowing Candle'], ['As you enter the room, a witch flies down from the ceiling to attack you!']),
 
-'Wizard training room':Room("Wizard Training Room", """Wizards are battling it out in the corner...they spot you...""", "wizard", 140, 1, 
+'Wizard training room':Room("Wizard Training Room", """Wizards are battling it out in the corner...they spot you...""", "wizard", 140, 1, [], 
 ['Enchanted Staff', 'Boomerang'], ['The head Wizard aims his wand at you']),
 
-'Cloud Fortress': Room("Cloud Fortress", """You jump off of the broomstick and land at the gates of a mighty fortress, high up on a magical floating cloud city""", [], 0, [] ),
+'Cloud Fortress': Room("Cloud Fortress", """You jump off of the broomstick and land at the gates of a mighty fortress, high up on a magical floating cloud city""", [], 0, [], [] ),
 'Mysterious Shack': Room("Mysterious Shack", """You arrive at an old run down shack in the middle of the clouds\
-    what on earth is this thing doing here???""", [], 0, [], ['Glowing Orb']),  
-'Rabbit Hole': Room("Rabbit Hole", """You fall down a giant hole within the hut, in front of you is a tiny door""", [], 0, [],\
+    what on earth is this thing doing here???""", [], 0, [], [], ['Glowing Orb']),  
+'Rabbit Hole': Room("Rabbit Hole", """You fall down a giant hole within the hut, in front of you is a tiny door""", [], 0, [],[],\
      ['Mysterious looking Brownie'] ),
 'Castle Gates': Room('Castle Gates', """Before you stands a towering fortress. As you walk closer you see two giant posts with skulls at the top of them""",\
-    "Ogre Guard", 165, 2, ['Golden Axe'], ['A large brute wielding a giant mace comes charging at you']),
+    "Ogre Guard", 165, 2,[], ['Golden Axe'], ['A large brute wielding a giant mace comes charging at you']),
 'Ogre Fortress': Room('Ogre Fortress', """The fortress ceiling is at least 100 feet tall...you are but a puny ant in this lair!""",\
-    'Captain of the Ogre Guard', 300, .8, ['Diamond Sword'], ['A massive ogre descends down the stairs!']),
+    'Captain of the Ogre Guard', 300, .8,[],  ['Diamond Sword'], ['A massive ogre descends down the stairs!']),
 "Ogre King's Lair": Room("Ogre King's Lair", """You hear a thumping from within the cave...the sound grows louder and louder!""",\
-    'The Ogre King', 1000, .5, ['Ring of invisibility'],['A towering ogre with a golden crown comes lumbering through the cave'] )                      
+    'The Ogre King', 1000, .5,[], ['Ring of invisibility'],['A towering ogre with a golden crown comes lumbering through the cave'] )                      
 }
 
 
 
+Monsters = {'Archimedes' : 'Amplify_Attack', 'Draconis' : 'Firebreath'}
 
-
-Wonderland = {'WonderWorld': Room('WonderWorld', """As you fit through the miniature door, a vast forest lies before you""", [], 0, [])
+Wonderland = {'WonderWorld': Room('WonderWorld', """As you fit through the miniature door, a vast forest lies before you""",\
+    [], 0, [],[], ), 'Tree-land': Room('Tree-land', """You have found a ladder leading up into the trees""",\
+        [], 0, [], ['Archimedes', 'Draconis'], ['Cannon']) 
 
 }
 
@@ -89,12 +91,14 @@ room['Castle Gates'].n_to = room['Ogre Fortress']
 room['Ogre Fortress'].s_to = room['Castle Gates']
 room['Ogre Fortress'].n_to = room["Ogre King's Lair"]
 room["Ogre King's Lair"].s_to = room['Ogre Fortress']
+#World 3
+Wonderland['WonderWorld'].n_to = Wonderland['Tree-land']
 
 
 User_name = input("Please enter your name: \n")
 
 player = Player(name=User_name, level=1, defense=1,  magic_level=1, \
-    room=room["outside"],  item=[] ) 
+    room=room["outside"], companion=[], item=[] ) 
 
 print(f"Welcome {player.name}")
 
@@ -247,8 +251,56 @@ while True:
 
                         print(f"You have died to the {player.room.enemies}!")
                         break                 
+                #Possibly Select Team Members from Wonderland        
+                
+                if len(player.room.companion) > 0:
+                    print("You have found some friends to help you on your journey")
+                    for companion in player.room.companion:
+                        for name, ability in Monsters.items():
+                            if companion == name:
+                                print(f"{name} gives {ability}")
+                                print('------------------------------')
+                    
+                    Choice3 = False
+                    while Choice3 == False:
 
-
+                        companion_choice = input("Please choose your companion or pass to move on: \n")
+                        
+                        if companion_choice == 'q':
+                            Quit_Choice = True
+                            break 
+                        elif companion_choice == 'pass':
+                            break 
+                        elif companion_choice not in player.room.companion or companion_choice in player.companion:
+                            continue 
+                        
+                        elif companion_choice in player.room.companion and companion_choice not in player.companion:
+                            if len(player.companion) <4:
+                                player.companion.append(companion_choice)    
+                                                                             
+                            elif len(player.companion) >= 4:
+                                print("You currently have too many companions!")
+                                print(f"You currently possess {player.companion}")
+                                
+                                choice4 = False
+                                while choice4 == False:
+                                    swap_choice = input("Please choose a companion to get rid of, or pass to continue with your current group of friends: ")
+                                    
+                                    if swap_choice in player.companion:
+                                        player.companion.remove(swap_choice)
+                                        player.companion.append(companion_choice)
+                                        choice4 = True 
+                                    elif swap_choice == 'pass':
+                                        choice4 = True 
+                            Choice3 = True                 
+                
+                    if companion_choice == 'q':
+                        break 
+                
+                    print("----------------------------------")
+                    print(f"You currently possess {player.companion}")
+            
+                #Select Items to add to bag
                 if len(player.room.item) < 1:
                     continue
                 
@@ -313,6 +365,8 @@ while True:
                     
                     print("----------------------------------")
                     print(f"You currently possess {player.item}")
+
+
 
             else:
                 print("----------------------------------")

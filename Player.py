@@ -4,7 +4,7 @@ from Room import Room, Monster
 import random
 
 class Player:
-    def __init__(self, name, level,  defense, magic_level,  room, item=[]):
+    def __init__(self, name, level,  defense, magic_level, room, companion=[], item=[]):
         self.room = room 
         self.name = name
         self.item = item
@@ -15,6 +15,8 @@ class Player:
         # self.lives = 0
         self.defense = defense
         self.invisibility = False 
+        self.companion = companion
+        
         # self.size = size 
         # self.fortune = fortune
          
