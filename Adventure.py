@@ -52,11 +52,11 @@ await you now! Beware the beasts that dwell within!""",[], 0, [], [],  ['Magic C
 
 
 
-Monsters = {'Archimedes' : 'Amplify_Attack', 'Draconis' : 'Firebreath'}
+Monsters = {'Archimedes' : 'Deafening', 'Draconis' : 'Firebreathing'}
 
 Wonderland = {'WonderWorld': Room('WonderWorld', """As you fit through the miniature door, a vast forest lies before you""",\
     [], 0, [],[], ), 'Tree-land': Room('Tree-land', """You have found a ladder leading up into the trees""",\
-        [], 0, [], ['Archimedes', 'Draconis'], ['Cannon']) 
+        [], 0, [], ['Archimedes', 'Draconis']) 
 
 }
 
@@ -95,6 +95,10 @@ room["Ogre King's Lair"].s_to = room['Ogre Fortress']
 Wonderland['WonderWorld'].n_to = Wonderland['Tree-land']
 Wonderland['Tree-land'].s_to = Wonderland['WonderWorld']
 
+
+
+
+
 User_name = input("Please enter your name: \n")
 
 player = Player(name=User_name, level=1, defense=1,  magic_level=1, \
@@ -106,7 +110,8 @@ difficulty_choice = ""
 
 while difficulty_choice != "easy" and difficulty_choice != "medium" and difficulty_choice != "hard" and difficulty_choice != "expert":
     difficulty_choice = input("Please choose easy, medium, hard, or expert: \n")
-        
+
+       
 player.set_lives(difficulty_choice)
 player.set_initial_fortune_and_defense()
 

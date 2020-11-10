@@ -15,6 +15,8 @@ class Player:
         # self.lives = 0
         self.defense = defense
         self.invisibility = False 
+        self.firebreathing = False
+        self.deafening = False  
         self.companion = companion
         
         # self.size = size 
@@ -105,6 +107,16 @@ class Player:
         if 'Golden Axe' in self.item:
             Player.attack = Player.attack * 1.15
         
+        if 'Draconis' in self.companion:
+            self.firebreathing = True
+            print('You have the firebreathing ability now')
+            print('--------------------------------') 
+        if 'Archimedes' in self.companion:
+            self.deafening = True     
+            print('Your owl can deafen the opponent!')
+            print('---------------------------------')
+
+
                  
 
                         
@@ -129,3 +141,7 @@ class Player:
             if item == key:
                 print(f"{item} gives you {value}")
                 print("--------------------------")
+
+    
+
+                
