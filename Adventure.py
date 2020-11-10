@@ -251,56 +251,78 @@ while True:
 
                         print(f"You have died to the {player.room.enemies}!")
                         break                 
-                #Possibly Select Team Members from Wonderland        
                 
-                if len(player.room.companion) > 0:
-                    print("You have found some friends to help you on your journey")
-                    print('------------------------------')
-                    for companion in player.room.companion:
-                        for name, ability in Monsters.items():
-                            if companion == name:
-                                print(f"{name} gives {ability}")
-                                print('------------------------------')
+                #Possibly Select Companions        
+                Companion_Count = False
+                while Companion_Count == False:
                     
-                    Choice3 = False
-                    while Choice3 == False:
-
-                        companion_choice = input("Please choose your companion or pass to move on: \n")
-                        
-                        if companion_choice == 'q':
-                            Quit_Choice = True
-                            break 
-                        elif companion_choice == 'pass':
-                            break 
-                        elif companion_choice not in player.room.companion or companion_choice in player.companion:
-                            continue 
-                        
-                        elif companion_choice in player.room.companion and companion_choice not in player.companion:
-                            if len(player.companion) <4:
-                                player.companion.append(companion_choice)    
-                                                                             
-                            elif len(player.companion) >= 4:
-                                print("You currently have too many companions!")
-                                print(f"You currently possess {player.companion}")
-                                
-                                choice4 = False
-                                while choice4 == False:
-                                    swap_choice = input("Please choose a companion to get rid of, or pass to continue with your current group of friends: ")
-                                    
-                                    if swap_choice in player.companion:
-                                        player.companion.remove(swap_choice)
-                                        player.companion.append(companion_choice)
-                                        choice4 = True 
-                                    elif swap_choice == 'pass':
-                                        choice4 = True 
-                            Choice3 = True                 
+                    if len(player.room.companion) < 1:
+                        break
                 
-                    if companion_choice == 'q':
+                    counter1 = 0
+                    len_companions = len(player.room.companion)
+                    for item in player.room.companion:
+                        if item in player.companion:
+                            counter1 +=1
+                    if counter1 == len_companions:
+                        counter1 = 0
                         break 
+                    
+                    else:
+                                        
+                        counter1 = 0
+                        
+                        print("You have found some friends to help you on your journey")
+                        print('------------------------------')
+                        for companion in player.room.companion:
+                            for name, ability in Monsters.items():
+                                if companion == name:
+                                    print(f"{name} gives {ability}")
+                                    print('------------------------------')
+                        
+                        Choice3 = False
+                        while Choice3 == False:
+
+                            companion_choice = input("Please choose your companion or pass to move on: \n")
+                            
+                            if companion_choice == 'q':
+                                Quit_Choice = True
+                                Companion_Count = True 
+                                break 
+                            elif companion_choice == 'pass':
+                                Companion_Count = True 
+                                break 
+                            elif companion_choice not in player.room.companion or companion_choice in player.companion:
+                                continue 
+                            
+                            elif companion_choice in player.room.companion and companion_choice not in player.companion:
+                                if len(player.companion) <4:
+                                    player.companion.append(companion_choice)    
+                                                                                
+                                elif len(player.companion) >= 4:
+                                    print("You currently have too many companions!")
+                                    print(f"You currently possess {player.companion}")
+                                    
+                                    choice4 = False
+                                    while choice4 == False:
+                                        swap_choice = input("Please choose a companion to get rid of, or pass to continue with your current group of friends: ")
+                                        
+                                        if swap_choice in player.companion:
+                                            player.companion.remove(swap_choice)
+                                            player.companion.append(companion_choice)
+                                            choice4 = True 
+                                        elif swap_choice == 'pass':
+                                            choice4 = True 
+                                Companion_Count = True 
+                                Choice3 = True                 
+                    
+                        if companion_choice == 'q':
+                            Companion_Count = True 
+                            break 
+                    
+                        print("----------------------------------")
+                        print(f"You currently possess {player.companion}")
                 
-                    print("----------------------------------")
-                    print(f"You currently possess {player.companion}")
-            
                 #Select Items to add to bag
                 if len(player.room.item) < 1:
                     continue
@@ -317,6 +339,7 @@ while True:
                 else:
                     
                     counter = 0
+                    print("--------------------------------")
                     print(f"You find {player.room.item}")
                     if len(player.item) >0:
                         print(f"You currently possess{player.item}")
