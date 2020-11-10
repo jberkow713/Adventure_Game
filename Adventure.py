@@ -93,7 +93,7 @@ room['Ogre Fortress'].n_to = room["Ogre King's Lair"]
 room["Ogre King's Lair"].s_to = room['Ogre Fortress']
 #World 3
 Wonderland['WonderWorld'].n_to = Wonderland['Tree-land']
-
+Wonderland['Tree-land'].s_to = Wonderland['WonderWorld']
 
 User_name = input("Please enter your name: \n")
 
@@ -255,6 +255,7 @@ while True:
                 
                 if len(player.room.companion) > 0:
                     print("You have found some friends to help you on your journey")
+                    print('------------------------------')
                     for companion in player.room.companion:
                         for name, ability in Monsters.items():
                             if companion == name:
