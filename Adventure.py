@@ -2,6 +2,8 @@ from Room import Room, Monster, MagicRoom
 from Player import Player 
 # Declare all the rooms
 import random
+from tabulate import tabulate
+from texttest import text_box, printline
 
 room = {
 'outside':  Room("Outside Cave Entrance",
@@ -54,9 +56,12 @@ await you now! Beware the beasts that dwell within!""",[], 0, [], [],  ['Magic C
 
 Monsters = {'Archimedes' : 'Deafening', 'Draconis' : 'Firebreathing'}
 
-Wonderland = {'WonderWorld': Room('WonderWorld', """As you fit through the miniature door, a vast forest lies before you""",\
-    [], 0, [],[], ), 'Tree-land': Room('Tree-land', """You have found a ladder leading up into the trees""",\
-        [], 0, [], ['Archimedes', 'Draconis']) 
+Wonderland = {
+    'WonderWorld': Room('WonderWorld', """As you fit through the miniature door, a vast forest lies before you""",\
+    [], 0, [],[], ), 
+    'Tree-land': Room('Tree-land', """You have found a ladder leading up into the trees""",\
+        [], 0, [], ['Archimedes', 'Draconis']), 
+        
 
 }
 
@@ -95,7 +100,14 @@ room["Ogre King's Lair"].s_to = room['Ogre Fortress']
 Wonderland['WonderWorld'].n_to = Wonderland['Tree-land']
 Wonderland['Tree-land'].s_to = Wonderland['WonderWorld']
 
-
+# text = input("Please enter your name: \n")
+# text2 = (f"Welcome {text}")
+# table = [[text]]
+# table2 = [[text2]]
+# output = tabulate(table, tablefmt='grid')
+# output2 = tabulate(table2, tablefmt='grid')
+# print(output)
+# print(output2)
 
 
 
@@ -104,7 +116,10 @@ User_name = input("Please enter your name: \n")
 player = Player(name=User_name, level=1, defense=1,  magic_level=1, \
     room=room["outside"], companion=[], item=[] ) 
 
-print(f"Welcome {player.name}")
+text_box(f"Welcome {player.name}")
+
+
+
 
 difficulty_choice = ""
 
@@ -115,41 +130,33 @@ while difficulty_choice != "easy" and difficulty_choice != "medium" and difficul
 player.set_lives(difficulty_choice)
 player.set_initial_fortune_and_defense()
 
-print(f"Your starting fortune is {player.fortune}") 
-print(f"Your starting defense is {player.defense}") 
 Quit_Choice = False 
 
 while True:
     #Set attributes at start of every battle
     if Quit_Choice == True:
-        print("Your journey has ended!")
+        text_box("Your journey has ended!")
         break 
     
     if player.lives <=0:
-        print("Your journey has ended, but we all must fade someday...try again soon!")
+        text_box("Your journey has ended, but we all must fade someday...try again soon!")
         break 
-    print('----------------------------------------')
-    print('----------------------------------------')
-    print(f"You are currently in the {player.room.name}")
-    print('----------------------------------------')        
-    
+       
+    text_box(f" You are currently in the {player.room.name}. \nYou currently have {round(player.lives,1)} lives left.")
+          
     player.set_player_attributes(difficulty_choice)
 
-    #lives, level, and magic level are based on experience and defeating monsters, they can not reset
-    # player.lives = round((player.lives * player.level * player.magic_level),1)
-    print(f"Your current level is {round(player.level, 1)}, your current magic level is {round(player.magic_level,1)}")
-    print('----------------------------------------')
-    print(f"You currently have {round(player.lives,1)} lives left.")
-    print('----------------------------------------')
-    print(f"Your current attack is {round(player.attack,1)}, Your current magic attack is {round(player.magic_attack,1)},\n\
-    Your current defense is {round(player.defense, 1)}")
-    print('----------------------------------------')
-    print("Your attack, magic_attack, defense, level, and magic level all improve your ability to defeat monsters!")
-    print('----------------------------------------')
+    text_box(f" Your fortune is {player.fortune}, Your defense is {player.defense}. \nYour current level is {round(player.level, 1)}, your current magic level is {round(player.magic_level,1)}. \
+             \nYour current attack is {round(player.attack,1)}, Your current magic attack is {round(player.magic_attack,1)},\nYour current defense is {round(player.defense, 1)}")
+    
+    text_box("Your attack, magic_attack, defense, level, and magic level all improve your ability to defeat monsters!")
+    
            
     if player.room.name == "Rabbit Hole":
         if 'Mysterious looking Brownie' in player.item:
-            print("A tiny door stands before you. Dirt begins to fall from the ceiling, you'd better find a way out quickly!")
+            text_box("A tiny door stands before you. Dirt begins to fall from the ceiling, you'd better find a way out quickly!")
+            
+            # print("A tiny door stands before you. Dirt begins to fall from the ceiling, you'd better find a way out quickly!")
             escape = input("Do you walk through the tiny door?")
             escape = escape.lower()
             if "yes" in escape:
@@ -167,8 +174,8 @@ while True:
         choices = ["north", "east", "west", "south", "magic", "fly"]
         Choices = False
         while Choices == False:
+            
             users_choice = input("Please choose north, east, west, south, magic, or fly: \n ")
-            print('----------------------------------------')
             if users_choice == 'q':
                 Quit_Choice = True 
                 break
@@ -185,7 +192,6 @@ while True:
         Choices = False
         while Choices == False:
             users_choice = input("Please choose north, east, west, south, magic: \n ")
-            print('----------------------------------------')
             if users_choice == 'q':
                 Quit_Choice = True 
                 break  
@@ -203,12 +209,11 @@ while True:
             if value is not None:
                 player.room = value
             
-                print(player.room.description)
-                print('----------------------------------------')
+                text_box(player.room.description)
+                
                 if len(player.room.enemies) >=1:
-                    print(f" {player.room.enemy_description}")
-                    print('----------------------------------------')
-                    
+                    text_box(f" {player.room.enemy_description}")
+                                        
                     #trying new format for battles
                     if player.room.name == "Ogre King's Lair":
                         
@@ -217,44 +222,39 @@ while True:
                                                         
                             if "Diamond Sword" not in player.item or "Glowing Orb" not in player.item:
                                 player.lives = 0
-                                print("The king's skin is impenetrable without the special weapon!")
-                                print('----------------------------------------') 
+                                text_box("The king's skin is impenetrable without the special weapon!")
                                 break 
                             else:
                                 player.item.remove("Diamond Sword")
                                 player.item.remove("Glowing Orb")
-                                print("You wield the special weapon...strike now!")
-                                print('----------------------------------------')
+                                text_box("You wield the special weapon...strike now!")
                                 Special_Weapon = True 
 
                     Enemy_hp = player.room.enemyHP 
                     while Enemy_hp >0 and player.lives > 0:
                         
 
-                        print(f"You have {round(player.lives,1)} lives, let the battle begin!")
+                        text_box(f"You have {round(player.lives,1)} lives, let the battle begin!")
                         attack = round(random.uniform(0, (player.room.enemyHP * player.room.enemy_diff)), 1) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                        print(f"You prepare to battle the {player.room.enemies} with {Enemy_hp} hitpoints left. You attack for {round(attack,1)} damage !")
+                        text_box(f"You prepare to battle the {player.room.enemies} with {Enemy_hp} hitpoints left. You attack for {round(attack,1)} damage !")
                                                         
                         if attack >= Enemy_hp:
                             player.lives += (1/ player.room.enemy_diff)
                             player.level += (.1 / player.room.enemy_diff)
-                            print(f"You have defeated the {player.room.enemies} with {round(player.lives,1)} lives left!")
-                            print(f"You gain {round(.1 / player.room.enemy_diff ,2)} lives")
-                            print('----------------------------------------')
+                            text_box(f"You have defeated the {player.room.enemies} with {round(player.lives,1)} lives left!\nYou gain {round(.1 / player.room.enemy_diff ,2)} lives")
                             break 
                         else:
                             player.lives -=1
                             if player.room.enemies.endswith('s'):
-                                print(f"The {player.room.enemies} have injured you!")
-                                print('----------------------------------------') 
+                                text_box(f"The {player.room.enemies} have injured you!")
                             else:
-                                print(f"The {player.room.enemies} has injured you!")
-                                print('----------------------------------------') 
+                                text_box(f"The {player.room.enemies} has injured you!")
+                                
                             Enemy_hp = round(Enemy_hp-attack,1) 
 
                     if player.lives  <= 0:
 
-                        print(f"You have died to the {player.room.enemies}!")
+                        text_box(f"You have died to the {player.room.enemies}!")
                         break                 
                 
                 #Possibly Select Companions        
@@ -278,14 +278,13 @@ while True:
                                         
                         counter1 = 0
                         
-                        print("You have found some friends to help you on your journey")
-                        print('------------------------------')
+                        text_box("You have found some friends to help you on your journey")
                         for companion in player.room.companion:
                             for name, ability in Monsters.items():
                                 if companion == name:
                                     print(f"{name} gives {ability}")
-                                    print('------------------------------')
-                        
+                                    printline()
+                                                            
                         Choice3 = False
                         while Choice3 == False:
 
@@ -306,8 +305,7 @@ while True:
                                     player.companion.append(companion_choice)    
                                                                                 
                                 elif len(player.companion) >= 4:
-                                    print("You currently have too many companions!")
-                                    print(f"You currently possess {player.companion}")
+                                    text_box(f"You currently have too many companions! \nYou currently possess {player.companion}")
                                     
                                     choice4 = False
                                     while choice4 == False:
@@ -327,8 +325,7 @@ while True:
                             Quit_Trigger = True 
                             break 
                     
-                        print("----------------------------------")
-                        print(f"You currently possess {player.companion}")
+                        text_box(f"You currently possess {player.companion}")
                 
                 #Select Items to add to bag
                 if Quit_Trigger == True:
@@ -348,14 +345,15 @@ while True:
                 else:
                     
                     counter = 0
-                    print("--------------------------------")
-                    print(f"You find {player.room.item}")
+                    text_box(f"You find {player.room.item}")
                     if len(player.item) >0:
-                        print(f"You currently possess{player.item}")
-                    print("-------------------------")
+                        text_box(f"You currently possess{player.item}")
+                    
                     
                     for treasure in player.room.item:
                         player.describe_power(treasure)
+                        printline() 
+                        
 
                     item_choice = input("Which item will you pickup? Or say pass to move on: \n")
                                       
@@ -377,8 +375,7 @@ while True:
                                 player.item.append(item_choice)    
                                                                             
                             elif len(player.item) >= 5:
-                                print("You currently have too many items in your bag")
-                                print(f"You currently possess {player.item}")
+                                text_box(f"You currently have too many items in your bag. \nYou currently possess {player.item}")
                                 
                                 choice2 = False
                                 while choice2 == False:
@@ -396,12 +393,11 @@ while True:
                     if item_choice == 'q':
                         break 
                     
-                    print("----------------------------------")
-                    print(f"You currently possess {player.item}")
+                    
+                    text_box(f"You currently possess {player.item}")
 
 
 
             else:
-                print("----------------------------------")
-                print('You can not go in that direction!')
+                text_box('You can not go in that direction!')
                 continue

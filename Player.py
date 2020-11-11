@@ -2,6 +2,7 @@
 # currently.
 from Room import Room, Monster
 import random
+from texttest import text_box
 
 class Player:
     def __init__(self, name, level,  defense, magic_level, room, companion=[], item=[]):
@@ -97,24 +98,18 @@ class Player:
             Player.magic_attack = Player.magic_attack * 1.2
         if "Boomerang" in self.item:
             Player.attack = Player.attack * 1.1
-           
-        # if "Broomstick" in self.item:
-                        
-        #     print('---------------------------')
-        if 'Mysterious looking Brownie' in self.item:
-            print("You shrink down to the size of a penny!")
-            print('----------------------------')
+              
+        
         if 'Golden Axe' in self.item:
             Player.attack = Player.attack * 1.15
         
         if 'Draconis' in self.companion:
             self.firebreathing = True
-            print('You have the firebreathing ability now')
-            print('--------------------------------') 
+                    
         if 'Archimedes' in self.companion:
             self.deafening = True     
-            print('Your owl can deafen the opponent!')
-            print('---------------------------------')
+            
+            
 
 
                  
@@ -140,8 +135,7 @@ class Player:
         for key, value in power_dict.items():
             if item == key:
                 print(f"{item} gives you {value}")
-                print("--------------------------")
-
+                
     
 
                 
