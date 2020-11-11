@@ -134,7 +134,7 @@ class Player:
 
         for key, value in power_dict.items():
             if item == key:
-                print(f"{item} gives you {value}")
+                print(f" {item} gives you {value}")
                 
     
 
