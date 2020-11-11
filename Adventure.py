@@ -338,8 +338,7 @@ while True:
                                         
                     for treasure in player.room.item:
                         player.describe_power(treasure)
-                        printline() 
-                    
+                                            
                     item_choice = input("Which item will you pickup? Or say pass to move on: \n")
                     
                     choice = False
