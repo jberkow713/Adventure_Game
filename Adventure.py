@@ -102,20 +102,30 @@ User_name = input("Please enter your name: \n")
 player = Player(name=User_name, level=1, defense=1,  magic_level=1, \
     room=room["outside"], companion=[], item=[] ) 
 
-text_box(f"Welcome {player.name}")
+text_box(f"Welcome: {player.name}")
+text_box("You may quit at any time during the game by typing q as an answer to any prompt")
 
 difficulty_choice = ""
+Quit_before_start = False 
 
-while difficulty_choice != "easy" and difficulty_choice != "medium" and difficulty_choice != "hard" and difficulty_choice != "expert":
+while difficulty_choice != 'q' and difficulty_choice != "easy" and difficulty_choice != "medium" and difficulty_choice != "hard" and difficulty_choice != "expert":
     difficulty_choice = input("Please choose easy, medium, hard, or expert: \n")
-       
-player.set_lives(difficulty_choice)
-player.set_initial_fortune_and_defense()
+
+    if difficulty_choice == 'q':
+        Quit_before_start = True 
+        
+    else:
+        player.set_lives(difficulty_choice)
+        player.set_initial_fortune_and_defense()
 
 Quit_Choice = False 
 
 while True:
     #Set attributes at start of every battle
+    if Quit_before_start == True:
+        text_box("Your journey has ended before it has begun!")
+        break
+    
     if Quit_Choice == True:
         text_box("Your journey has ended!")
         break 
