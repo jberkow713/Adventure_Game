@@ -52,8 +52,6 @@ await you now! Beware the beasts that dwell within!""",[], 0, [], [],  ['Magic C
     'The Ogre King', 1000, .5,[], ['Ring of invisibility'],['A towering ogre with a golden crown comes lumbering through the cave'] )                      
 }
 
-
-
 Monsters = {'Archimedes' : 'Deafening', 'Draconis' : 'Firebreathing'}
 
 Wonderland = {
@@ -61,8 +59,6 @@ Wonderland = {
     [], 0, [],[], ), 
     'Tree-land': Room('Tree-land', """You have found a ladder leading up into the trees""",\
         [], 0, [], ['Archimedes', 'Draconis']), 
-        
-
 }
 
 # Link rooms together
@@ -100,16 +96,6 @@ room["Ogre King's Lair"].s_to = room['Ogre Fortress']
 Wonderland['WonderWorld'].n_to = Wonderland['Tree-land']
 Wonderland['Tree-land'].s_to = Wonderland['WonderWorld']
 
-# text = input("Please enter your name: \n")
-# text2 = (f"Welcome {text}")
-# table = [[text]]
-# table2 = [[text2]]
-# output = tabulate(table, tablefmt='grid')
-# output2 = tabulate(table2, tablefmt='grid')
-# print(output)
-# print(output2)
-
-
 
 User_name = input("Please enter your name: \n")
 
@@ -118,14 +104,10 @@ player = Player(name=User_name, level=1, defense=1,  magic_level=1, \
 
 text_box(f"Welcome {player.name}")
 
-
-
-
 difficulty_choice = ""
 
 while difficulty_choice != "easy" and difficulty_choice != "medium" and difficulty_choice != "hard" and difficulty_choice != "expert":
     difficulty_choice = input("Please choose easy, medium, hard, or expert: \n")
-
        
 player.set_lives(difficulty_choice)
 player.set_initial_fortune_and_defense()
@@ -143,7 +125,7 @@ while True:
         break 
        
     text_box(f" You are currently in the {player.room.name}. \nYou currently have {round(player.lives,1)} lives left.")
-          
+    
     player.set_player_attributes(difficulty_choice)
 
     text_box(f" Your fortune is {player.fortune}, Your defense is {player.defense}. \nYour current level is {round(player.level, 1)}, your current magic level is {round(player.magic_level,1)}. \
@@ -156,7 +138,6 @@ while True:
         if 'Mysterious looking Brownie' in player.item:
             text_box("A tiny door stands before you. Dirt begins to fall from the ceiling, you'd better find a way out quickly!")
             
-            # print("A tiny door stands before you. Dirt begins to fall from the ceiling, you'd better find a way out quickly!")
             escape = input("Do you walk through the tiny door?")
             escape = escape.lower()
             if "yes" in escape:
@@ -203,7 +184,7 @@ while True:
         directions = [player.room.n_to, player.room.e_to, player.room.w_to, player.room.s_to, player.room.magic_to]
         path_dict = dict(zip(choices, directions))
 
-    #consolidated all directions into one for loop!    
+    #consolidated all directions into one for loop    
     for key, value in path_dict.items():
         if users_choice == key:
             if value is not None:
@@ -213,8 +194,7 @@ while True:
                 
                 if len(player.room.enemies) >=1:
                     text_box(f" {player.room.enemy_description}")
-                                        
-                    #trying new format for battles
+                                     
                     if player.room.name == "Ogre King's Lair":
                         
                         Special_Weapon = False
@@ -275,7 +255,6 @@ while True:
                         break 
                     
                     else:
-                                        
                         counter1 = 0
                         
                         text_box("You have found some friends to help you on your journey")
@@ -343,21 +322,17 @@ while True:
                     continue
                 
                 else:
-                    
                     counter = 0
                     text_box(f"You find {player.room.item}")
                     if len(player.item) >0:
                         text_box(f"You currently possess{player.item}")
-                    
-                    
+                                        
                     for treasure in player.room.item:
                         player.describe_power(treasure)
                         printline() 
-                        
-
+                    
                     item_choice = input("Which item will you pickup? Or say pass to move on: \n")
-                                      
-
+                    
                     choice = False
                     while choice == False:
                         if item_choice == 'q':
@@ -392,11 +367,8 @@ while True:
                     
                     if item_choice == 'q':
                         break 
-                    
-                    
+                                        
                     text_box(f"You currently possess {player.item}")
-
-
 
             else:
                 text_box('You can not go in that direction!')
