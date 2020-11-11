@@ -127,7 +127,7 @@ class Player:
                 "Attack * 1.1", "Magic_level * 1.15","Fortune * 1.1", "Magic_attack *1.1", "Attack * 1.2", \
                     "Magic_attack * 1.2", "Magic_level * 1.1", "Magic_attack * 1.2", "Attack * 1.1",\
                         "the ability to fly!", "Who knows what this does...", "miniature size", "Attack * 1.15",\
-                            "The second piece towards creating a powerful weapon!", 'You can become invisible!'       ]
+                            "The second piece towards creating a powerful weapon!", 'the ability to become invisible!'       ]
         
         
         power_dict = dict(zip(item_list, item_benefit))
