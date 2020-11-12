@@ -4,16 +4,58 @@ from pygame.locals import *
 
 pygame.init()
 #Pixel width by pixel height
+BLACK = ( 0, 0, 0)
+WHITE = (255, 255, 255)
+RED = (255, 0, 0)
+GREEN = ( 0, 255, 0)
+BLUE = ( 0, 0, 255)
+
 WIDTH = 1000
 HEIGHT = 1000
 XMARGIN = 50
 YMARGIN = 50
-Display_Surface = pygame.display.set_mode((WIDTH, HEIGHT))
+Big_Gap = XMARGIN*4
+Small_Gap = XMARGIN*2 
+DISPLAYSURF = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('You have opened a new pygame window!')
 
 WHITE = (255, 255, 255)
-Display_Surface.fill(WHITE)
-Board = pygame.draw.rect(Display_Surface, (128,255, 255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
+DISPLAYSURF.fill(WHITE)
+#World 1
+# Board = pygame.draw.rect(DISPLAYSURF, (128,255, 255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
+# pygame.draw.line(DISPLAYSURF, BLUE, (200, 900), (200, 800), 4)
+# pygame.draw.rect(DISPLAYSURF, RED, (150, 700, 100,100))
+# pygame.draw.line(DISPLAYSURF, BLUE, (200, 700), (200, 600), 4)
+# pygame.draw.rect(DISPLAYSURF, RED, (150, 500, 100,100))
+# pygame.draw.line(DISPLAYSURF, BLUE, (250, 750), (350, 750), 4)
+# pygame.draw.rect(DISPLAYSURF, RED, (350, 700, 100,100))
+# pygame.draw.line(DISPLAYSURF, BLUE, (400, 700), (400, 600), 4)
+# pygame.draw.rect(DISPLAYSURF, RED, (350, 500, 100,100))
+# pygame.draw.line(DISPLAYSURF, BLUE, (400, 500), (400, 400), 4)
+# pygame.draw.rect(DISPLAYSURF, RED, (350, 300, 100,100))
+# pygame.draw.line(DISPLAYSURF, BLUE, (450, 350), (550, 350), 4)
+# pygame.draw.rect(DISPLAYSURF, RED, (550, 300, 100,100))
+
+#World 2
+
+Board = pygame.draw.rect(DISPLAYSURF, (128,255, 255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
+pygame.draw.rect(DISPLAYSURF, RED, (150, 800, 100,100))
+pygame.draw.line(DISPLAYSURF, BLUE, (250, 850), (350, 850), 4)
+pygame.draw.rect(DISPLAYSURF, RED, (350, 800, 100,100))
+pygame.draw.line(DISPLAYSURF, GREEN, (200, 800), (200, 700), 15)
+pygame.draw.rect(DISPLAYSURF, RED, (150, 600, 100,100))
+pygame.draw.line(DISPLAYSURF, BLUE, (250, 650), (350, 650), 4)
+pygame.draw.rect(DISPLAYSURF, RED, (350, 600, 100,100))
+pygame.draw.line(DISPLAYSURF, BLUE, (400, 600), (400, 500), 4)
+pygame.draw.rect(DISPLAYSURF, RED, (350, 400, 100,100))
+pygame.draw.line(DISPLAYSURF, BLUE, (400, 400), (400, 300), 4)
+pygame.draw.rect(DISPLAYSURF, RED, (350, 200, 100,100))
+pygame.draw.line(DISPLAYSURF, BLUE, (400, 200), (400, 100), 4)
+pygame.draw.rect(DISPLAYSURF, RED, (200, 50, 400,50))
+
+
+
+
 
 
 
