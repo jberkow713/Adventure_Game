@@ -4,7 +4,7 @@ from Player import Player
 import random
 from tabulate import tabulate
 from texttest import text_box, printline
-
+import sys
 room = {
 'outside':  Room("Outside Cave Entrance",
                      "North of you, the cave mount beckons", [], 0, [], [],["Body Armor" ], ["There are no enemies here..."]),
@@ -98,6 +98,8 @@ Wonderland['Tree-land'].s_to = Wonderland['WonderWorld']
 
 
 User_name = input("Please enter your name: \n")
+if User_name == 'q':
+    sys.exit()
 
 player = Player(name=User_name, level=1, defense=1,  magic_level=1, \
     room=room["outside"], companion=[], item=[] ) 
