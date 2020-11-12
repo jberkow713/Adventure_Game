@@ -82,14 +82,23 @@ pygame.display.set_caption('Hello World!')
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 128)
-
+# 2nd parameter in font is the fontsize
 fontObj = pygame.font.Font('freesansbold.ttf', 32)
+#render draws text in the font type, first argument is text, 2nd is like making edges nice, 
+#3rd is color of text, 4th is background color
 textSurfaceObj = fontObj.render('Hello world!', True, WHITE, BLUE)
+#creates a rectangle object based on the SIZE of the textsurfaceobject, puts its left and top coordinates at 0,0
 textRectObj = textSurfaceObj.get_rect()
+#moves objects coordinates to the x,y coordinates specified here
 textRectObj.center = (250, 250)
 
 while True:
+    #fills surface with Green variable color
     DISPLAYSURF.fill(GREEN)
+    # take the image, the hello world image, blit it onto the textRectObj coordinates
+    # you then take the hellow world , and the correctly sized rectangle object, and put the text onto the object, 
+    # at the proper coordinates
+
     DISPLAYSURF.blit(textSurfaceObj, textRectObj)
     for event in pygame.event.get():
         if event.type == QUIT:
