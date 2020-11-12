@@ -7,67 +7,59 @@ from texttest import text_box, printline
 import sys
 room = {
 
-'outside':  Room(1, "Outside Cave Entrance",
+'outside':  Room(1, 1,"Outside Cave Entrance",
                      "North of you, the cave mount beckons", [], 0, [], [],["Body Armor" ], ["There are no enemies here..."]),
 
-'foyer':    Room(2, "Foyer", """Dim light filters in from the south. Dusty
+'foyer':    Room(2, 1,"Foyer", """Dim light filters in from the south. Dusty
 passages run north and east.""", "snakes", 4, 4,[], ["sword", "helmet"], ["Snakes...why did it have to be snakes?"]),
 
-'overlook': Room(3, "Grand Overlook", """A steep cliff appears before you, falling
+'overlook': Room(3, 1,"Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
 the distance, but there is no way across the chasm.""", "goblins", 12, 3, [], ["key", "bomb"], ["Out of nowhere come three scary goblins"]),
 
-'narrow':   Room(4, "Narrow Passage", """The narrow passage bends here from west
+'narrow':   Room(4, 1,"Narrow Passage", """The narrow passage bends here from west
 to north. The smell of gold permeates the air.""", "mummies", 15, 3, [], ["bow", "arrows"], ["A group of Mummies lumber towards you"]),
 
-'treasure': Room(5, "Treasure Chamber", """You've found the long-lost treasure
+'treasure': Room(5, 1,"Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
 earlier adventurers. """, "red dragon", 40 , 2, [], ["diamond", "Arkenstone"], ["A giant Red Dragon approaches"]),
 
-'Cave Exit': Room(6, "Cave Exit", """You have free solod your way out of the treasure room to the opening above, 
+'Cave Exit': Room(6, 1,"Cave Exit", """You have free solod your way out of the treasure room to the opening above, 
 the sun greets you as you claw your way through the rocks to a giant open field""", [], 0, [], [] ),
 
-'Enchanted Forest': Room(7, "Enchanted Forest", """As you enter the woods you feel a bit funny...You turn around to 
+'Enchanted Forest': Room(7, 1, "Enchanted Forest", """As you enter the woods you feel a bit funny...You turn around to 
 retreat, only to find that you are completely lost""", "giant spider", 80, 1,[], ['Ocarina', 'Bag of marbles'], ['From the treetops, a giant spider \
 descends upon you!']),
 
-'Magical Entrance': Room(8,"Magical Entrance", """The forest has captured you and brought you here...A world of wonder and magic
+'Magical Entrance': Room(8, 2,"Magical Entrance", """The forest has captured you and brought you here...A world of wonder and magic
 await you now! Beware the beasts that dwell within!""",[], 0, [], [],  ['Magic Cloak', 'Crystal Sword', 'Wand of Death']),
 
-'Cauldron Room': Room(9, "Cauldron Room", """In the center of the room lies a large cauldron...it is bubbling.""", "witch", 185, 1,[], 
+'Cauldron Room': Room(9, 2,"Cauldron Room", """In the center of the room lies a large cauldron...it is bubbling.""", "witch", 185, 1,[], 
 ['Broomstick', 'Glowing Candle'], ['As you enter the room, a witch flies down from the ceiling to attack you!']),
 
-'Wizard training room':Room(10, "Wizard Training Room", """Wizards are battling it out in the corner...they spot you...""", "wizard", 140, 1, [], 
+'Wizard training room':Room(10, 2,"Wizard Training Room", """Wizards are battling it out in the corner...they spot you...""", "wizard", 140, 1, [], 
 ['Enchanted Staff', 'Boomerang'], ['The head Wizard aims his wand at you']),
 
-'Cloud Fortress': Room(11,"Cloud Fortress", """You jump off of the broomstick and land at the gates of a mighty fortress, high up on a magical floating cloud city""", [], 0, [], [] ),
-'Mysterious Shack': Room(12,"Mysterious Shack", """You arrive at an old run down shack in the middle of the clouds\
+'Cloud Fortress': Room(11, 2,"Cloud Fortress", """You jump off of the broomstick and land at the gates of a mighty fortress, high up on a magical floating cloud city""", [], 0, [], [] ),
+'Mysterious Shack': Room(12,2, "Mysterious Shack", """You arrive at an old run down shack in the middle of the clouds\
     what on earth is this thing doing here???""", [], 0, [], [], ['Glowing Orb']),  
-'Rabbit Hole': Room(13,"Rabbit Hole", """You fall down a giant hole within the hut, in front of you is a tiny door""", [], 0, [],[],\
+'Rabbit Hole': Room(13, 2,"Rabbit Hole", """You fall down a giant hole within the hut, in front of you is a tiny door""", [], 0, [],[],\
      ['Mysterious looking Brownie'] ),
-'Castle Gates': Room(14, 'Castle Gates', """Before you stands a towering fortress. As you walk closer you see two giant posts with skulls at the top of them""",\
-    "Ogre Guard", 165, 2,[], ['Golden Axe'], ['A large brute wielding a giant mace comes charging at you']),
-'Ogre Fortress': Room(15,'Ogre Fortress', """The fortress ceiling is at least 100 feet tall...you are but a puny ant in this lair!""",\
+'Castle Gates': Room(14, 2,'Castle Gates', """Before you stands a towering fortress. As you walk closer you see two giant posts with skulls at the top of them""",\
+    "Ogre Guard", 165,  2,[], ['Golden Axe'], ['A large brute wielding a giant mace comes charging at you']),
+'Ogre Fortress': Room(15, 2, 'Ogre Fortress', """The fortress ceiling is at least 100 feet tall...you are but a puny ant in this lair!""",\
     'Captain of the Ogre Guard', 300, .8,[],  ['Diamond Sword'], ['A massive ogre descends down the stairs!']),
-"Ogre King's Lair": Room(16,"Ogre King's Lair", """You hear a thumping from within the cave...the sound grows louder and louder!""",\
+"Ogre King's Lair": Room(16,2,"Ogre King's Lair", """You hear a thumping from within the cave...the sound grows louder and louder!""",\
     'The Ogre King', 1000, .5,[], ['Ring of invisibility'],['A towering ogre with a golden crown comes lumbering through the cave'] )                      
 }
 
 Monsters = {'Archimedes' : 'Deafening', 'Draconis' : 'Firebreathing'}
 
 Wonderland = {
-    'WonderWorld': Room(17,'WonderWorld', """As you fit through the miniature door, a vast forest lies before you""",\
+    'WonderWorld': Room(17,3,'WonderWorld', """As you fit through the miniature door, a vast forest lies before you""",\
     [], 0, [],[], ), 
-    'Tree-land': Room(18,'Tree-land', """You have found a ladder leading up into the trees""",\
+    'Tree-land': Room(18,3,'Tree-land', """You have found a ladder leading up into the trees""",\
         [], 0, [], ['Archimedes', 'Draconis']), 
-}
-
-#Each part of each value is a direction, N, S, E, W, M, F
-#Current map, mapping each room to each other room based on the rooms number and the direction in the list, representing
-# N, S, E, W, Magic, or Fly
-Map = { 1: [2,0,0,0,0,0], 2: [3,1,4,0,0, 0], 3: [0,2,0,0,0, 0], 4: [5,0,0,2,0, 0], 5: [6,4,0,0,0, 0], 6: [0,5,7,0,0, 0], \
-     7: [0,0,0,6,8, 0], 8: [9,0,10,0,7, 0], 9: [0,8,0,0,0, 11], 10: [0,0,0,8,0, 0], 11: [0,0,12,0,0, 9], 12: [14,0,0,0,13, 0], \
-         13: [0,0,0,0,0, 0], 14: [15,12,0,0,0, 0], 15: [16,14,0,0,0, 0], 16: [0,15,0,0,0, 0], 17: [18,0,0,0,0, 0], 18: [0,17,0,0,0, 0]\
 }
 
 
