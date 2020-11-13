@@ -10,7 +10,7 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame, sys
 import pygame.locals
 from pygame.locals import *
-# from Maptesting import World1
+from Maptesting import World1draw
 import getpass
 
 
@@ -136,20 +136,20 @@ Wonderland['Tree-land'].s_to = Wonderland['WonderWorld']
 def Adventurer():
     
     ##############################################
-    pygame.init()
+    # pygame.init()
     #Pixel width by pixel height
-    BLACK = ( 0, 0, 0)
-    WHITE = (255, 255, 255)
-    RED = (255, 0, 0)
-    GREEN = ( 0, 255, 0)
-    BLUE = ( 0, 0, 255)
+    # BLACK = ( 0, 0, 0)
+    # WHITE = (255, 255, 255)
+    # RED = (255, 0, 0)
+    # GREEN = ( 0, 255, 0)
+    # BLUE = ( 0, 0, 255)
 
-    WIDTH = 1000
-    HEIGHT = 1000
-    XMARGIN = 50
-    YMARGIN = 50
-    Big_Gap = XMARGIN*4
-    Small_Gap = XMARGIN*2 
+    # WIDTH = 1000
+    # HEIGHT = 1000
+    # XMARGIN = 50
+    # YMARGIN = 50
+    # Big_Gap = XMARGIN*4
+    # Small_Gap = XMARGIN*2 
     # FPS = 0 # frames per second setting
     ##############################################
             
@@ -201,6 +201,8 @@ def Adventurer():
             player.set_lives(difficulty_choice)
             player.set_initial_fortune_and_defense()    
 
+
+    
     Quit_Choice = False
     while True:
 
@@ -229,35 +231,85 @@ def Adventurer():
         
         
         # Pygame Functionality Begins
-        if player.room.world == 1:
+    
+    
 
-            fpsClock = pygame.time.Clock()
+        if player.room.world == 1 :
 
-            DISPLAYSURF = pygame.display.set_mode((WIDTH, HEIGHT))
-            pygame.display.set_caption('You have entered World 1!')
+            World1draw()
+                        
+            # Loop = True 
+            # while Loop == True:
+                
+            # pygame.init() 
+        
+            # DISPLAYSURF = pygame.display.set_mode((WIDTH, HEIGHT))
+            # pygame.display.set_caption('You have entered World 1!')
+            # DISPLAYSURF.fill(WHITE)
+            
+            # Board = pygame.draw.rect(DISPLAYSURF, (128,255, 255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
+            # pygame.draw.line(DISPLAYSURF, BLUE, (200, 900), (200, 800), 4)
+            # pygame.draw.rect(DISPLAYSURF, RED, (150, 700, 100,100))
+            # pygame.draw.line(DISPLAYSURF, BLUE, (200, 700), (200, 600), 4)
+            # pygame.draw.rect(DISPLAYSURF, RED, (150, 500, 100,100))
+            # pygame.draw.line(DISPLAYSURF, BLUE, (250, 750), (350, 750), 4)
+            # pygame.draw.rect(DISPLAYSURF, RED, (350, 700, 100,100))
+            # pygame.draw.line(DISPLAYSURF, BLUE, (400, 700), (400, 600), 4)
+            # pygame.draw.rect(DISPLAYSURF, RED, (350, 500, 100,100))
+            # pygame.draw.line(DISPLAYSURF, BLUE, (400, 500), (400, 400), 4)
+            # pygame.draw.rect(DISPLAYSURF, RED, (350, 300, 100,100))
+            # pygame.draw.line(DISPLAYSURF, BLUE, (450, 350), (550, 350), 4)
+            # pygame.draw.rect(DISPLAYSURF, RED, (550, 300, 100,100))
 
-            WHITE = (255, 255, 255)
-            DISPLAYSURF.fill(WHITE)
-    # World 1
-            Board = pygame.draw.rect(DISPLAYSURF, (128,255, 255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
-            pygame.draw.line(DISPLAYSURF, BLUE, (200, 900), (200, 800), 4)
-            pygame.draw.rect(DISPLAYSURF, RED, (150, 700, 100,100))
-            pygame.draw.line(DISPLAYSURF, BLUE, (200, 700), (200, 600), 4)
-            pygame.draw.rect(DISPLAYSURF, RED, (150, 500, 100,100))
-            pygame.draw.line(DISPLAYSURF, BLUE, (250, 750), (350, 750), 4)
-            pygame.draw.rect(DISPLAYSURF, RED, (350, 700, 100,100))
-            pygame.draw.line(DISPLAYSURF, BLUE, (400, 700), (400, 600), 4)
-            pygame.draw.rect(DISPLAYSURF, RED, (350, 500, 100,100))
-            pygame.draw.line(DISPLAYSURF, BLUE, (400, 500), (400, 400), 4)
-            pygame.draw.rect(DISPLAYSURF, RED, (350, 300, 100,100))
-            pygame.draw.line(DISPLAYSURF, BLUE, (450, 350), (550, 350), 4)
-            pygame.draw.rect(DISPLAYSURF, RED, (550, 300, 100,100))
-            pygame.display.update()
-            fpsClock.tick(FPS)
-            pygame.quit()
+            
+            # fontObj = pygame.font.Font('freesansbold.ttf', 16)
+            # fontObj2 = pygame.font.Font('freesansbold.ttf', 14)
+            # Room1 = fontObj.render('FOYER', True, BLACK, RED)
+            # Room2 = fontObj.render('OVERLOOK', True, BLACK, RED)
+            # Room3 = fontObj.render('NARROW', True, BLACK, RED)
+            # Room3a = fontObj.render('PASSAGE', True, BLACK, RED)
+            # Room4 = fontObj.render('TREASURE', True, BLACK, RED)
+            # Room4a = fontObj.render('ROOM', True, BLACK, RED)
+            # Room5 = fontObj.render('CAVE EXIT', True, BLACK, RED)
+            # Room6 = fontObj2.render('ENCHANTED', True, BLACK, RED)
+            # Room6a = fontObj2.render('FOREST', True, BLACK, RED)
+            
+            
+            # DISPLAYSURF.blit(Room1, (170, 740))
+            # DISPLAYSURF.blit(Room2, (155, 540))
+            # DISPLAYSURF.blit(Room3, (365, 730))
+            # DISPLAYSURF.blit(Room3a, (365, 745))
+            # DISPLAYSURF.blit(Room4, (355, 530))
+            # DISPLAYSURF.blit(Room4a, (370, 545))
+            # DISPLAYSURF.blit(Room5, (355, 340))
+            # DISPLAYSURF.blit(Room6, (555, 330))
+            # DISPLAYSURF.blit(Room6a, (570, 345)) 
+            
+                                
+            # pygame.display.update() 
+            
+            # fpsClock = pygame.time.Clock()
+            # fpsClock.tick(FPS)
+            
+            # # Room1 = fontObj.render('FOYER', True, BLACK, GREEN)
+            
+            # pygame.quit()
+                                            
+            # Loop = False 
+                            
+        # pygame.display.update()
+        
+        # fpsClock = pygame.time.Clock()
+            # fpsClock.tick(FPS)
+            
+        #the blitting and rendering is making it so i can not run this loop infinitely...must find out why,
+        #changing size of board does not make a difference, changing blitting also doesnt make a difference, 
+                           
 # #     #Pygame Map functionality ends, player continues on   
+        
         if player.room.world == 2:
-
+            
+            pygame.init()    
             fpsClock = pygame.time.Clock()
 
             DISPLAYSURF = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -318,7 +370,7 @@ def Adventurer():
             directions = [player.room.n_to, player.room.e_to, player.room.w_to, player.room.s_to, player.room.magic_to, player.room.fly_to]
             path_dict = dict(zip(choices, directions))
         
-        else:
+        if "Broomstick" not in player.item:
             choices = ["north", "east", "west", "south", "magic"]
             Choices = False
             while Choices == False:
