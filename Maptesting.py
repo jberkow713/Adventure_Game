@@ -41,20 +41,20 @@ from Adventure import *
 
 # #World 2
 
-# Board = pygame.draw.rect(DISPLAYSURF, (128,255, 255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
-# pygame.draw.rect(DISPLAYSURF, RED, (150, 800, 100,100))
-# pygame.draw.line(DISPLAYSURF, BLUE, (250, 850), (350, 850), 4)
-# pygame.draw.rect(DISPLAYSURF, RED, (350, 800, 100,100))
-# pygame.draw.line(DISPLAYSURF, GREEN, (200, 800), (200, 700), 15)
-# pygame.draw.rect(DISPLAYSURF, RED, (150, 600, 100,100))
-# pygame.draw.line(DISPLAYSURF, BLUE, (250, 650), (350, 650), 4)
-# pygame.draw.rect(DISPLAYSURF, RED, (350, 600, 100,100))
-# pygame.draw.line(DISPLAYSURF, BLUE, (400, 600), (400, 500), 4)
-# pygame.draw.rect(DISPLAYSURF, RED, (350, 400, 100,100))
-# pygame.draw.line(DISPLAYSURF, BLUE, (400, 400), (400, 300), 4)
-# pygame.draw.rect(DISPLAYSURF, RED, (350, 200, 100,100))
-# pygame.draw.line(DISPLAYSURF, BLUE, (400, 200), (400, 100), 4)
-# pygame.draw.rect(DISPLAYSURF, RED, (200, 50, 400,50))
+Board = pygame.draw.rect(DISPLAYSURF, (128,255, 255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
+pygame.draw.rect(DISPLAYSURF, RED, (150, 800, 100,100))
+pygame.draw.line(DISPLAYSURF, BLUE, (250, 850), (350, 850), 4)
+pygame.draw.rect(DISPLAYSURF, RED, (350, 800, 100,100))
+pygame.draw.line(DISPLAYSURF, GREEN, (200, 800), (200, 700), 15)
+pygame.draw.rect(DISPLAYSURF, RED, (150, 600, 100,100))
+pygame.draw.line(DISPLAYSURF, BLUE, (250, 650), (350, 650), 4)
+pygame.draw.rect(DISPLAYSURF, RED, (350, 600, 100,100))
+pygame.draw.line(DISPLAYSURF, BLUE, (400, 600), (400, 500), 4)
+pygame.draw.rect(DISPLAYSURF, RED, (350, 400, 100,100))
+pygame.draw.line(DISPLAYSURF, BLUE, (400, 400), (400, 300), 4)
+pygame.draw.rect(DISPLAYSURF, RED, (350, 200, 100,100))
+pygame.draw.line(DISPLAYSURF, BLUE, (400, 200), (400, 100), 4)
+pygame.draw.rect(DISPLAYSURF, RED, (200, 50, 400,50))
 
 
 
@@ -134,8 +134,8 @@ def Show_Map():
                 sys.exit()
         pygame.display.update()
         
-        if 2 > 0:
-            Adventurer()
+        # if 2 > 0:
+        #     Adventurer()
             
 
         
