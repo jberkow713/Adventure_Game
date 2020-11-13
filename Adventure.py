@@ -5,10 +5,14 @@ import random
 from tabulate import tabulate
 from texttest import text_box, printline
 import sys
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame, sys
 import pygame.locals
 from pygame.locals import *
 # from Maptesting import Show_Map
+
+
 
 
 
@@ -105,54 +109,97 @@ room["Ogre King's Lair"].s_to = room['Ogre Fortress']
 #World 3
 Wonderland['WonderWorld'].n_to = Wonderland['Tree-land']
 Wonderland['Tree-land'].s_to = Wonderland['WonderWorld']
-#################################################################################
-#Pygame Info
-pygame.init()
-#Pixel width by pixel height
-BLACK = ( 0, 0, 0)
-WHITE = (255, 255, 255)
-RED = (255, 0, 0)
-GREEN = ( 0, 255, 0)
-BLUE = ( 0, 0, 255)
+# #################################################################################
+# #Pygame Info
+# pygame.init()
+# #Pixel width by pixel height
+# BLACK = ( 0, 0, 0)
+# WHITE = (255, 255, 255)
+# RED = (255, 0, 0)
+# GREEN = ( 0, 255, 0)
+# BLUE = ( 0, 0, 255)
 
-WIDTH = 1000
-HEIGHT = 1000
-XMARGIN = 50
-YMARGIN = 50
-Big_Gap = XMARGIN*4
-Small_Gap = XMARGIN*2 
-FPS = .25 # frames per second setting
+# WIDTH = 1000
+# HEIGHT = 1000
+# XMARGIN = 50
+# YMARGIN = 50
+# Big_Gap = XMARGIN*4
+# Small_Gap = XMARGIN*2 
+# FPS = .25 # frames per second setting
 
-###############################################################################
+# ###############################################################################
 
 
 
-User_name = input("Please enter your name: \n")
-if User_name == 'q':
-    sys.exit()
+def Adventurer():
+    
+    ##############################################
+    pygame.init()
+    #Pixel width by pixel height
+    BLACK = ( 0, 0, 0)
+    WHITE = (255, 255, 255)
+    RED = (255, 0, 0)
+    GREEN = ( 0, 255, 0)
+    BLUE = ( 0, 0, 255)
 
-player = Player(name=User_name, level=1, defense=1,  magic_level=1, \
+    WIDTH = 1000
+    HEIGHT = 1000
+    XMARGIN = 50
+    YMARGIN = 50
+    Big_Gap = XMARGIN*4
+    Small_Gap = XMARGIN*2 
+    # FPS = 0 # frames per second setting
+    ##############################################
+    printline()
+        
+    choices = ["1", "2", "3", "4"]
+    
+    Choices = False
+    while Choices == False:
+
+        text_box("The higher the map display setting value, the longer the map will display", 2)      
+        Map_speed = input("Please choose 1,2,3, or 4 for Map Display Settings \n\n")
+        if Map_speed == 'q':
+            break
+        elif Map_speed not in choices:
+            print("That is not a valid speed")
+        elif Map_speed in choices:
+            Choices = True
+    
+    Speeds = [.4, .2, .15, .1]
+    path_dict = dict(zip(choices, Speeds))
+
+    for key, value in path_dict.items():
+        if Map_speed == key:
+            FPS = value
+    
+    if Map_speed == 'q':
+        sys.exit() 
+
+    printline()
+    User_name = input("Please enter your name: \n")
+    if User_name == 'q':
+        sys.exit()
+
+    player = Player(name=User_name, level=1, defense=1,  magic_level=1, \
     room=room["outside"], companion=[], item=[] ) 
 
-text_box(f"Welcome: {player.name}", 1)
-text_box("You may quit at any time during the game by typing q as an answer to any prompt", 2)
+    text_box(f"Welcome: {player.name}", 1)
+    text_box("You may quit at any time during the game by typing q as an answer to any prompt", 2)
 
-difficulty_choice = ""
-Quit_before_start = False 
+    difficulty_choice = ""
+    Quit_before_start = False 
 
-while difficulty_choice != 'q' and difficulty_choice != "easy" and difficulty_choice != "medium" and difficulty_choice != "hard" and difficulty_choice != "expert":
-    difficulty_choice = input("Please choose easy, medium, hard, or expert: \n\n")
+    while difficulty_choice != 'q' and difficulty_choice != "easy" and difficulty_choice != "medium" and difficulty_choice != "hard" and difficulty_choice != "expert":
+        difficulty_choice = input("Please choose easy, medium, hard, or expert: \n\n")
 
-    if difficulty_choice == 'q':
-        Quit_before_start = True 
+        if difficulty_choice == 'q':
+            Quit_before_start = True 
         
-    else:
-        player.set_lives(difficulty_choice)
-        player.set_initial_fortune_and_defense()
+        else:
+            player.set_lives(difficulty_choice)
+            player.set_initial_fortune_and_defense()    
 
-# Quit_Choice = False 
-# Show_Map()
-def Adventurer():
     Quit_Choice = False
     while True:
 
