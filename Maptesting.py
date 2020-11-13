@@ -168,7 +168,7 @@ from Player import Player
 # pygame.quit()        
 
 
-def World1draw():
+def World1draw(FPS):
     BLACK = ( 0, 0, 0)
     WHITE = (255, 255, 255)
     RED = (255, 0, 0)
@@ -181,17 +181,17 @@ def World1draw():
     YMARGIN = 50
     Big_Gap = XMARGIN*4
     Small_Gap = XMARGIN*2 
-    DISPLAYSURF = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.display.set_caption('You have opened a new pygame window!')
-    FPS = .4
+       
     
     pygame.init() 
         
     DISPLAYSURF = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.display.set_caption('You have entered World 1!')
+    pygame.display.set_caption('YOU ARE CURRENTLY IN WORLD 1')
     DISPLAYSURF.fill(WHITE)
     
     Board = pygame.draw.rect(DISPLAYSURF, (128,255, 255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
+    
+    pygame.draw.rect(DISPLAYSURF, RED, (150, 900, 100,50))
     pygame.draw.line(DISPLAYSURF, BLUE, (200, 900), (200, 800), 4)
     pygame.draw.rect(DISPLAYSURF, RED, (150, 700, 100,100))
     pygame.draw.line(DISPLAYSURF, BLUE, (200, 700), (200, 600), 4)
@@ -217,8 +217,9 @@ def World1draw():
     Room5 = fontObj.render('CAVE EXIT', True, BLACK, RED)
     Room6 = fontObj2.render('ENCHANTED', True, BLACK, RED)
     Room6a = fontObj2.render('FOREST', True, BLACK, RED)
+    Room7 = fontObj2.render('OUTSIDE', True, BLACK, RED)
     
-    
+    DISPLAYSURF.blit(Room7, (170, 920))
     DISPLAYSURF.blit(Room1, (170, 740))
     DISPLAYSURF.blit(Room2, (155, 540))
     DISPLAYSURF.blit(Room3, (365, 730))
@@ -239,5 +240,81 @@ def World1draw():
     
     pygame.quit()
     
-# World1draw()
-    
+# World1draw(.2)
+
+def World2draw(FPS):
+
+    BLACK = ( 0, 0, 0)
+    WHITE = (255, 255, 255)
+    RED = (255, 0, 0)
+    GREEN = ( 0, 255, 0)
+    BLUE = ( 0, 0, 255)
+
+    WIDTH = 1000
+    HEIGHT = 1000
+    XMARGIN = 50
+    YMARGIN = 50
+    Big_Gap = XMARGIN*4
+    Small_Gap = XMARGIN*2 
+
+    pygame.init() 
+    DISPLAYSURF = pygame.display.set_mode((WIDTH, HEIGHT))
+    pygame.display.set_caption('YOU ARE CURRENTLY IN WORLD 2!')
+    DISPLAYSURF.fill(WHITE)
+
+    Board = pygame.draw.rect(DISPLAYSURF, (128,255, 255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
+    pygame.draw.rect(DISPLAYSURF, RED, (150, 800, 100,100))
+    pygame.draw.line(DISPLAYSURF, BLUE, (250, 850), (350, 850), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (350, 800, 100,100))
+    pygame.draw.line(DISPLAYSURF, BLUE, (200, 800), (200, 700), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (150, 400, 100,100))
+    pygame.draw.line(DISPLAYSURF, GREEN, (200, 600), (200, 500), 15)
+    pygame.draw.rect(DISPLAYSURF, RED, (150, 600, 100,100))
+    pygame.draw.line(DISPLAYSURF, BLUE, (250, 450), (350, 450), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (350, 400, 100,100))
+    pygame.draw.line(DISPLAYSURF, BLUE, (400, 400), (400, 300), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (350, 200, 100,100))
+    pygame.draw.line(DISPLAYSURF, BLUE, (400, 200), (400, 100), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (200, 50, 400,50))
+
+    fontObj = pygame.font.Font('freesansbold.ttf', 16)
+    fontObj2 = pygame.font.Font('freesansbold.ttf', 14)
+
+
+    Room1 = fontObj.render('MAGICAL', True, BLACK, RED)
+    Room1a = fontObj.render('ENTRANCE', True, BLACK, RED)
+    Room1b = fontObj.render("WIZARD'S", True, BLACK, RED)
+    Room1c = fontObj.render('LAIR', True, BLACK, RED)
+    Room2 = fontObj.render('CAULDRON', True, BLACK, RED)
+    Room2a = fontObj.render('ROOM', True, BLACK, RED)
+    Room3 = fontObj.render('CLOUD', True, BLACK, RED)
+    Room3a = fontObj.render('FORTRESS', True, BLACK, RED)
+    Room4 = fontObj2.render('MYSTERIOUS', True, BLACK, RED)
+    Room4a = fontObj2.render('SHACK', True, BLACK, RED)
+    Room6 = fontObj.render('OGRE', True, BLACK, RED)
+    Room6a = fontObj.render('FORTRESS', True, BLACK, RED)
+    Room7 = fontObj.render("OGRE KING'S LAIR", True, BLACK, RED)
+
+
+    DISPLAYSURF.blit(Room1, (160, 830))
+    DISPLAYSURF.blit(Room1a, (151, 850))
+    DISPLAYSURF.blit(Room1b, (360, 830))
+    DISPLAYSURF.blit(Room1c, (380, 850))
+    DISPLAYSURF.blit(Room2, (152, 630))
+    DISPLAYSURF.blit(Room2a, (180, 650))
+    DISPLAYSURF.blit(Room3, (175, 430))
+    DISPLAYSURF.blit(Room3a, (156, 450))
+    DISPLAYSURF.blit(Room4, (355, 430))
+    DISPLAYSURF.blit(Room4a, (374, 450))
+    DISPLAYSURF.blit(Room6, (376, 230))
+    DISPLAYSURF.blit(Room6a, (356, 250))
+    DISPLAYSURF.blit(Room7, (325, 60))
+
+
+    pygame.display.update() 
+        
+    fpsClock = pygame.time.Clock()
+    fpsClock.tick(FPS)
+        
+    pygame.quit()
+

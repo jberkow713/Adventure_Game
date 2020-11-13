@@ -10,7 +10,7 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame, sys
 import pygame.locals
 from pygame.locals import *
-from Maptesting import World1draw
+from Maptesting import World1draw, World2draw
 import getpass
 
 
@@ -20,7 +20,7 @@ import getpass
 
 room = {
 
-'outside':  Room(1, 1,"Outside Cave Entrance",
+'outside':  Room(1, 1,"Outside",
                      "North of you, the cave mount beckons", [], 0, [], [],["Body Armor" ], ["There are no enemies here..."]),
 
 'foyer':    Room(2, 1,"Foyer", """Dim light filters in from the south. Dusty
@@ -50,7 +50,7 @@ await you now! Beware the beasts that dwell within!""",[], 0, [], [],  ['Magic C
 'Cauldron Room': Room(9, 2,"Cauldron Room", """In the center of the room lies a large cauldron...it is bubbling.""", "witch", 185, 1,[], 
 ['Broomstick', 'Glowing Candle'], ['As you enter the room, a witch flies down from the ceiling to attack you!']),
 
-'Wizard training room':Room(10, 2,"Wizard Training Room", """Wizards are battling it out in the corner...they spot you...""", "wizard", 140, 1, [], 
+"Wizard's Lair":Room(10, 2,"Wizard's Lair", """Wizards are battling it out in the corner...they spot you...""", "wizard", 140, 1, [], 
 ['Enchanted Staff', 'Boomerang'], ['The head Wizard aims his wand at you']),
 
 'Cloud Fortress': Room(11, 2,"Cloud Fortress", """You jump off of the broomstick and land at the gates of a mighty fortress, high up on a magical floating cloud city""", [], 0, [], [] ),
@@ -58,8 +58,8 @@ await you now! Beware the beasts that dwell within!""",[], 0, [], [],  ['Magic C
     what on earth is this thing doing here???""", [], 0, [], [], ['Glowing Orb']),  
 'Rabbit Hole': Room(13, 2,"Rabbit Hole", """You fall down a giant hole within the hut, in front of you is a tiny door""", [], 0, [],[],\
      ['Mysterious looking Brownie'] ),
-'Castle Gates': Room(14, 2,'Castle Gates', """Before you stands a towering fortress. As you walk closer you see two giant posts with skulls at the top of them""",\
-    "Ogre Guard", 165,  2,[], ['Golden Axe'], ['A large brute wielding a giant mace comes charging at you']),
+# 'Castle Gates': Room(14, 2,'Castle Gates', """Before you stands a towering fortress. As you walk closer you see two giant posts with skulls at the top of them""",\
+#     "Ogre Guard", 165,  2,[], ['Golden Axe'], ['A large brute wielding a giant mace comes charging at you']),
 'Ogre Fortress': Room(15, 2, 'Ogre Fortress', """The fortress ceiling is at least 100 feet tall...you are but a puny ant in this lair!""",\
     'Captain of the Ogre Guard', 300, .8,[],  ['Diamond Sword'], ['A massive ogre descends down the stairs!']),
 "Ogre King's Lair": Room(16,2,"Ogre King's Lair", """You hear a thumping from within the cave...the sound grows louder and louder!""",\
@@ -92,67 +92,30 @@ room['Cave Exit'].s_to = room['treasure']
 room['Cave Exit'].e_to = room['Enchanted Forest']
 room['Enchanted Forest'].magic_to = room['Magical Entrance']
 #World 2
+room['Magical Entrance'].magic_to = room['Enchanted Forest']
 room['Magical Entrance'].n_to = room['Cauldron Room']
 room['Cauldron Room'].s_to = room['Magical Entrance']
-room['Magical Entrance'].e_to =room['Wizard training room']
-room['Wizard training room'].w_to = room['Magical Entrance']
+room['Magical Entrance'].e_to =room["Wizard's Lair"]
+room["Wizard's Lair"].w_to = room['Magical Entrance']
 room['Cauldron Room'].fly_to = room['Cloud Fortress']
 room['Cloud Fortress'].e_to = room['Mysterious Shack']
 room['Cloud Fortress'].fly_to = room['Cauldron Room']
 room['Mysterious Shack'].magic_to = room['Rabbit Hole']
 room['Rabbit Hole'].magic_to = Wonderland['WonderWorld']
 room['Mysterious Shack'].w_to = room['Cloud Fortress']
-room['Mysterious Shack'].n_to = room['Castle Gates']
-room['Castle Gates'].s_to = room['Mysterious Shack']
-room['Castle Gates'].n_to = room['Ogre Fortress']
-room['Ogre Fortress'].s_to = room['Castle Gates']
+room['Mysterious Shack'].n_to = room['Ogre Fortress']
+# room['Castle Gates'].s_to = room['Mysterious Shack']
+# room['Castle Gates'].n_to = room['Ogre Fortress']
+room['Ogre Fortress'].s_to = room['Mysterious Shack']
 room['Ogre Fortress'].n_to = room["Ogre King's Lair"]
 room["Ogre King's Lair"].s_to = room['Ogre Fortress']
 #World 3
 Wonderland['WonderWorld'].n_to = Wonderland['Tree-land']
 Wonderland['Tree-land'].s_to = Wonderland['WonderWorld']
-# #################################################################################
-# #Pygame Info
-# pygame.init()
-# #Pixel width by pixel height
-# BLACK = ( 0, 0, 0)
-# WHITE = (255, 255, 255)
-# RED = (255, 0, 0)
-# GREEN = ( 0, 255, 0)
-# BLUE = ( 0, 0, 255)
-
-# WIDTH = 1000
-# HEIGHT = 1000
-# XMARGIN = 50
-# YMARGIN = 50
-# Big_Gap = XMARGIN*4
-# Small_Gap = XMARGIN*2 
-# FPS = .25 # frames per second setting
-
-# ###############################################################################
-
 
 
 def Adventurer():
-    
-    ##############################################
-    # pygame.init()
-    #Pixel width by pixel height
-    # BLACK = ( 0, 0, 0)
-    # WHITE = (255, 255, 255)
-    # RED = (255, 0, 0)
-    # GREEN = ( 0, 255, 0)
-    # BLUE = ( 0, 0, 255)
-
-    # WIDTH = 1000
-    # HEIGHT = 1000
-    # XMARGIN = 50
-    # YMARGIN = 50
-    # Big_Gap = XMARGIN*4
-    # Small_Gap = XMARGIN*2 
-    # FPS = 0 # frames per second setting
-    ##############################################
-            
+                    
     choices = ["1", "2", "3", "4"]
     
     Choices = False
@@ -236,39 +199,13 @@ def Adventurer():
 
         if player.room.world == 1 :
 
-            World1draw()
-                        
-            
+            World1draw(FPS)
+                
 # #     #Pygame Map functionality ends, player continues on   
         
         if player.room.world == 2:
             
-            pygame.init()    
-            fpsClock = pygame.time.Clock()
-
-            DISPLAYSURF = pygame.display.set_mode((WIDTH, HEIGHT))
-            pygame.display.set_caption('You have entered World 2!')
-
-            WHITE = (255, 255, 255)
-            DISPLAYSURF.fill(WHITE)
-
-            Board = pygame.draw.rect(DISPLAYSURF, (128,255, 255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
-            pygame.draw.rect(DISPLAYSURF, RED, (150, 800, 100,100))
-            pygame.draw.line(DISPLAYSURF, BLUE, (250, 850), (350, 850), 4)
-            pygame.draw.rect(DISPLAYSURF, RED, (350, 800, 100,100))
-            pygame.draw.line(DISPLAYSURF, GREEN, (200, 800), (200, 700), 15)
-            pygame.draw.rect(DISPLAYSURF, RED, (150, 600, 100,100))
-            pygame.draw.line(DISPLAYSURF, BLUE, (250, 650), (350, 650), 4)
-            pygame.draw.rect(DISPLAYSURF, RED, (350, 600, 100,100))
-            pygame.draw.line(DISPLAYSURF, BLUE, (400, 600), (400, 500), 4)
-            pygame.draw.rect(DISPLAYSURF, RED, (350, 400, 100,100))
-            pygame.draw.line(DISPLAYSURF, BLUE, (400, 400), (400, 300), 4)
-            pygame.draw.rect(DISPLAYSURF, RED, (350, 200, 100,100))
-            pygame.draw.line(DISPLAYSURF, BLUE, (400, 200), (400, 100), 4)
-            pygame.draw.rect(DISPLAYSURF, RED, (200, 50, 400,50))
-            pygame.display.update()
-            fpsClock.tick(FPS)
-            pygame.quit()
+            World2draw(FPS)
 
         if player.room.name == "Rabbit Hole":
             if 'Mysterious looking Brownie' in player.item:
@@ -317,8 +254,8 @@ def Adventurer():
                 elif users_choice in choices:
                     Choices = True
                     
-        directions = [player.room.n_to, player.room.e_to, player.room.w_to, player.room.s_to, player.room.magic_to]
-        path_dict = dict(zip(choices, directions))
+            directions = [player.room.n_to, player.room.e_to, player.room.w_to, player.room.s_to, player.room.magic_to]
+            path_dict = dict(zip(choices, directions))
         #Pygame Map Functionality
      
 
@@ -462,7 +399,7 @@ def Adventurer():
                     else:
                         counter = 0
                         text_box(f"You find {player.room.item}",2)
-                        if len(player.item) >0:
+                        if len(player.item) !=0:
                             text_box(f"You currently possess{player.item}",1)
                                             
                         for treasure in player.room.item:
