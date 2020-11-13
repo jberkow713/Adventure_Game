@@ -179,6 +179,32 @@ def Adventurer():
         
         text_box("Your attack, magic_attack, defense, level, and magic level all improve your ability to defeat monsters!", 2)
         
+        #Pygame Functionality Begins
+        fpsClock = pygame.time.Clock()
+
+        DISPLAYSURF = pygame.display.set_mode((WIDTH, HEIGHT))
+        pygame.display.set_caption('You have opened a new pygame window!')
+
+        WHITE = (255, 255, 255)
+        DISPLAYSURF.fill(WHITE)
+# World 1
+        Board = pygame.draw.rect(DISPLAYSURF, (128,255, 255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
+        pygame.draw.line(DISPLAYSURF, BLUE, (200, 900), (200, 800), 4)
+        pygame.draw.rect(DISPLAYSURF, RED, (150, 700, 100,100))
+        pygame.draw.line(DISPLAYSURF, BLUE, (200, 700), (200, 600), 4)
+        pygame.draw.rect(DISPLAYSURF, RED, (150, 500, 100,100))
+        pygame.draw.line(DISPLAYSURF, BLUE, (250, 750), (350, 750), 4)
+        pygame.draw.rect(DISPLAYSURF, RED, (350, 700, 100,100))
+        pygame.draw.line(DISPLAYSURF, BLUE, (400, 700), (400, 600), 4)
+        pygame.draw.rect(DISPLAYSURF, RED, (350, 500, 100,100))
+        pygame.draw.line(DISPLAYSURF, BLUE, (400, 500), (400, 400), 4)
+        pygame.draw.rect(DISPLAYSURF, RED, (350, 300, 100,100))
+        pygame.draw.line(DISPLAYSURF, BLUE, (450, 350), (550, 350), 4)
+        pygame.draw.rect(DISPLAYSURF, RED, (550, 300, 100,100))
+        pygame.display.update()
+        fpsClock.tick(FPS)
+        pygame.quit()
+# #     #Pygame Map functionality ends, player continues on   
             
         if player.room.name == "Rabbit Hole":
             if 'Mysterious looking Brownie' in player.item:
@@ -230,31 +256,7 @@ def Adventurer():
         directions = [player.room.n_to, player.room.e_to, player.room.w_to, player.room.s_to, player.room.magic_to]
         path_dict = dict(zip(choices, directions))
         #Pygame Map Functionality
-        fpsClock = pygame.time.Clock()
-
-        DISPLAYSURF = pygame.display.set_mode((WIDTH, HEIGHT))
-        pygame.display.set_caption('You have opened a new pygame window!')
-
-        WHITE = (255, 255, 255)
-        DISPLAYSURF.fill(WHITE)
-# World 1
-        Board = pygame.draw.rect(DISPLAYSURF, (128,255, 255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
-        pygame.draw.line(DISPLAYSURF, BLUE, (200, 900), (200, 800), 4)
-        pygame.draw.rect(DISPLAYSURF, RED, (150, 700, 100,100))
-        pygame.draw.line(DISPLAYSURF, BLUE, (200, 700), (200, 600), 4)
-        pygame.draw.rect(DISPLAYSURF, RED, (150, 500, 100,100))
-        pygame.draw.line(DISPLAYSURF, BLUE, (250, 750), (350, 750), 4)
-        pygame.draw.rect(DISPLAYSURF, RED, (350, 700, 100,100))
-        pygame.draw.line(DISPLAYSURF, BLUE, (400, 700), (400, 600), 4)
-        pygame.draw.rect(DISPLAYSURF, RED, (350, 500, 100,100))
-        pygame.draw.line(DISPLAYSURF, BLUE, (400, 500), (400, 400), 4)
-        pygame.draw.rect(DISPLAYSURF, RED, (350, 300, 100,100))
-        pygame.draw.line(DISPLAYSURF, BLUE, (450, 350), (550, 350), 4)
-        pygame.draw.rect(DISPLAYSURF, RED, (550, 300, 100,100))
-        pygame.display.update()
-        fpsClock.tick(FPS)
-        pygame.quit()
-# #     #Pygame Map functionality ends, player continues on        
+     
 
         # Show_Map()    
         #consolidated all directions into one for loop    
