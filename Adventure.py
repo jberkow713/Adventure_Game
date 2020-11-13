@@ -5,6 +5,13 @@ import random
 from tabulate import tabulate
 from texttest import text_box, printline
 import sys
+import pygame, sys
+import pygame.locals
+from pygame.locals import *
+# from Maptesting import Show_Map
+
+
+
 room = {
 
 'outside':  Room(1, 1,"Outside Cave Entrance",
@@ -98,6 +105,26 @@ room["Ogre King's Lair"].s_to = room['Ogre Fortress']
 #World 3
 Wonderland['WonderWorld'].n_to = Wonderland['Tree-land']
 Wonderland['Tree-land'].s_to = Wonderland['WonderWorld']
+#################################################################################
+#Pygame Info
+pygame.init()
+#Pixel width by pixel height
+BLACK = ( 0, 0, 0)
+WHITE = (255, 255, 255)
+RED = (255, 0, 0)
+GREEN = ( 0, 255, 0)
+BLUE = ( 0, 0, 255)
+
+WIDTH = 1000
+HEIGHT = 1000
+XMARGIN = 50
+YMARGIN = 50
+Big_Gap = XMARGIN*4
+Small_Gap = XMARGIN*2 
+FPS = .15 # frames per second setting
+
+###############################################################################
+
 
 
 User_name = input("Please enter your name: \n")
@@ -123,266 +150,300 @@ while difficulty_choice != 'q' and difficulty_choice != "easy" and difficulty_ch
         player.set_lives(difficulty_choice)
         player.set_initial_fortune_and_defense()
 
-Quit_Choice = False 
+# Quit_Choice = False 
+# Show_Map()
+def Adventurer():
+    Quit_Choice = False
+    while True:
 
-while True:
-    #Set attributes at start of every battle
-    if Quit_before_start == True:
-        text_box("Your journey has ended before it has begun!",1)
-        break
-    
-    if Quit_Choice == True:
-        text_box("Your journey has ended!",1)
-        break 
-    
-    if player.lives <=0:
-        text_box("Your journey has ended, but we all must fade someday...try again soon!",1)
-        break 
-       
-    text_box(f" You are currently in the {player.room.name}. \nYou currently have {round(player.lives,1)} lives left." ,1)
-    
-    player.set_player_attributes(difficulty_choice)
-
-    text_box(f" Your fortune is {round(player.fortune,1)}, Your defense is {round(player.defense,1)}. \nYour current level is {round(player.level, 1)}, your current magic level is {round(player.magic_level,1)}. \
-             \nYour current attack is {round(player.attack,1)}, Your current magic attack is {round(player.magic_attack,1)},\nYour current defense is {round(player.defense, 1)}", 1)
-    
-    text_box("Your attack, magic_attack, defense, level, and magic level all improve your ability to defeat monsters!", 2)
-    
-           
-    if player.room.name == "Rabbit Hole":
-        if 'Mysterious looking Brownie' in player.item:
-            text_box("A tiny door stands before you. Dirt begins to fall from the ceiling, you'd better find a way out quickly!", 1)
-            
-            escape = input("Do you walk through the tiny door?\n\n")
-            escape = escape.lower()
-            if "yes" in escape:
-                player.room = Wonderland['WonderWorld']
-                player.item.remove("Mysterious looking Brownie")
-                continue
-            else:
-                print("You have been buried alive")
-                break     
-        elif 'Mysterious looking Brownie' not in player.item:
-            print('Dirt begins to fall from the ceiling...there is no escape...perhaps you should have eaten the brownie')
+                
+        #Set attributes at start of every battle
+        if Quit_before_start == True:
+            text_box("Your journey has ended before it has begun!",1)
+            break
+        
+        if Quit_Choice == True:
+            text_box("Your journey has ended!",1)
             break 
-    
-    if "Broomstick" in player.item:
-        choices = ["north", "east", "west", "south", "magic", "fly"]
-        Choices = False
-        while Choices == False:
+        
+        if player.lives <=0:
+            text_box("Your journey has ended, but we all must fade someday...try again soon!",1)
+            break 
+        
+        text_box(f" You are currently in the {player.room.name}. \nYou currently have {round(player.lives,1)} lives left." ,1)
+        
+        player.set_player_attributes(difficulty_choice)
+
+        text_box(f" Your fortune is {round(player.fortune,1)}, Your defense is {round(player.defense,1)}. \nYour current level is {round(player.level, 1)}, your current magic level is {round(player.magic_level,1)}. \
+                \nYour current attack is {round(player.attack,1)}, Your current magic attack is {round(player.magic_attack,1)},\nYour current defense is {round(player.defense, 1)}", 1)
+        
+        text_box("Your attack, magic_attack, defense, level, and magic level all improve your ability to defeat monsters!", 2)
+        
             
-            users_choice = input("Please choose north, east, west, south, magic, or fly: \n\n ")
-            if users_choice == 'q':
-                Quit_Choice = True 
-                break
-            elif users_choice not in choices:
-                print("That is not a valid direction")
-            elif users_choice in choices:
-                Choices = True
-           
-        directions = [player.room.n_to, player.room.e_to, player.room.w_to, player.room.s_to, player.room.magic_to, player.room.fly_to]
-        path_dict = dict(zip(choices, directions))
-    
-    else:
-        choices = ["north", "east", "west", "south", "magic"]
-        Choices = False
-        while Choices == False:
-            users_choice = input("Please choose north, east, west, south, magic: \n\n ")
-            if users_choice == 'q':
-                Quit_Choice = True 
-                break  
-            elif users_choice not in choices:
-                print("That is not a valid direction")
-            elif users_choice in choices:
-                Choices = True
-                   
+        if player.room.name == "Rabbit Hole":
+            if 'Mysterious looking Brownie' in player.item:
+                text_box("A tiny door stands before you. Dirt begins to fall from the ceiling, you'd better find a way out quickly!", 1)
+                
+                escape = input("Do you walk through the tiny door?\n\n")
+                escape = escape.lower()
+                if "yes" in escape:
+                    player.room = Wonderland['WonderWorld']
+                    player.item.remove("Mysterious looking Brownie")
+                    continue
+                else:
+                    print("You have been buried alive")
+                    break     
+            elif 'Mysterious looking Brownie' not in player.item:
+                print('Dirt begins to fall from the ceiling...there is no escape...perhaps you should have eaten the brownie')
+                break 
+        
+        if "Broomstick" in player.item:
+            choices = ["north", "east", "west", "south", "magic", "fly"]
+            Choices = False
+            while Choices == False:
+                
+                users_choice = input("Please choose north, east, west, south, magic, or fly: \n\n ")
+                if users_choice == 'q':
+                    Quit_Choice = True 
+                    break
+                elif users_choice not in choices:
+                    print("That is not a valid direction")
+                elif users_choice in choices:
+                    Choices = True
+            
+            directions = [player.room.n_to, player.room.e_to, player.room.w_to, player.room.s_to, player.room.magic_to, player.room.fly_to]
+            path_dict = dict(zip(choices, directions))
+        
+        else:
+            choices = ["north", "east", "west", "south", "magic"]
+            Choices = False
+            while Choices == False:
+                users_choice = input("Please choose north, east, west, south, magic: \n\n ")
+                if users_choice == 'q':
+                    Quit_Choice = True 
+                    break  
+                elif users_choice not in choices:
+                    print("That is not a valid direction")
+                elif users_choice in choices:
+                    Choices = True
+                    
         directions = [player.room.n_to, player.room.e_to, player.room.w_to, player.room.s_to, player.room.magic_to]
         path_dict = dict(zip(choices, directions))
+        #Pygame Map Functionality
+        fpsClock = pygame.time.Clock()
 
-    #consolidated all directions into one for loop    
-    for key, value in path_dict.items():
-        if users_choice == key:
-            if value is not None:
-                player.room = value
-            
-                text_box(player.room.description, 1)
+        DISPLAYSURF = pygame.display.set_mode((WIDTH, HEIGHT))
+        pygame.display.set_caption('You have opened a new pygame window!')
+
+        WHITE = (255, 255, 255)
+        DISPLAYSURF.fill(WHITE)
+# World 1
+        Board = pygame.draw.rect(DISPLAYSURF, (128,255, 255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
+        pygame.draw.line(DISPLAYSURF, BLUE, (200, 900), (200, 800), 4)
+        pygame.draw.rect(DISPLAYSURF, RED, (150, 700, 100,100))
+        pygame.draw.line(DISPLAYSURF, BLUE, (200, 700), (200, 600), 4)
+        pygame.draw.rect(DISPLAYSURF, RED, (150, 500, 100,100))
+        pygame.draw.line(DISPLAYSURF, BLUE, (250, 750), (350, 750), 4)
+        pygame.draw.rect(DISPLAYSURF, RED, (350, 700, 100,100))
+        pygame.draw.line(DISPLAYSURF, BLUE, (400, 700), (400, 600), 4)
+        pygame.draw.rect(DISPLAYSURF, RED, (350, 500, 100,100))
+        pygame.draw.line(DISPLAYSURF, BLUE, (400, 500), (400, 400), 4)
+        pygame.draw.rect(DISPLAYSURF, RED, (350, 300, 100,100))
+        pygame.draw.line(DISPLAYSURF, BLUE, (450, 350), (550, 350), 4)
+        pygame.draw.rect(DISPLAYSURF, RED, (550, 300, 100,100))
+        pygame.display.update()
+        fpsClock.tick(FPS)
+        pygame.quit()
+# #     #Pygame Map functionality ends, player continues on        
+
+        # Show_Map()    
+        #consolidated all directions into one for loop    
+        for key, value in path_dict.items():
+            if users_choice == key:
+                if value is not None:
+                    player.room = value
                 
-                if len(player.room.enemies) >=1:
-                    text_box(f" {player.room.enemy_description}", 1)
-                                     
-                    if player.room.name == "Ogre King's Lair":
-                        
-                        Special_Weapon = False
-                        while Special_Weapon == False:
-                                                        
-                            if "Diamond Sword" not in player.item or "Glowing Orb" not in player.item:
-                                player.lives = 0
-                                text_box("The king's skin is impenetrable without the special weapon!", 1)
+                    text_box(player.room.description, 1)
+                    
+                    if len(player.room.enemies) >=1:
+                        text_box(f" {player.room.enemy_description}", 1)
+                                        
+                        if player.room.name == "Ogre King's Lair":
+                            
+                            Special_Weapon = False
+                            while Special_Weapon == False:
+                                                            
+                                if "Diamond Sword" not in player.item or "Glowing Orb" not in player.item:
+                                    player.lives = 0
+                                    text_box("The king's skin is impenetrable without the special weapon!", 1)
+                                    break 
+                                else:
+                                    player.item.remove("Diamond Sword")
+                                    player.item.remove("Glowing Orb")
+                                    text_box("You wield the special weapon...strike now!", 1)
+                                    Special_Weapon = True 
+
+                        Enemy_hp = player.room.enemyHP 
+                        while Enemy_hp >0 and player.lives > 0:
+                            
+
+                            text_box(f"You have {round(player.lives,1)} lives, let the battle begin!", 1)
+                            attack = round(random.uniform(0, (player.room.enemyHP * player.room.enemy_diff)), 1) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
+                            text_box(f"You prepare to battle the {player.room.enemies} with {Enemy_hp} hitpoints left. You attack for {round(attack,1)} damage !", 1)
+                                                            
+                            if attack >= Enemy_hp:
+                                player.lives += (1/ player.room.enemy_diff)
+                                player.level += (.1 / player.room.enemy_diff)
+                                text_box(f"You have defeated the {player.room.enemies} with {round(player.lives,1)} lives left!\nYou gain {round(.1 / player.room.enemy_diff ,2)} lives",1)
                                 break 
                             else:
-                                player.item.remove("Diamond Sword")
-                                player.item.remove("Glowing Orb")
-                                text_box("You wield the special weapon...strike now!", 1)
-                                Special_Weapon = True 
+                                player.lives -=1
+                                if player.room.enemies.endswith('s'):
+                                    text_box(f"The {player.room.enemies} have injured you!",2)
+                                else:
+                                    text_box(f"The {player.room.enemies} has injured you!",2)
+                                    
+                                Enemy_hp = round(Enemy_hp-attack,1) 
 
-                    Enemy_hp = player.room.enemyHP 
-                    while Enemy_hp >0 and player.lives > 0:
-                        
+                        if player.lives  <= 0:
 
-                        text_box(f"You have {round(player.lives,1)} lives, let the battle begin!", 1)
-                        attack = round(random.uniform(0, (player.room.enemyHP * player.room.enemy_diff)), 1) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
-                        text_box(f"You prepare to battle the {player.room.enemies} with {Enemy_hp} hitpoints left. You attack for {round(attack,1)} damage !", 1)
-                                                        
-                        if attack >= Enemy_hp:
-                            player.lives += (1/ player.room.enemy_diff)
-                            player.level += (.1 / player.room.enemy_diff)
-                            text_box(f"You have defeated the {player.room.enemies} with {round(player.lives,1)} lives left!\nYou gain {round(.1 / player.room.enemy_diff ,2)} lives",1)
-                            break 
-                        else:
-                            player.lives -=1
-                            if player.room.enemies.endswith('s'):
-                                text_box(f"The {player.room.enemies} have injured you!",2)
-                            else:
-                                text_box(f"The {player.room.enemies} has injured you!",2)
-                                
-                            Enemy_hp = round(Enemy_hp-attack,1) 
-
-                    if player.lives  <= 0:
-
-                        text_box(f"You have died to the {player.room.enemies}!",1)
-                        break                 
-                
-                #Possibly Select Companions        
-                Quit_Trigger = False 
-                Companion_Count = False
-                while Companion_Count == False:
+                            text_box(f"You have died to the {player.room.enemies}!",1)
+                            break                 
                     
-                    if len(player.room.companion) < 1:
-                        break
-                
-                    counter1 = 0
-                    len_companions = len(player.room.companion)
-                    for item in player.room.companion:
-                        if item in player.companion:
-                            counter1 +=1
-                    if counter1 == len_companions:
+                    #Possibly Select Companions        
+                    Quit_Trigger = False 
+                    Companion_Count = False
+                    while Companion_Count == False:
+                        
+                        if len(player.room.companion) < 1:
+                            break
+                    
                         counter1 = 0
+                        len_companions = len(player.room.companion)
+                        for item in player.room.companion:
+                            if item in player.companion:
+                                counter1 +=1
+                        if counter1 == len_companions:
+                            counter1 = 0
+                            break 
+                        
+                        else:
+                            counter1 = 0
+                            
+                            text_box("You have found some friends to help you on your journey",1)
+                            for companion in player.room.companion:
+                                for name, ability in Monsters.items():
+                                    if companion == name:
+                                        text_box(f"{name} gives {ability}", 2)
+                                                                                                    
+                            Choice3 = False
+                            while Choice3 == False:
+
+                                companion_choice = input("Please choose your companion or pass to move on: \n")
+                                
+                                if companion_choice == 'q':
+                                    Quit_Choice = True
+                                    Companion_Count = True 
+                                    break 
+                                elif companion_choice == 'pass':
+                                    Companion_Count = True 
+                                    break 
+                                elif companion_choice not in player.room.companion or companion_choice in player.companion:
+                                    continue 
+                                
+                                elif companion_choice in player.room.companion and companion_choice not in player.companion:
+                                    if len(player.companion) <4:
+                                        player.companion.append(companion_choice)    
+                                                                                    
+                                    elif len(player.companion) >= 4:
+                                        text_box(f"You currently have too many companions! \nYou currently possess {player.companion}",2)
+                                        
+                                        choice4 = False
+                                        while choice4 == False:
+                                            swap_choice = input("Please choose a companion to get rid of, or pass to continue with your current group of friends: ")
+                                            
+                                            if swap_choice in player.companion:
+                                                player.companion.remove(swap_choice)
+                                                player.companion.append(companion_choice)
+                                                choice4 = True 
+                                            elif swap_choice == 'pass':
+                                                choice4 = True 
+                                    Companion_Count = True 
+                                    Choice3 = True                 
+                        
+                            if companion_choice == 'q':
+                                Companion_Count = True 
+                                Quit_Trigger = True 
+                                break 
+                        
+                            text_box(f"You currently possess {player.companion}", 2)
+                    
+                    #Select Items to add to bag
+                    if Quit_Trigger == True:
                         break 
+                    if len(player.room.item) < 1:
+                        continue
+                    
+                    counter = 0
+                    len_items_in_bag = len(player.room.item)
+                    for item in player.room.item:
+                        if item in player.item:
+                            counter +=1
+                    if counter == len_items_in_bag:
+                        counter = 0
+                        continue
                     
                     else:
-                        counter1 = 0
-                        
-                        text_box("You have found some friends to help you on your journey",1)
-                        for companion in player.room.companion:
-                            for name, ability in Monsters.items():
-                                if companion == name:
-                                    text_box(f"{name} gives {ability}", 2)
-                                                                                                
-                        Choice3 = False
-                        while Choice3 == False:
-
-                            companion_choice = input("Please choose your companion or pass to move on: \n")
-                            
-                            if companion_choice == 'q':
-                                Quit_Choice = True
-                                Companion_Count = True 
-                                break 
-                            elif companion_choice == 'pass':
-                                Companion_Count = True 
-                                break 
-                            elif companion_choice not in player.room.companion or companion_choice in player.companion:
-                                continue 
-                            
-                            elif companion_choice in player.room.companion and companion_choice not in player.companion:
-                                if len(player.companion) <4:
-                                    player.companion.append(companion_choice)    
-                                                                                
-                                elif len(player.companion) >= 4:
-                                    text_box(f"You currently have too many companions! \nYou currently possess {player.companion}",2)
-                                    
-                                    choice4 = False
-                                    while choice4 == False:
-                                        swap_choice = input("Please choose a companion to get rid of, or pass to continue with your current group of friends: ")
-                                        
-                                        if swap_choice in player.companion:
-                                            player.companion.remove(swap_choice)
-                                            player.companion.append(companion_choice)
-                                            choice4 = True 
-                                        elif swap_choice == 'pass':
-                                            choice4 = True 
-                                Companion_Count = True 
-                                Choice3 = True                 
-                    
-                        if companion_choice == 'q':
-                            Companion_Count = True 
-                            Quit_Trigger = True 
-                            break 
-                    
-                        text_box(f"You currently possess {player.companion}", 2)
-                
-                #Select Items to add to bag
-                if Quit_Trigger == True:
-                    break 
-                if len(player.room.item) < 1:
-                    continue
-                
-                counter = 0
-                len_items_in_bag = len(player.room.item)
-                for item in player.room.item:
-                    if item in player.item:
-                        counter +=1
-                if counter == len_items_in_bag:
-                    counter = 0
-                    continue
-                
-                else:
-                    counter = 0
-                    text_box(f"You find {player.room.item}",2)
-                    if len(player.item) >0:
-                        text_box(f"You currently possess{player.item}",1)
-                                        
-                    for treasure in player.room.item:
-                        player.describe_power(treasure)
+                        counter = 0
+                        text_box(f"You find {player.room.item}",2)
+                        if len(player.item) >0:
+                            text_box(f"You currently possess{player.item}",1)
                                             
-                    item_choice = input("Which item will you pickup? Or say pass to move on: \n")
-                    
-                    choice = False
-                    while choice == False:
-                        if item_choice == 'q':
-                            Quit_Choice = True
-                            break 
-                        elif item_choice == 'pass':
-                            choice = True 
-
-                        elif item_choice not in player.room.item or item_choice in player.item:
-                            item_choice = input("Which item will you pickup? Or say 'pass' to move on: \n")
-                            continue 
+                        for treasure in player.room.item:
+                            player.describe_power(treasure)
                                                 
-                        elif item_choice in player.room.item and item_choice not in player.item:
-                            if len(player.item) <5:
-                                player.item.append(item_choice)    
-                                                                            
-                            elif len(player.item) >= 5:
-                                text_box(f"You currently have too many items in your bag. \nYou currently possess {player.item}",2)
-                                
-                                choice2 = False
-                                while choice2 == False:
-                                    swap_choice = input("Please choose an item to swap from your bag, or pass to continue with your current bag: ")
-                                    
-                                    if swap_choice in player.item:
-                                        player.item.remove(swap_choice)
-                                        player.item.append(item_choice)
-                                        choice2 = True 
-                                    elif swap_choice == 'pass':
-                                        choice2 = True 
-                                   
-                            choice = True                 
-                    
-                    if item_choice == 'q':
-                        break 
-                                        
-                    text_box(f"You currently possess {player.item}",2)
+                        item_choice = input("Which item will you pickup? Or say pass to move on: \n")
+                        
+                        choice = False
+                        while choice == False:
+                            if item_choice == 'q':
+                                Quit_Choice = True
+                                break 
+                            elif item_choice == 'pass':
+                                choice = True 
 
-            else:
-                text_box('You can not go in that direction!',1)
-                continue
+                            elif item_choice not in player.room.item or item_choice in player.item:
+                                item_choice = input("Which item will you pickup? Or say 'pass' to move on: \n")
+                                continue 
+                                                    
+                            elif item_choice in player.room.item and item_choice not in player.item:
+                                if len(player.item) <5:
+                                    player.item.append(item_choice)    
+                                                                                
+                                elif len(player.item) >= 5:
+                                    text_box(f"You currently have too many items in your bag. \nYou currently possess {player.item}",2)
+                                    
+                                    choice2 = False
+                                    while choice2 == False:
+                                        swap_choice = input("Please choose an item to swap from your bag, or pass to continue with your current bag: ")
+                                        
+                                        if swap_choice in player.item:
+                                            player.item.remove(swap_choice)
+                                            player.item.append(item_choice)
+                                            choice2 = True 
+                                        elif swap_choice == 'pass':
+                                            choice2 = True 
+                                    
+                                choice = True                 
+                        
+                        if item_choice == 'q':
+                            break 
+                                            
+                        text_box(f"You currently possess {player.item}",2)
+
+                else:
+                    text_box('You can not go in that direction!',1)
+                    continue
+
+Adventurer()
+
