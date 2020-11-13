@@ -238,73 +238,7 @@ def Adventurer():
 
             World1draw()
                         
-            # Loop = True 
-            # while Loop == True:
-                
-            # pygame.init() 
-        
-            # DISPLAYSURF = pygame.display.set_mode((WIDTH, HEIGHT))
-            # pygame.display.set_caption('You have entered World 1!')
-            # DISPLAYSURF.fill(WHITE)
             
-            # Board = pygame.draw.rect(DISPLAYSURF, (128,255, 255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
-            # pygame.draw.line(DISPLAYSURF, BLUE, (200, 900), (200, 800), 4)
-            # pygame.draw.rect(DISPLAYSURF, RED, (150, 700, 100,100))
-            # pygame.draw.line(DISPLAYSURF, BLUE, (200, 700), (200, 600), 4)
-            # pygame.draw.rect(DISPLAYSURF, RED, (150, 500, 100,100))
-            # pygame.draw.line(DISPLAYSURF, BLUE, (250, 750), (350, 750), 4)
-            # pygame.draw.rect(DISPLAYSURF, RED, (350, 700, 100,100))
-            # pygame.draw.line(DISPLAYSURF, BLUE, (400, 700), (400, 600), 4)
-            # pygame.draw.rect(DISPLAYSURF, RED, (350, 500, 100,100))
-            # pygame.draw.line(DISPLAYSURF, BLUE, (400, 500), (400, 400), 4)
-            # pygame.draw.rect(DISPLAYSURF, RED, (350, 300, 100,100))
-            # pygame.draw.line(DISPLAYSURF, BLUE, (450, 350), (550, 350), 4)
-            # pygame.draw.rect(DISPLAYSURF, RED, (550, 300, 100,100))
-
-            
-            # fontObj = pygame.font.Font('freesansbold.ttf', 16)
-            # fontObj2 = pygame.font.Font('freesansbold.ttf', 14)
-            # Room1 = fontObj.render('FOYER', True, BLACK, RED)
-            # Room2 = fontObj.render('OVERLOOK', True, BLACK, RED)
-            # Room3 = fontObj.render('NARROW', True, BLACK, RED)
-            # Room3a = fontObj.render('PASSAGE', True, BLACK, RED)
-            # Room4 = fontObj.render('TREASURE', True, BLACK, RED)
-            # Room4a = fontObj.render('ROOM', True, BLACK, RED)
-            # Room5 = fontObj.render('CAVE EXIT', True, BLACK, RED)
-            # Room6 = fontObj2.render('ENCHANTED', True, BLACK, RED)
-            # Room6a = fontObj2.render('FOREST', True, BLACK, RED)
-            
-            
-            # DISPLAYSURF.blit(Room1, (170, 740))
-            # DISPLAYSURF.blit(Room2, (155, 540))
-            # DISPLAYSURF.blit(Room3, (365, 730))
-            # DISPLAYSURF.blit(Room3a, (365, 745))
-            # DISPLAYSURF.blit(Room4, (355, 530))
-            # DISPLAYSURF.blit(Room4a, (370, 545))
-            # DISPLAYSURF.blit(Room5, (355, 340))
-            # DISPLAYSURF.blit(Room6, (555, 330))
-            # DISPLAYSURF.blit(Room6a, (570, 345)) 
-            
-                                
-            # pygame.display.update() 
-            
-            # fpsClock = pygame.time.Clock()
-            # fpsClock.tick(FPS)
-            
-            # # Room1 = fontObj.render('FOYER', True, BLACK, GREEN)
-            
-            # pygame.quit()
-                                            
-            # Loop = False 
-                            
-        # pygame.display.update()
-        
-        # fpsClock = pygame.time.Clock()
-            # fpsClock.tick(FPS)
-            
-        #the blitting and rendering is making it so i can not run this loop infinitely...must find out why,
-        #changing size of board does not make a difference, changing blitting also doesnt make a difference, 
-                           
 # #     #Pygame Map functionality ends, player continues on   
         
         if player.room.world == 2:
