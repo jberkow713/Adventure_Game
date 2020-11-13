@@ -121,7 +121,7 @@ XMARGIN = 50
 YMARGIN = 50
 Big_Gap = XMARGIN*4
 Small_Gap = XMARGIN*2 
-FPS = .15 # frames per second setting
+FPS = .25 # frames per second setting
 
 ###############################################################################
 
@@ -179,7 +179,8 @@ def Adventurer():
         
         text_box("Your attack, magic_attack, defense, level, and magic level all improve your ability to defeat monsters!", 2)
         
-        #Pygame Functionality Begins
+        
+        # Pygame Functionality Begins
         if player.room.world == 1:
 
             fpsClock = pygame.time.Clock()
@@ -231,6 +232,9 @@ def Adventurer():
             pygame.draw.rect(DISPLAYSURF, RED, (350, 200, 100,100))
             pygame.draw.line(DISPLAYSURF, BLUE, (400, 200), (400, 100), 4)
             pygame.draw.rect(DISPLAYSURF, RED, (200, 50, 400,50))
+            pygame.display.update()
+            fpsClock.tick(FPS)
+            pygame.quit()
 
         if player.room.name == "Rabbit Hole":
             if 'Mysterious looking Brownie' in player.item:
