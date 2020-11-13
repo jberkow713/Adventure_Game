@@ -10,7 +10,9 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame, sys
 import pygame.locals
 from pygame.locals import *
-# from Maptesting import Show_Map
+# from Maptesting import World1
+import getpass
+
 
 
 
@@ -150,15 +152,15 @@ def Adventurer():
     Small_Gap = XMARGIN*2 
     # FPS = 0 # frames per second setting
     ##############################################
-    printline()
-        
+            
     choices = ["1", "2", "3", "4"]
     
     Choices = False
     while Choices == False:
 
         text_box("The higher the map display setting value, the longer the map will display", 2)      
-        Map_speed = input("Please choose 1,2,3, or 4 for Map Display Settings \n\n")
+        #Getpass makes it so this input is not displayed
+        Map_speed = getpass.getpass("Please choose 1,2,3, or 4 for Map Display Settings \n\n")
         if Map_speed == 'q':
             break
         elif Map_speed not in choices:
@@ -166,7 +168,7 @@ def Adventurer():
         elif Map_speed in choices:
             Choices = True
     
-    Speeds = [.4, .2, .15, .1]
+    Speeds = [.33, .2, .15, .1]
     path_dict = dict(zip(choices, Speeds))
 
     for key, value in path_dict.items():
@@ -176,7 +178,6 @@ def Adventurer():
     if Map_speed == 'q':
         sys.exit() 
 
-    printline()
     User_name = input("Please enter your name: \n")
     if User_name == 'q':
         sys.exit()

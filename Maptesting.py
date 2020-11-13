@@ -165,7 +165,33 @@ def Show_Map():
         pygame.draw.rect(DISPLAYSURF, RED, (200, 50, 400,50))
         
 
-        
+def World1():
+
+    fpsClock = pygame.time.Clock()
+
+    DISPLAYSURF = pygame.display.set_mode((WIDTH, HEIGHT))
+    pygame.display.set_caption('You have entered World 1!')
+
+    WHITE = (255, 255, 255)
+    DISPLAYSURF.fill(WHITE)
+
+
+    Board = pygame.draw.rect(DISPLAYSURF, (128,255, 255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
+    pygame.draw.line(DISPLAYSURF, BLUE, (200, 900), (200, 800), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (150, 700, 100,100))
+    pygame.draw.line(DISPLAYSURF, BLUE, (200, 700), (200, 600), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (150, 500, 100,100))
+    pygame.draw.line(DISPLAYSURF, BLUE, (250, 750), (350, 750), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (350, 700, 100,100))
+    pygame.draw.line(DISPLAYSURF, BLUE, (400, 700), (400, 600), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (350, 500, 100,100))
+    pygame.draw.line(DISPLAYSURF, BLUE, (400, 500), (400, 400), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (350, 300, 100,100))
+    pygame.draw.line(DISPLAYSURF, BLUE, (450, 350), (550, 350), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (550, 300, 100,100))
+    pygame.display.update()
+    fpsClock.tick(FPS)
+    pygame.quit()        
 
         
 
