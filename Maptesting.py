@@ -1,3 +1,7 @@
+x = 750
+y = 0
+import os
+os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (x,y)
 import pygame, sys
 import pygame.locals
 from pygame.locals import *
@@ -7,6 +11,14 @@ import getpass
 from texttest import text_box
 
 
+
+# import pygame
+# pygame.init()
+# screen = pygame.display.set_mode((100,100))
+
+# # wait for a while to show the window.
+# import time
+# time.sleep(2)
 
 
 
@@ -186,4 +198,7 @@ def Choose_Map_Speed():
             FPS = value
     
     return(FPS) 
-           
+
+# Map_speed = Choose_Map_Speed()
+
+# World1draw(Map_speed)

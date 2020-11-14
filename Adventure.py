@@ -1,3 +1,8 @@
+x_coord = 750
+y_coord = 0
+import os
+os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (x_coord,y_coord)
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 from Room import Room, Monster, MagicRoom
 from Player import Player 
 # Declare all the rooms
@@ -5,8 +10,6 @@ import random
 from tabulate import tabulate
 from texttest import text_box, printline
 import sys
-import os
-os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame, sys
 import pygame.locals
 from pygame.locals import *
@@ -162,7 +165,7 @@ def Adventurer():
         text_box(f" Your fortune is {round(player.fortune,1)}, Your defense is {round(player.defense,1)}. \nYour current level is {round(player.level, 1)}, your current magic level is {round(player.magic_level,1)}. \
                 \nYour current attack is {round(player.attack,1)}, Your current magic attack is {round(player.magic_attack,1)},\nYour current defense is {round(player.defense, 1)}", 1)
         
-        text_box("Your attack, magic_attack, defense, level, and magic level all improve your ability to defeat monsters!", 2)
+        text_box("Your attack, magic and defense help you defeat monsters!", 2)
         
         # Pygame Functionality Begins
   
