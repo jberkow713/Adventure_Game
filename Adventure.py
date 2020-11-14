@@ -10,7 +10,7 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame, sys
 import pygame.locals
 from pygame.locals import *
-from Maptesting import World1draw, World2draw
+from Maptesting import World1draw, World2draw, Choose_Map_Speed
 import getpass
 
 
@@ -115,31 +115,13 @@ Wonderland['Tree-land'].s_to = Wonderland['WonderWorld']
 
 
 def Adventurer():
-                    
-    choices = ["1", "2", "3", "4"]
-    
-    Choices = False
-    while Choices == False:
 
-        text_box("The higher the map display setting value, the longer the map will display", 2)      
-        #Getpass makes it so this input is not displayed
-        Map_speed = getpass.getpass("Please choose 1,2,3, or 4 for Map Display Settings \n\n")
-        if Map_speed == 'q':
-            break
-        elif Map_speed not in choices:
-            print("That is not a valid speed")
-        elif Map_speed in choices:
-            Choices = True
+           
+    Map_quit = False
+    Map_Speed = Choose_Map_Speed()
     
-    Speeds = [.33, .2, .15, .1]
-    path_dict = dict(zip(choices, Speeds))
-
-    for key, value in path_dict.items():
-        if Map_speed == key:
-            FPS = value
-    
-    if Map_speed == 'q':
-        sys.exit() 
+    if Map_quit ==  True:
+        sys.exit()
 
     User_name = input("Please enter your name: \n")
     if User_name == 'q':
@@ -192,20 +174,15 @@ def Adventurer():
         
         text_box("Your attack, magic_attack, defense, level, and magic level all improve your ability to defeat monsters!", 2)
         
-        
         # Pygame Functionality Begins
-    
-    
-
+  
         if player.room.world == 1 :
 
-            World1draw(FPS)
-                
-# #     #Pygame Map functionality ends, player continues on   
-        
+            World1draw(Map_Speed)
+       
         if player.room.world == 2:
             
-            World2draw(FPS)
+            World2draw(Map_Speed)
 
         if player.room.name == "Rabbit Hole":
             if 'Mysterious looking Brownie' in player.item:
@@ -256,10 +233,7 @@ def Adventurer():
                     
             directions = [player.room.n_to, player.room.e_to, player.room.w_to, player.room.s_to, player.room.magic_to]
             path_dict = dict(zip(choices, directions))
-        #Pygame Map Functionality
-     
-
-        # Show_Map()    
+           
         #consolidated all directions into one for loop    
         for key, value in path_dict.items():
             if users_choice == key:
