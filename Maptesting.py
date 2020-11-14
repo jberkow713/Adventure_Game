@@ -190,7 +190,7 @@ def Choose_Map_Speed():
         elif Map_speed in choices:
             Choices = True
     
-    Speeds = [.33, .2, .15, .1]
+    Speeds = [.33, .2, .15, .05]
     path_dict = dict(zip(choices, Speeds))
 
     for key, value in path_dict.items():
@@ -202,3 +202,44 @@ def Choose_Map_Speed():
 # Map_speed = Choose_Map_Speed()
 
 # World1draw(Map_speed)
+
+#so we need player's room, and we need the starting coordinates of that room,
+# and we need the direction the player has selected, to alter the position of link, 
+# based on starting coordinates...
+# so if starting coordinates = 200,500:
+# if direction = north, blit on 250,500
+# if direction or (users_choice) = south, then blit on 250,600,
+# if diretion = east, blit on 300, 550,
+# if direction = west, blit on 200, 550, 
+# if the room is cauldron room and chooses fly, blit on north path,
+# if the room is cloud fortress and chooses fly, blit on south path
+
+# so general idea, coordinates (x, y)
+# north, blit on (x+50, y)
+# south, blit on (x+50, y+100)
+# east, blit on (x+100, y+50)
+#west, blit on (x, y+50)
+
+# so we need to check players room , like if it equals Foyer, starting coords = x, y
+# then it checks if users_choice = whatever, blit link at the corresponding coordinates, and walk him certain 
+#way, there will be 4 if , elif statements, one for each direction
+#fly case will have to be written separately
+
+#could make a dictionary, where each room name is a key, and each value corresponds to list of x, y coordinates,
+# then check to see if player.room.name = key in dictionary, players coordinates = value[0], value[1]
+# then adjust the value based on north, west, east, south, 
+# player_coords can be the value from the dictionary, corresponding to the room, so a 
+# list representing [x-coord value, y-coord value], so based on the direction, do stuff to values in list
+#if north, list[0]= list[0]+50, list[1] = list[1]...
+#append the new values to a new list, to get links (starting coordinates)
+# if south, east, west, etc
+
+#then you need some sort of loop that walks him maybe 10 coordinate along x or y axis at a time, till he reaches
+# his final destination, each will be 100 in length total, then you exit the loop, so youre sort of blitting him
+# onto 10 different spots, starting at the (starting coordinates) and going in the direction
+# when he hits the end of the while loop, you exit the pygame window
+
+# so make the function the same for world 1 and world 2, you just have one giant dictionary of all the rooms
+# when you run the function inside world 1, it will only pick up coordinates for names of rooms in world 1, 
+# and same for world 2, so function will be exactly the same for each world, aside from flying directions
+

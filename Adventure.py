@@ -167,16 +167,6 @@ def Adventurer():
         
         text_box("Your attack, magic and defense help you defeat monsters!", 2)
         
-        # Pygame Functionality Begins
-  
-        if player.room.world == 1 :
-
-            World1draw(Map_Speed)
-       
-        if player.room.world == 2:
-            
-            World2draw(Map_Speed)
-
         if player.room.name == "Rabbit Hole":
             if 'Mysterious looking Brownie' in player.item:
                 text_box("A tiny door stands before you. Dirt begins to fall from the ceiling, you'd better find a way out quickly!", 1)
@@ -231,7 +221,32 @@ def Adventurer():
         for key, value in path_dict.items():
             if users_choice == key:
                 if value is not None:
+
+
+
+                    if player.room.world == 1 :
+
+                        World1draw(Map_Speed)
+                    # this is where we call the movement function
+                    
+                    # so you take current room, check its coordinates, alter them based on the user_choice
+                    # blit Link icon on those coordinates, and then based on the user_choice, alter links 
+                    # coordinates somehow to make him walk in that direction
+                    # and THEN you change the player.room's value to be the next room
+                    
+                    elif player.room.world == 2:
+            
+                        World2draw(Map_Speed)
+                    # this is where we call the movement function
+                    
+                    # so you take current room, check its coordinates, alter them based on the user_choice
+                    # blit Link icon on those coordinates, and then based on the user_choice, alter links 
+                    # coordinates somehow to make him walk in that direction
+                    # and THEN you change the player.room's value to be the next room
                     player.room = value
+                    text_box(f"You have moved to the {player.room.name}",1)
+
+                    
                 
                     text_box(player.room.description, 1)
                     
