@@ -13,11 +13,6 @@ from pygame.locals import *
 from Maptesting import World1draw, World2draw, Choose_Map_Speed
 import getpass
 
-
-
-
-
-
 room = {
 
 'outside':  Room(1, 1,"Outside",
@@ -115,7 +110,6 @@ Wonderland['Tree-land'].s_to = Wonderland['WonderWorld']
 
 
 def Adventurer():
-
            
     Map_quit = False
     Map_Speed = Choose_Map_Speed()
@@ -145,13 +139,9 @@ def Adventurer():
         else:
             player.set_lives(difficulty_choice)
             player.set_initial_fortune_and_defense()    
-
-
-    
+   
     Quit_Choice = False
     while True:
-
-                
         #Set attributes at start of every battle
         if Quit_before_start == True:
             text_box("Your journey has ended before it has begun!",1)
@@ -423,4 +413,3 @@ def Adventurer():
                     continue
 
 Adventurer()
-
