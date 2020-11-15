@@ -190,7 +190,7 @@ def Choose_Map_Speed():
         elif Map_speed in choices:
             Choices = True
     
-    Speeds = [.33, .2, .15, .05]
+    Speeds = [.33, .2, .15, .1]
     path_dict = dict(zip(choices, Speeds))
 
     for key, value in path_dict.items():
@@ -201,7 +201,7 @@ def Choose_Map_Speed():
 
 # Map_speed = Choose_Map_Speed()
 
-# World1draw(Map_speed)
+# World2draw(Map_speed)
 
 #so we need player's room, and we need the starting coordinates of that room,
 # and we need the direction the player has selected, to alter the position of link, 
@@ -243,3 +243,128 @@ def Choose_Map_Speed():
 # when you run the function inside world 1, it will only pick up coordinates for names of rooms in world 1, 
 # and same for world 2, so function will be exactly the same for each world, aside from flying directions
 
+
+def Map_Movement_World1(Map_Speed, player, users_choice):
+
+    catImg = pygame.image.load('cat.png')
+    
+    
+
+    Room_location = { "Outside": [150, 900], "Foyer": [150, 700], "Grand Overlook": [150, 500], \
+        "Narrow Passage": [350, 700], "Treasure Chamber": [350,500], "Cave Exit": [350, 300], \
+            "Enchanted Forest": [550, 300], "Magical Entrance": [150, 800], "Cauldron Room": [150, 600], \
+                "Wizard's Lair": [350, 800], "Cloud Fortress": [150, 400], "Mysterious Shack": [350, 400], \
+                    'Ogre Fortress': [350, 200], "Ogre King's Lair": [350, 0]
+    }
+    
+    X_value = -50
+    Y_value = -50
+    for room, coords in Room_location.items():
+        if player.room.name == room:
+
+            X_value += coords[0]
+            Y_value += coords[1] 
+    
+      
+    #starting values of coordinates of Cat, or whatever is going to be moving 
+    #Take starting coordinates of player's room, and adjust starting coordinates for movement direction
+    
+    if users_choice == "north":
+        
+        X_starting = X_value +50
+        Y_starting = Y_value 
+        
+    elif users_choice == "south":
+        X_starting = X_value +50
+        Y_starting = Y_value + 100 
+    
+    elif users_choice == "east":
+        X_starting = X_value +100
+        Y_starting = Y_value + 50 
+    
+    elif users_choice == "west":
+        X_starting = X_value 
+        Y_starting = Y_value + 50 
+    
+    elif users_choice == "fly":
+        
+        if player.room == "Cauldron Room":
+            X_starting = X_value +50
+            Y_starting = Y_value
+        else:
+            X_starting = X_value +50
+            Y_starting = Y_value + 100 
+
+    BLACK = ( 0, 0, 0)
+    WHITE = (255, 255, 255)
+    RED = (255, 0, 0)
+    GREEN = ( 0, 255, 0)
+    BLUE = ( 0, 0, 255)
+
+    WIDTH = 1000
+    HEIGHT = 1000
+    XMARGIN = 50
+    YMARGIN = 50
+    Big_Gap = XMARGIN*4
+    Small_Gap = XMARGIN*2 
+       
+    pygame.init() 
+        
+    DISPLAYSURF = pygame.display.set_mode((WIDTH, HEIGHT))
+    pygame.display.set_caption('YOU ARE CURRENTLY IN WORLD 1')
+    DISPLAYSURF.fill(WHITE)
+    
+    Board = pygame.draw.rect(DISPLAYSURF, (128,255, 255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
+    
+    pygame.draw.rect(DISPLAYSURF, RED, (150, 900, 100,50))
+    pygame.draw.line(DISPLAYSURF, BLUE, (200, 900), (200, 800), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (150, 700, 100,100))
+    pygame.draw.line(DISPLAYSURF, BLUE, (200, 700), (200, 600), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (150, 500, 100,100))
+    pygame.draw.line(DISPLAYSURF, BLUE, (250, 750), (350, 750), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (350, 700, 100,100))
+    pygame.draw.line(DISPLAYSURF, BLUE, (400, 700), (400, 600), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (350, 500, 100,100))
+    pygame.draw.line(DISPLAYSURF, BLUE, (400, 500), (400, 400), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (350, 300, 100,100))
+    pygame.draw.line(DISPLAYSURF, BLUE, (450, 350), (550, 350), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (550, 300, 100,100))
+
+    
+    fontObj = pygame.font.Font('freesansbold.ttf', 16)
+    fontObj2 = pygame.font.Font('freesansbold.ttf', 14)
+    Room1 = fontObj.render('FOYER', True, BLACK, RED)
+    Room2 = fontObj.render('OVERLOOK', True, BLACK, RED)
+    Room3 = fontObj.render('NARROW', True, BLACK, RED)
+    Room3a = fontObj.render('PASSAGE', True, BLACK, RED)
+    Room4 = fontObj.render('TREASURE', True, BLACK, RED)
+    Room4a = fontObj.render('ROOM', True, BLACK, RED)
+    Room5 = fontObj.render('CAVE EXIT', True, BLACK, RED)
+    Room6 = fontObj2.render('ENCHANTED', True, BLACK, RED)
+    Room6a = fontObj2.render('FOREST', True, BLACK, RED)
+    Room7 = fontObj2.render('OUTSIDE', True, BLACK, RED)
+    
+    DISPLAYSURF.blit(Room7, (170, 920))
+    DISPLAYSURF.blit(Room1, (170, 740))
+    DISPLAYSURF.blit(Room2, (155, 540))
+    DISPLAYSURF.blit(Room3, (365, 730))
+    DISPLAYSURF.blit(Room3a, (365, 745))
+    DISPLAYSURF.blit(Room4, (355, 530))
+    DISPLAYSURF.blit(Room4a, (370, 545))
+    DISPLAYSURF.blit(Room5, (355, 340))
+    DISPLAYSURF.blit(Room6, (555, 330))
+    DISPLAYSURF.blit(Room6a, (570, 345)) 
+    
+    DISPLAYSURF.blit(catImg, [X_starting, Y_starting])
+                        
+    pygame.display.update() 
+    
+    fpsClock = pygame.time.Clock()
+    fpsClock.tick(Map_Speed)
+    
+    # Room1 = fontObj.render('FOYER', True, BLACK, GREEN)
+    
+    pygame.quit()
+    print(X_starting, Y_starting)
+        
+    

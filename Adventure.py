@@ -13,7 +13,7 @@ import sys
 import pygame, sys
 import pygame.locals
 from pygame.locals import *
-from Maptesting import World1draw, World2draw, Choose_Map_Speed
+from Maptesting import World1draw, World2draw, Choose_Map_Speed, Map_Movement_World1
 import getpass
 
 room = {
@@ -222,11 +222,14 @@ def Adventurer():
             if users_choice == key:
                 if value is not None:
 
+                    #Test to see if room heading towards is real, and direction is valid, if so, call the map
+                    # function to move player along map
 
+                    
 
                     if player.room.world == 1 :
-
-                        World1draw(Map_Speed)
+                           
+                        Map_Movement_World1(Map_Speed=Map_Speed, player=player, users_choice=users_choice)
                     # this is where we call the movement function
                     
                     # so you take current room, check its coordinates, alter them based on the user_choice
