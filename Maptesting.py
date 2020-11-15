@@ -394,7 +394,12 @@ def Map_Movement_World1(Map_Speed, player, users_choice):
                 Y_starting +=20
                 Count +=20
                 DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
-
+        
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            pygame.display.update()
 
     
     #While loop goes here                    
@@ -569,7 +574,11 @@ def Map_Movement_World2(Map_Speed, player, users_choice):
                 Count +=20
                 DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
 
-
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            pygame.display.update()
     
     #While loop goes here                    
     pygame.display.update() 
@@ -580,6 +589,14 @@ def Map_Movement_World2(Map_Speed, player, users_choice):
     # Room1 = fontObj.render('FOYER', True, BLACK, GREEN)
     
     pygame.quit()
+
+        # for event in pygame.event.get():
+        #     if event.type == QUIT:
+        #         pygame.quit()
+        #         sys.exit()
+        #     pygame.display.update()
+
+
     
         
     
