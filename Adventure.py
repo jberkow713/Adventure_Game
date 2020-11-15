@@ -13,7 +13,7 @@ import sys
 import pygame, sys
 import pygame.locals
 from pygame.locals import *
-from Maptesting import World1draw, World2draw, Choose_Map_Speed, Map_Movement_World1
+from Maptesting import World1draw, World2draw, Choose_Map_Speed, Map_Movement_World1, Map_Movement_World2
 import getpass
 
 room = {
@@ -113,10 +113,11 @@ Wonderland['Tree-land'].s_to = Wonderland['WonderWorld']
 
 
 def Adventurer():
-           
+
+    
     Map_quit = False
     Map_Speed = Choose_Map_Speed()
-    
+        
     if Map_quit ==  True:
         sys.exit()
 
@@ -167,6 +168,12 @@ def Adventurer():
         
         text_box("Your attack, magic and defense help you defeat monsters!", 2)
         
+        if player.room.world == 1:
+            World1draw(Map_Speed*2)
+        if player.room.world == 2:
+            World2draw(Map_Speed*2)
+
+
         if player.room.name == "Rabbit Hole":
             if 'Mysterious looking Brownie' in player.item:
                 text_box("A tiny door stands before you. Dirt begins to fall from the ceiling, you'd better find a way out quickly!", 1)
@@ -221,31 +228,34 @@ def Adventurer():
         for key, value in path_dict.items():
             if users_choice == key:
                 if value is not None:
+                    if users_choice != "magic":
+
 
                     #Test to see if room heading towards is real, and direction is valid, if so, call the map
                     # function to move player along map
 
                     
 
-                    if player.room.world == 1 :
-                           
-                        Map_Movement_World1(Map_Speed=Map_Speed, player=player, users_choice=users_choice)
-                    # this is where we call the movement function
+                        if player.room.world == 1 :
+                            
+                            Map_Movement_World1(Map_Speed=Map_Speed, player=player, users_choice=users_choice)
+                        # this is where we call the movement function
+                        
+                        # so you take current room, check its coordinates, alter them based on the user_choice
+                        # blit Link icon on those coordinates, and then based on the user_choice, alter links 
+                        # coordinates somehow to make him walk in that direction
+                        # and THEN you change the player.room's value to be the next room
+                        
+                        elif player.room.world == 2:
+                
+                            Map_Movement_World2(Map_Speed=Map_Speed, player=player, users_choice=users_choice)
+                        # this is where we call the movement function
                     
                     # so you take current room, check its coordinates, alter them based on the user_choice
                     # blit Link icon on those coordinates, and then based on the user_choice, alter links 
                     # coordinates somehow to make him walk in that direction
                     # and THEN you change the player.room's value to be the next room
                     
-                    elif player.room.world == 2:
-            
-                        World2draw(Map_Speed)
-                    # this is where we call the movement function
-                    
-                    # so you take current room, check its coordinates, alter them based on the user_choice
-                    # blit Link icon on those coordinates, and then based on the user_choice, alter links 
-                    # coordinates somehow to make him walk in that direction
-                    # and THEN you change the player.room's value to be the next room
                     player.room = value
                     text_box(f"You have moved to the {player.room.name}",1)
 
@@ -384,9 +394,9 @@ def Adventurer():
                     else:
                         counter = 0
                         text_box(f"You find {player.room.item}",2)
-                        if len(player.item) !=0:
+                        if len(player.item) >=1:
                             text_box(f"You currently possess{player.item}",1)
-                                            
+                                                                        
                         for treasure in player.room.item:
                             player.describe_power(treasure)
                                                 

@@ -43,7 +43,7 @@ def World1draw(FPS):
     pygame.display.set_caption('YOU ARE CURRENTLY IN WORLD 1')
     DISPLAYSURF.fill(WHITE)
     
-    Board = pygame.draw.rect(DISPLAYSURF, (128,255, 255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
+    Board = pygame.draw.rect(DISPLAYSURF,(128,128,255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
     
     pygame.draw.rect(DISPLAYSURF, RED, (150, 900, 100,50))
     pygame.draw.line(DISPLAYSURF, BLUE, (200, 900), (200, 800), 4)
@@ -67,7 +67,7 @@ def World1draw(FPS):
     Room3 = fontObj.render('NARROW', True, BLACK, RED)
     Room3a = fontObj.render('PASSAGE', True, BLACK, RED)
     Room4 = fontObj.render('TREASURE', True, BLACK, RED)
-    Room4a = fontObj.render('ROOM', True, BLACK, RED)
+    Room4a = fontObj.render('CHAMBER', True, BLACK, RED)
     Room5 = fontObj.render('CAVE EXIT', True, BLACK, RED)
     Room6 = fontObj2.render('ENCHANTED', True, BLACK, RED)
     Room6a = fontObj2.render('FOREST', True, BLACK, RED)
@@ -79,7 +79,7 @@ def World1draw(FPS):
     DISPLAYSURF.blit(Room3, (365, 730))
     DISPLAYSURF.blit(Room3a, (365, 745))
     DISPLAYSURF.blit(Room4, (355, 530))
-    DISPLAYSURF.blit(Room4a, (370, 545))
+    DISPLAYSURF.blit(Room4a, (355, 545))
     DISPLAYSURF.blit(Room5, (355, 340))
     DISPLAYSURF.blit(Room6, (555, 330))
     DISPLAYSURF.blit(Room6a, (570, 345)) 
@@ -116,7 +116,7 @@ def World2draw(FPS):
     pygame.display.set_caption('YOU ARE CURRENTLY IN WORLD 2!')
     DISPLAYSURF.fill(WHITE)
 
-    Board = pygame.draw.rect(DISPLAYSURF, (128,255, 255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
+    Board = pygame.draw.rect(DISPLAYSURF,(128,128,255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
     pygame.draw.rect(DISPLAYSURF, RED, (150, 800, 100,100))
     pygame.draw.line(DISPLAYSURF, BLUE, (250, 850), (350, 850), 4)
     pygame.draw.rect(DISPLAYSURF, RED, (350, 800, 100,100))
@@ -247,7 +247,8 @@ def Choose_Map_Speed():
 def Map_Movement_World1(Map_Speed, player, users_choice):
 
     catImg = pygame.image.load('cat.png')
-    
+    fightImg = pygame.image.load('fighter.png')
+    LinkImg = pygame.image.load('SmallLink.png')
     
 
     Room_location = { "Outside": [150, 900], "Foyer": [150, 700], "Grand Overlook": [150, 500], \
@@ -257,8 +258,8 @@ def Map_Movement_World1(Map_Speed, player, users_choice):
                     'Ogre Fortress': [350, 200], "Ogre King's Lair": [350, 0]
     }
     
-    X_value = -50
-    Y_value = -50
+    X_value = -25
+    Y_value = -20
     for room, coords in Room_location.items():
         if player.room.name == room:
 
@@ -294,7 +295,8 @@ def Map_Movement_World1(Map_Speed, player, users_choice):
         else:
             X_starting = X_value +50
             Y_starting = Y_value + 100 
-
+    
+    
     BLACK = ( 0, 0, 0)
     WHITE = (255, 255, 255)
     RED = (255, 0, 0)
@@ -312,9 +314,11 @@ def Map_Movement_World1(Map_Speed, player, users_choice):
         
     DISPLAYSURF = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption('YOU ARE CURRENTLY IN WORLD 1')
+    pygame.display.set_caption('Animation')
+
     DISPLAYSURF.fill(WHITE)
     
-    Board = pygame.draw.rect(DISPLAYSURF, (128,255, 255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
+    Board = pygame.draw.rect(DISPLAYSURF,(128,128,255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
     
     pygame.draw.rect(DISPLAYSURF, RED, (150, 900, 100,50))
     pygame.draw.line(DISPLAYSURF, BLUE, (200, 900), (200, 800), 4)
@@ -338,7 +342,7 @@ def Map_Movement_World1(Map_Speed, player, users_choice):
     Room3 = fontObj.render('NARROW', True, BLACK, RED)
     Room3a = fontObj.render('PASSAGE', True, BLACK, RED)
     Room4 = fontObj.render('TREASURE', True, BLACK, RED)
-    Room4a = fontObj.render('ROOM', True, BLACK, RED)
+    Room4a = fontObj.render('CHAMBER', True, BLACK, RED)
     Room5 = fontObj.render('CAVE EXIT', True, BLACK, RED)
     Room6 = fontObj2.render('ENCHANTED', True, BLACK, RED)
     Room6a = fontObj2.render('FOREST', True, BLACK, RED)
@@ -350,13 +354,50 @@ def Map_Movement_World1(Map_Speed, player, users_choice):
     DISPLAYSURF.blit(Room3, (365, 730))
     DISPLAYSURF.blit(Room3a, (365, 745))
     DISPLAYSURF.blit(Room4, (355, 530))
-    DISPLAYSURF.blit(Room4a, (370, 545))
+    DISPLAYSURF.blit(Room4a, (355, 545))
     DISPLAYSURF.blit(Room5, (355, 340))
     DISPLAYSURF.blit(Room6, (555, 330))
     DISPLAYSURF.blit(Room6a, (570, 345)) 
     
-    DISPLAYSURF.blit(catImg, [X_starting, Y_starting])
-                        
+    Small_Link = pygame.transform.scale(LinkImg, (50, 30))
+    Small_fighter = pygame.transform.scale(fightImg,(70,50))
+    Small_fighter = Small_fighter.convert_alpha()
+    Small_Cat = pygame.transform.scale(catImg, (50, 30))
+    
+    # Small_Link_Coords = Small_Link, [X_starting, Y_starting]
+    DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
+    Count = 0
+    while Count < 100:
+        if users_choice == "north":
+            Y_starting -=20
+            Count +=20
+            DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
+        elif users_choice == "south":
+            Y_starting +=20
+            Count +=20
+            DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
+        elif users_choice == "east":
+            X_starting +=20
+            Count +=20
+            DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
+        elif users_choice == "west":
+            X_starting -=20
+            Count +=20
+            DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
+        elif users_choice == "fly":
+
+            if player.room.name == "Cauldron Room":
+                Y_starting -=20
+                Count +=20
+                DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
+            elif player.room.name == "Cloud Fortress":
+                Y_starting +=20
+                Count +=20
+                DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
+
+
+    
+    #While loop goes here                    
     pygame.display.update() 
     
     fpsClock = pygame.time.Clock()
@@ -365,6 +406,180 @@ def Map_Movement_World1(Map_Speed, player, users_choice):
     # Room1 = fontObj.render('FOYER', True, BLACK, GREEN)
     
     pygame.quit()
-    print(X_starting, Y_starting)
+    
+
+
+
+def Map_Movement_World2(Map_Speed, player, users_choice):
+
+    catImg = pygame.image.load('cat.png')
+    fightImg = pygame.image.load('fighter.png')
+    LinkImg = pygame.image.load('SmallLink.png')
+    
+
+    Room_location = { "Outside": [150, 900], "Foyer": [150, 700], "Grand Overlook": [150, 500], \
+        "Narrow Passage": [350, 700], "Treasure Chamber": [350,500], "Cave Exit": [350, 300], \
+            "Enchanted Forest": [550, 300], "Magical Entrance": [150, 800], "Cauldron Room": [150, 600], \
+                "Wizard's Lair": [350, 800], "Cloud Fortress": [150, 400], "Mysterious Shack": [350, 400], \
+                    'Ogre Fortress': [350, 200], "Ogre King's Lair": [350, 0]
+    }
+    
+    X_value = -25
+    Y_value = -20
+    for room, coords in Room_location.items():
+        if player.room.name == room:
+
+            X_value += coords[0]
+            Y_value += coords[1] 
+    
+      
+    #starting values of coordinates of Cat, or whatever is going to be moving 
+    #Take starting coordinates of player's room, and adjust starting coordinates for movement direction
+    
+    if users_choice == "north":
+        
+        X_starting = X_value +50
+        Y_starting = Y_value 
+        
+    elif users_choice == "south":
+        X_starting = X_value +50
+        Y_starting = Y_value + 100 
+    
+    elif users_choice == "east":
+        X_starting = X_value +100
+        Y_starting = Y_value + 50 
+    
+    elif users_choice == "west":
+        X_starting = X_value 
+        Y_starting = Y_value + 50 
+    
+    elif users_choice == "fly":
+        
+        if player.room.name == "Cauldron Room":
+            X_starting = X_value +50
+            Y_starting = Y_value 
+        else:
+            X_starting = X_value +50
+            Y_starting = Y_value + 100 
+    
+    
+    BLACK = ( 0, 0, 0)
+    WHITE = (255, 255, 255)
+    RED = (255, 0, 0)
+    GREEN = ( 0, 255, 0)
+    BLUE = ( 0, 0, 255)
+
+    WIDTH = 1000
+    HEIGHT = 1000
+    XMARGIN = 50
+    YMARGIN = 50
+    Big_Gap = XMARGIN*4
+    Small_Gap = XMARGIN*2 
+       
+    pygame.init() 
+        
+    DISPLAYSURF = pygame.display.set_mode((WIDTH, HEIGHT))
+    pygame.display.set_caption('YOU ARE CURRENTLY IN WORLD 1')
+    pygame.display.set_caption('Animation')
+
+    DISPLAYSURF.fill(WHITE)
+    
+    Board = pygame.draw.rect(DISPLAYSURF,(128,128,255), (XMARGIN, YMARGIN, (WIDTH - 2 * XMARGIN), (HEIGHT-2*YMARGIN)))
+    
+    pygame.draw.rect(DISPLAYSURF, RED, (150, 800, 100,100))
+    pygame.draw.line(DISPLAYSURF, BLUE, (250, 850), (350, 850), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (350, 800, 100,100))
+    pygame.draw.line(DISPLAYSURF, BLUE, (200, 800), (200, 700), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (150, 400, 100,100))
+    pygame.draw.line(DISPLAYSURF, GREEN, (200, 600), (200, 500), 15)
+    pygame.draw.rect(DISPLAYSURF, RED, (150, 600, 100,100))
+    pygame.draw.line(DISPLAYSURF, BLUE, (250, 450), (350, 450), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (350, 400, 100,100))
+    pygame.draw.line(DISPLAYSURF, BLUE, (400, 400), (400, 300), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (350, 200, 100,100))
+    pygame.draw.line(DISPLAYSURF, BLUE, (400, 200), (400, 100), 4)
+    pygame.draw.rect(DISPLAYSURF, RED, (200, 50, 400,50))
+
+    fontObj = pygame.font.Font('freesansbold.ttf', 16)
+    fontObj2 = pygame.font.Font('freesansbold.ttf', 14)
+
+
+    Room1 = fontObj.render('MAGICAL', True, BLACK, RED)
+    Room1a = fontObj.render('ENTRANCE', True, BLACK, RED)
+    Room1b = fontObj.render("WIZARD'S", True, BLACK, RED)
+    Room1c = fontObj.render('LAIR', True, BLACK, RED)
+    Room2 = fontObj.render('CAULDRON', True, BLACK, RED)
+    Room2a = fontObj.render('ROOM', True, BLACK, RED)
+    Room3 = fontObj.render('CLOUD', True, BLACK, RED)
+    Room3a = fontObj.render('FORTRESS', True, BLACK, RED)
+    Room4 = fontObj2.render('MYSTERIOUS', True, BLACK, RED)
+    Room4a = fontObj2.render('SHACK', True, BLACK, RED)
+    Room6 = fontObj.render('OGRE', True, BLACK, RED)
+    Room6a = fontObj.render('FORTRESS', True, BLACK, RED)
+    Room7 = fontObj.render("OGRE KING'S LAIR", True, BLACK, RED)
+
+
+    DISPLAYSURF.blit(Room1, (160, 830))
+    DISPLAYSURF.blit(Room1a, (151, 850))
+    DISPLAYSURF.blit(Room1b, (360, 830))
+    DISPLAYSURF.blit(Room1c, (380, 850))
+    DISPLAYSURF.blit(Room2, (152, 630))
+    DISPLAYSURF.blit(Room2a, (180, 650))
+    DISPLAYSURF.blit(Room3, (175, 430))
+    DISPLAYSURF.blit(Room3a, (156, 450))
+    DISPLAYSURF.blit(Room4, (355, 430))
+    DISPLAYSURF.blit(Room4a, (374, 450))
+    DISPLAYSURF.blit(Room6, (376, 230))
+    DISPLAYSURF.blit(Room6a, (356, 250))
+    DISPLAYSURF.blit(Room7, (325, 60)) 
+    
+    Small_Link = pygame.transform.scale(LinkImg, (50, 30))
+    Small_fighter = pygame.transform.scale(fightImg,(70,50))
+    Small_fighter = Small_fighter.convert_alpha()
+    Small_Cat = pygame.transform.scale(catImg, (50, 30))
+    
+    # Small_Link_Coords = Small_Link, [X_starting, Y_starting]
+    DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
+    Count = 0
+    while Count < 100:
+        if users_choice == "north":
+            Y_starting -=20
+            Count +=20
+            DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
+        elif users_choice == "south":
+            Y_starting +=20
+            Count +=20
+            DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
+        elif users_choice == "east":
+            X_starting +=20
+            Count +=20
+            DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
+        elif users_choice == "west":
+            X_starting -=20
+            Count +=20
+            DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
+        elif users_choice == "fly":
+
+            if player.room.name == "Cauldron Room":
+                Y_starting -=20
+                Count +=20
+                DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
+            elif player.room.name == "Cloud Fortress":
+                Y_starting +=20
+                Count +=20
+                DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
+
+
+    
+    #While loop goes here                    
+    pygame.display.update() 
+    
+    fpsClock = pygame.time.Clock()
+    fpsClock.tick(Map_Speed)
+    
+    # Room1 = fontObj.render('FOYER', True, BLACK, GREEN)
+    
+    pygame.quit()
+    
         
     
