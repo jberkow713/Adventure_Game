@@ -369,30 +369,30 @@ def Map_Movement_World1(Map_Speed, player, users_choice):
     Count = 0
     while Count < 100:
         if users_choice == "north":
-            Y_starting -=20
-            Count +=20
+            Y_starting -=5
+            Count +=5
             DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
         elif users_choice == "south":
-            Y_starting +=20
-            Count +=20
+            Y_starting +=5
+            Count +=5
             DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
         elif users_choice == "east":
-            X_starting +=20
-            Count +=20
+            X_starting +=5
+            Count +=5
             DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
         elif users_choice == "west":
-            X_starting -=20
-            Count +=20
+            X_starting -=5
+            Count +=5
             DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
         elif users_choice == "fly":
 
             if player.room.name == "Cauldron Room":
-                Y_starting -=20
-                Count +=20
+                Y_starting -=5
+                Count +=5
                 DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
             elif player.room.name == "Cloud Fortress":
-                Y_starting +=20
-                Count +=20
+                Y_starting +=5
+                Count +=5
                 DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
         
         for event in pygame.event.get():
@@ -548,30 +548,30 @@ def Map_Movement_World2(Map_Speed, player, users_choice):
     Count = 0
     while Count < 100:
         if users_choice == "north":
-            Y_starting -=20
-            Count +=20
+            Y_starting -=5
+            Count +=5
             DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
         elif users_choice == "south":
-            Y_starting +=20
-            Count +=20
+            Y_starting +=5
+            Count +=5
             DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
         elif users_choice == "east":
-            X_starting +=20
-            Count +=20
+            X_starting +=5
+            Count +=5
             DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
         elif users_choice == "west":
-            X_starting -=20
-            Count +=20
+            X_starting -=5
+            Count +=5
             DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
         elif users_choice == "fly":
 
             if player.room.name == "Cauldron Room":
-                Y_starting -=20
-                Count +=20
+                Y_starting -=5
+                Count +=5
                 DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
             elif player.room.name == "Cloud Fortress":
-                Y_starting +=20
-                Count +=20
+                Y_starting +=5
+                Count +=5
                 DISPLAYSURF.blit(Small_Link, [X_starting, Y_starting])
 
         for event in pygame.event.get():

@@ -436,8 +436,8 @@ def Adventurer():
                         
                         if item_choice == 'q':
                             break 
-                                            
-                        text_box(f"You currently possess {player.item}",2)
+                        if len(player.item) >=1:
+                            text_box(f"You currently possess {player.item}",2)
 
                 else:
                     text_box('You can not go in that direction!',1)
