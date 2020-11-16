@@ -133,7 +133,7 @@ def Adventurer():
 
     difficulty_choice = ""
     Quit_before_start = False 
-
+    #Set lives and attributes based on difficulty choice selected
     while difficulty_choice != 'q' and difficulty_choice != "easy" and difficulty_choice != "medium" and difficulty_choice != "hard" and difficulty_choice != "expert":
         difficulty_choice = input("Please choose easy, medium, hard, or expert: \n\n")
 
@@ -167,7 +167,7 @@ def Adventurer():
                 \nYour current attack is {round(player.attack,1)}, Your current magic attack is {round(player.magic_attack,1)},\nYour current defense is {round(player.defense, 1)}", 1)
         
         text_box("Your attack, magic and defense help you defeat monsters!", 2)
-        
+        #Initially draw map so player can see where they are
         if player.room.world == 1:
             World1draw(Map_Speed)
         if player.room.world == 2:
@@ -241,34 +241,22 @@ def Adventurer():
                             Map_Movement_World1(Map_Speed=Map_Speed, player=player, users_choice=users_choice)
                         # this is where we call the movement function
                         
-                        # so you take current room, check its coordinates, alter them based on the user_choice
-                        # blit Link icon on those coordinates, and then based on the user_choice, alter links 
-                        # coordinates somehow to make him walk in that direction
-                        # and THEN you change the player.room's value to be the next room
-                        
+                                               
                         elif player.room.world == 2:
                 
                             Map_Movement_World2(Map_Speed=Map_Speed, player=player, users_choice=users_choice)
-                        # this is where we call the movement function
+                        # this is where we call the movement function for world 2
                     
-                    # so you take current room, check its coordinates, alter them based on the user_choice
-                    # blit Link icon on those coordinates, and then based on the user_choice, alter links 
-                    # coordinates somehow to make him walk in that direction
-                    # and THEN you change the player.room's value to be the next room
+                   #In case moving between worlds with the magic loop, maybe eventually create map functionality here too
                     elif users_choice == 'magic':
                         if player.room.name == "Enchanted Forest":
                             World2draw(Map_Speed)
                         elif player.room.name == "Magical Entrance":
                             World1draw(Map_Speed)
 
-
-
                     player.room = value
                     text_box(f"You have moved to the {player.room.name}",1)
-
-                    
-                        
-                
+          
                     text_box(player.room.description, 1)
                     
                     if len(player.room.enemies) >=1:
@@ -292,7 +280,6 @@ def Adventurer():
                         Enemy_hp = player.room.enemyHP 
                         while Enemy_hp >0 and player.lives > 0:
                             
-
                             text_box(f"You have {round(player.lives,1)} lives, let the battle begin!", 1)
                             attack = round(random.uniform(0, (player.room.enemyHP * player.room.enemy_diff)), 1) * player.attack * player.magic_attack * player.defense * player.level * player.magic_level
                             text_box(f"You prepare to battle the {player.room.enemies} with {Enemy_hp} hitpoints left. You attack for {round(attack,1)} damage !", 1)
