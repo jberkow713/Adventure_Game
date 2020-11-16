@@ -169,9 +169,9 @@ def Adventurer():
         text_box("Your attack, magic and defense help you defeat monsters!", 2)
         
         if player.room.world == 1:
-            World1draw(Map_Speed*2)
+            World1draw(Map_Speed)
         if player.room.world == 2:
-            World2draw(Map_Speed*2)
+            World2draw(Map_Speed)
 
 
         if player.room.name == "Rabbit Hole":
@@ -255,11 +255,19 @@ def Adventurer():
                     # blit Link icon on those coordinates, and then based on the user_choice, alter links 
                     # coordinates somehow to make him walk in that direction
                     # and THEN you change the player.room's value to be the next room
-                    
+                    elif users_choice == 'magic':
+                        if player.room.name == "Enchanted Forest":
+                            World2draw(Map_Speed)
+                        elif player.room.name == "Magical Entrance":
+                            World1draw(Map_Speed)
+
+
+
                     player.room = value
                     text_box(f"You have moved to the {player.room.name}",1)
 
                     
+                        
                 
                     text_box(player.room.description, 1)
                     
